@@ -1,4 +1,4 @@
-package com.ads.report.infrastructure.configuration;
+package com.ads.report.infrastructure.configuration.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;

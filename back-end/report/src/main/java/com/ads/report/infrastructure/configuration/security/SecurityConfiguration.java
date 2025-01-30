@@ -1,4 +1,4 @@
-package com.ads.report.infrastructure.configuration;
+package com.ads.report.infrastructure.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

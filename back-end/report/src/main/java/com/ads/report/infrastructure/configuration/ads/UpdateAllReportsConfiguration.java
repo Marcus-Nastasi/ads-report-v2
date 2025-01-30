@@ -1,4 +1,4 @@
-package com.ads.report.infrastructure.configuration;
+package com.ads.report.infrastructure.configuration.ads;
 
 import com.ads.report.application.gateway.GoogleAdsGateway;
 import com.ads.report.application.gateway.GoogleSheetsGateway;

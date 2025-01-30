@@ -1,4 +1,4 @@
-package com.ads.report.infrastructure.configuration;
+package com.ads.report.infrastructure.configuration.csv;
 
 import com.ads.report.application.gateway.JsonToCsvGateway;
 import com.ads.report.application.usecases.JsonToCsvUseCase;

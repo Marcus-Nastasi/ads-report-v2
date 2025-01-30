@@ -1,4 +1,4 @@
-package com.ads.report.infrastructure.configuration;
+package com.ads.report.infrastructure.configuration.sheets;
 
 import com.ads.report.application.gateway.GoogleSheetsGateway;
 import com.ads.report.application.usecases.GoogleSheetsUseCase;
