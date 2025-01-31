@@ -1,22 +1,40 @@
 version: '3.8'
 
 services:
-  report-app:
+  ads-report-redis:
+    image: redis:latest
+    container_name: ads-report-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - ads-report-network
+    command: ["redis-server", "--appendonly", "yes"]
+
+  ads-report-backend:
     build:
       context: ../back-end/report
       dockerfile: Dockerfile
     image: report-app:latest
-    container_name: report-backend
+    container_name: ads-report-backend
     ports:
       - "8080:8080"
     networks:
-      - report-network
+      - ads-report-network
     ## For production, is recomended to set the volumes for the properties of the app.
     ## For development you can comment the volumes bellow.
     volumes:
       - ./src/main/resources/ads.properties:/app/resources/ads.properties
       - ./src/main/resources/credentials.json:/app/resources/credentials.json
+    depends_on:
+      - ads-report-redis
 
 networks:
-  report-network: 
+  ads-report-network: 
     driver: bridge
+
+volumes:
+  redis-data:
+    driver: local
