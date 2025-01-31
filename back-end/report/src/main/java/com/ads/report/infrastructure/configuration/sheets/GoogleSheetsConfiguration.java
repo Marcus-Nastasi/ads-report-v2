@@ -3,6 +3,7 @@ package com.ads.report.infrastructure.configuration.sheets;
 import com.ads.report.application.gateway.GoogleSheetsGateway;
 import com.ads.report.application.usecases.GoogleSheetsUseCase;
 import com.ads.report.infrastructure.gateway.GoogleSheetsRepoGateway;
+import com.ads.report.infrastructure.gateway.redis.RedisOAuth2AuthorizedClient;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.sheets.v4.Sheets;
@@ -52,7 +53,7 @@ public class GoogleSheetsConfiguration {
     @Bean
     @RequestScope
     public Sheets googleSheetsService(
-            OAuth2AuthorizedClientService authorizedClientService,
+            RedisOAuth2AuthorizedClient authorizedClientService,
             OAuth2AuthorizedClientManager authorizedClientManager) throws IOException {
         // Getting authentication from session security context holder.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

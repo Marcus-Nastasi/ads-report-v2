@@ -4,6 +4,7 @@ import com.ads.report.adapters.mappers.GoogleAdsDtoMapper;
 import com.ads.report.application.gateway.GoogleAdsGateway;
 import com.ads.report.application.usecases.GoogleAdsUseCase;
 import com.ads.report.infrastructure.gateway.GoogleAdsRepoGateway;
+import com.ads.report.infrastructure.gateway.redis.RedisOAuth2AuthorizedClient;
 import com.google.ads.googleads.lib.GoogleAdsClient;
 import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.UserCredentials;
@@ -54,7 +55,7 @@ public class GoogleAdsConfiguration {
     @Bean
     @RequestScope
     public GoogleAdsClient googleAdsClient(
-            OAuth2AuthorizedClientService authorizedClientService,
+            RedisOAuth2AuthorizedClient authorizedClientService,
             OAuth2AuthorizedClientManager authorizedClientManager) {
         // Getting authentication from session security context holder.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
