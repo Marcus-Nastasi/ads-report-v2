@@ -1,6 +1,6 @@
 package com.ads.report.infrastructure.gateway.redis;
 
-import com.ads.report.domain.oauth2.OAuth2AuthorizedClientDto;
+import com.ads.report.infrastructure.entity.OAuth2AuthorizedClientDto;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -10,8 +10,17 @@ import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
 
 import java.time.Instant;
-import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ * <p>The Redis implementation for OAuth2AuthorizedClientService.<p/>
+ *
+ * <p>This class allows us to use Redis as the default session saving tool.<p/>
+ *
+ * @author Marcus Nastasi
+ * @version 1.0.2
+ * @since 2025
+ * */
 public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientService {
 
     private final RedisTemplate<String, OAuth2AuthorizedClientDto> redisTemplate;
@@ -23,9 +32,17 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
         this.clientRegistrationRepository = clientRegistrationRepository;
     }
 
+    /**
+     *
+     * <p>The function that allows the application to save the login on Redis.<p/>
+     *
+     * @param authorizedClient The client object that has logged.
+     * @param principal The authentication object.
+     */
     @Override
     public void saveAuthorizedClient(OAuth2AuthorizedClient authorizedClient, Authentication principal) {
         String key = REDIS_KEY_PREFIX + principal.getName();
+        // Manually creating the Dto object to save in Redis.
         OAuth2AuthorizedClientDto dto = new OAuth2AuthorizedClientDto(
             authorizedClient.getClientRegistration().getRegistrationId(),
             principal.getName(),
@@ -33,28 +50,34 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
             authorizedClient.getAccessToken().getExpiresAt().toEpochMilli(),
             authorizedClient.getRefreshToken() != null ? authorizedClient.getRefreshToken().getTokenValue() : null
         );
-        redisTemplate.opsForValue().set(key, dto);
+        redisTemplate.opsForValue().set(key, dto); // Saving object in Redis database.
     }
 
+    /**
+     *
+     * <p>The function that allows the application to load back the user information form Redis.<p/>
+     *
+     * @param clientRegistrationId The client ID that is registered.
+     * @param principalName The username saved as the key on Redis.
+     * @return Return the OAuth2AuthorizedClient object that we've had parsed from Redis.
+     */
     @Override
     public OAuth2AuthorizedClient loadAuthorizedClient(String clientRegistrationId, String principalName) {
         String key = REDIS_KEY_PREFIX + principalName;
+        // Getting the object from Redis by its key.
         OAuth2AuthorizedClientDto dto = redisTemplate.opsForValue().get(key);
-        if (dto == null) {
-            return null;
-        }
-        // Reconstruindo OAuth2AuthorizedClient manualmente
+        // Constructing the OAuth2AuthorizedClient manually.
         OAuth2AccessToken accessToken = new OAuth2AccessToken(
             OAuth2AccessToken.TokenType.BEARER,
             dto.getAccessToken(),
             Instant.now(),
             Instant.ofEpochMilli(dto.getAccessTokenExpiresAt())
         );
-
+        // Refreshing the refresh_token.
         OAuth2RefreshToken refreshToken = dto.getRefreshToken() != null
             ? new OAuth2RefreshToken(dto.getRefreshToken(), Instant.now())
             : null;
-
+        // Manually constructing the OAuth2AuthorizedClient.
         return new OAuth2AuthorizedClient(
             clientRegistrationRepository.findByRegistrationId(dto.getClientRegistrationId()),
             dto.getPrincipalName(),
@@ -63,6 +86,13 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
         );
     }
 
+    /**
+     *
+     * <p>Auxiliar function that deletes a registre on Redis, based on the client ID and name.<p/>
+     *
+     * @param clientRegistrationId The client ID that is registered.
+     * @param principalName The username saved as the key on Redis.
+     */
     @Override
     public void removeAuthorizedClient(String clientRegistrationId, String principalName) {
         String key = REDIS_KEY_PREFIX + principalName;

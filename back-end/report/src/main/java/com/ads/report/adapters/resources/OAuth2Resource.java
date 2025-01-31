@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ * <p>The controller to the OAuth2 verification.<p/>
+ *
+ * @author Marcus Nastasi
+ * @version 1.0.2
+ * @since 2025
+ * */
 @RestController
 @RequestMapping("/v2/auth")
 public class OAuth2Resource {
@@ -22,11 +30,26 @@ public class OAuth2Resource {
         this.authorizedClientService = authorizedClientService;
     }
 
+    /**
+     *
+     * <p>This endpoint allows users to retrieve their personal google account object.<p/>
+     *
+     * <p>Validates if user is logged in.<p/>
+     *
+     * @param user The Oidc User object.
+     * @param authentication The authentication token.
+     * @return Return a map of a spring an objects, that represents the personal google account.
+     */
     @GetMapping("/user")
     public Map<String, Object> getUser(@AuthenticationPrincipal OidcUser user, OAuth2AuthenticationToken authentication) {
-        OAuth2AuthorizedClient authorizedClient = authorizedClientService
-            .loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
+        // Using OAuth2AuthorizedClientService to load the user that is logged.
+        OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
+            authentication.getAuthorizedClientRegistrationId(),
+            authentication.getName()
+        );
+        // Creating the response object reference.
         Map<String, Object> response = new HashMap<>(user.getClaims());
+        // Putting the access_token and refresh_token manually.
         response.put("access_token", authorizedClient.getAccessToken().getTokenValue());
         response.put(
             "refresh_token",

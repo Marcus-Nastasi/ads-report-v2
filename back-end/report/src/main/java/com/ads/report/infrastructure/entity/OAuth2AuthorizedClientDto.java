@@ -1,33 +1,43 @@
-package com.ads.report.domain.oauth2;
+package com.ads.report.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ *
+ * <p>The Redis Dto to represent the OAuth2AuthorizedClient.<p/>
+ *
+ * <p>This class allows us to use a Dto to save the session's credentials on Redis.<p/>
+ *
+ * @author Marcus Nastasi
+ * @version 1.0.2
+ * @since 2025
+ * */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OAuth2AuthorizedClientDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("clientRegistrationId")
     private String clientRegistrationId;
-
-    @JsonProperty("principalName")
     private String principalName;
-
-    @JsonProperty("accessToken")
     private String accessToken;
-
-    @JsonProperty("accessTokenExpiresAt")
     private long accessTokenExpiresAt;
-
-    @JsonProperty("refreshToken")
     private String refreshToken;
 
-    public OAuth2AuthorizedClientDto(String clientRegistrationId, String principalName, String accessToken, long accessTokenExpiresAt, String refreshToken) {
+    public OAuth2AuthorizedClientDto() {}
+
+    @JsonCreator
+    public OAuth2AuthorizedClientDto(
+            @JsonProperty("clientRegistrationId") String clientRegistrationId,
+            @JsonProperty("principalName") String principalName,
+            @JsonProperty("accessToken") String accessToken,
+            @JsonProperty("accessTokenExpiresAt") long accessTokenExpiresAt,
+            @JsonProperty("refreshToken") String refreshToken) {
         this.clientRegistrationId = clientRegistrationId;
         this.principalName = principalName;
         this.accessToken = accessToken;
