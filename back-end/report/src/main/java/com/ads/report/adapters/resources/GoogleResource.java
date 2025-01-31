@@ -38,7 +38,7 @@ import java.util.Map;
  * @since 2025
  * */
 @RestController
-@RequestMapping("v1/reports")
+@RequestMapping("v2/reports")
 public class GoogleResource {
 
     @Autowired

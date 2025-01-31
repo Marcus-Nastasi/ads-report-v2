@@ -5,13 +5,24 @@ import com.ads.report.application.gateway.GoogleAdsGateway;
 import com.ads.report.application.usecases.GoogleAdsUseCase;
 import com.ads.report.infrastructure.gateway.GoogleAdsRepoGateway;
 import com.google.ads.googleads.lib.GoogleAdsClient;
+import com.google.auth.oauth2.AccessToken;
+import com.google.auth.oauth2.UserCredentials;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * The google ads configuration class.
@@ -26,19 +37,63 @@ import java.util.Properties;
 @Configuration
 public class GoogleAdsConfiguration {
 
+    @Value("${api.googleads.clientId}")
+    private String clientId;
+    @Value("${api.googleads.clientSecret}")
+    private String clientSecret;
+    @Value("${api.googleads.developerToken}")
+    private String developerToken;
+
     /**
-     * Bean that generates the google ads client.
+     *
+     * <p>Bean that generates the google ads client.<p/>
      *
      * @return Return the adwords client based on an ads.properties file.
      * @throws IOException If fails to create the client with builder.
      */
     @Bean
-    public GoogleAdsClient googleAdsClient() throws IOException {
-        InputStream resource = getClass().getClassLoader().getResourceAsStream("ads.properties");
-        if (resource == null) throw new IllegalArgumentException("File 'ads.properties' not found on classpath");
-        Properties properties = new Properties();
-        properties.load(resource);
-        return GoogleAdsClient.newBuilder().fromProperties(properties).build();
+    @RequestScope
+    public GoogleAdsClient googleAdsClient(
+            OAuth2AuthorizedClientService authorizedClientService,
+            OAuth2AuthorizedClientManager authorizedClientManager) {
+        // Getting authentication from session security context holder.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // Tests if the authentication granted is an OAuth2 instance, and associate it to oauthToken variable.
+        if (!(authentication instanceof OAuth2AuthenticationToken oauthToken))
+            throw new RuntimeException("User is not authenticated on Google OAuth2.");
+        // Loading authorized client by token's information.
+        OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(
+            oauthToken.getAuthorizedClientRegistrationId(),
+            oauthToken.getName()
+        );
+        if (client == null)
+            throw new RuntimeException("OAuth2AuthorizedClient not found. The user may be not authenticated.");
+        // Automatically renew token if expired.
+        client = authorizedClientManager.authorize(OAuth2AuthorizeRequest
+            .withClientRegistrationId(oauthToken.getAuthorizedClientRegistrationId())
+            .principal(oauthToken)
+            .build());
+        if (client == null || client.getAccessToken() == null)
+            throw new RuntimeException("Failed to renew access_token. Logon again.");
+        // Getting final access_token, expiration time and refresh_token.
+        String accessToken = client.getAccessToken().getTokenValue();
+        Instant expiresAt = client.getAccessToken().getExpiresAt();
+        String refreshToken = (client.getRefreshToken() != null) ? client.getRefreshToken().getTokenValue() : "";
+        if (refreshToken.isEmpty()) throw new RuntimeException("refresh_token not found.");
+        Date date = new Date();
+        date.setTime(expiresAt.getEpochSecond());
+        // Creating OAuth2 credentials for GoogleAds.
+        UserCredentials credentials = UserCredentials.newBuilder()
+            .setClientId(clientId)
+            .setClientSecret(clientSecret)
+            .setAccessToken(new AccessToken(accessToken, date))
+            .setRefreshToken(refreshToken)
+            .build();
+        // Creating GoogleAds client.
+        return GoogleAdsClient.newBuilder()
+            .setDeveloperToken(developerToken)
+            .setCredentials(credentials)
+            .build();
     }
 
     @Bean

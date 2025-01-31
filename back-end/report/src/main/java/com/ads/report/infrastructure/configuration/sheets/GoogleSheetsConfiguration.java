@@ -7,14 +7,23 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.auth.http.HttpCredentialsAdapter;
-import com.google.auth.oauth2.GoogleCredentials;
+import com.google.auth.oauth2.AccessToken;
+import com.google.auth.oauth2.UserCredentials;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.web.context.annotation.RequestScope;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * The implementation of google sheets interface.
@@ -26,19 +35,59 @@ import java.util.List;
 @Configuration
 public class GoogleSheetsConfiguration {
 
+    @Value("${api.googleads.clientId}")
+    private String clientId;
+    @Value("${api.googleads.clientSecret}")
+    private String clientSecret;
+    @Value("${api.googleads.developerToken}")
+    private String developerToken;
+
     /**
-     * Google sheets client bean.
      *
-     * @return A sheets client build.
-     * @throws IOException Throws exception if fails to create or find path.
+     * <p>Google Sheets client bean using OAuth2 dynamic authentication.<p/>
+     *
+     * @return A dynamically authenticated Sheets client.
+     * @throws IOException If fails to authenticate.
      */
     @Bean
-    public Sheets googleSheetsService() throws IOException {
-        InputStream resource = getClass().getClassLoader().getResourceAsStream("credentials.json");
-        if (resource == null) throw new FileNotFoundException("Credentials not found in 'resources/credentials.json'");
-        GoogleCredentials credentials = GoogleCredentials
-            .fromStream(resource)
-            .createScoped(List.of("https://www.googleapis.com/auth/spreadsheets"));
+    @RequestScope
+    public Sheets googleSheetsService(
+            OAuth2AuthorizedClientService authorizedClientService,
+            OAuth2AuthorizedClientManager authorizedClientManager) throws IOException {
+        // Getting authentication from session security context holder.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // Tests if the authentication granted is an OAuth2 instance, and associate it to oauthToken variable.
+        if (!(authentication instanceof OAuth2AuthenticationToken oauthToken))
+            throw new RuntimeException("User is not authenticated on Google OAuth2.");
+        // Loading authorized client by token's information.
+        OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(
+            oauthToken.getAuthorizedClientRegistrationId(),
+            oauthToken.getName()
+        );
+        if (client == null)
+            throw new RuntimeException("OAuth2AuthorizedClient not found. The user may be not authenticated.");
+        // Automatically renew token if expired.
+        client = authorizedClientManager.authorize(OAuth2AuthorizeRequest
+            .withClientRegistrationId(oauthToken.getAuthorizedClientRegistrationId())
+            .principal(oauthToken)
+            .build());
+        if (client == null || client.getAccessToken() == null)
+            throw new RuntimeException("Failed to renew access_token. Logon again.");
+        // Getting final access_token, expiration time and refresh_token.
+        String accessToken = client.getAccessToken().getTokenValue();
+        Instant expiresAt = client.getAccessToken().getExpiresAt();
+        String refreshToken = (client.getRefreshToken() != null) ? client.getRefreshToken().getTokenValue() : "";
+        if (refreshToken.isEmpty()) throw new RuntimeException("refresh_token not found.");
+        Date date = new Date();
+        date.setTime(expiresAt.getEpochSecond());
+        // Using UserCredentials to support the token's automatic renew.
+        UserCredentials credentials = UserCredentials.newBuilder()
+            .setClientId(clientId)
+            .setClientSecret(clientSecret)
+            .setAccessToken(new AccessToken(accessToken, date))
+            .setRefreshToken(refreshToken)
+            .build();
+        // Creating Google Sheets client.
         return new Sheets.Builder(
             new NetHttpTransport(),
             new GsonFactory(),
