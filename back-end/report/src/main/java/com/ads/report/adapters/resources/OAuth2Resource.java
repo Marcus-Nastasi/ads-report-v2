@@ -28,7 +28,10 @@ public class OAuth2Resource {
             .loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
         Map<String, Object> response = new HashMap<>(user.getClaims());
         response.put("access_token", authorizedClient.getAccessToken().getTokenValue());
-        response.put("refresh_token", authorizedClient.getRefreshToken() != null ? authorizedClient.getRefreshToken().getTokenValue() : "No refresh token");
+        response.put(
+            "refresh_token",
+            authorizedClient.getRefreshToken() != null ? authorizedClient.getRefreshToken().getTokenValue() : "No refresh token"
+        );
         return response;
     }
 }
