@@ -21,13 +21,18 @@ services:
     container_name: ads-report-backend
     ports:
       - "8080:8080"
+    environment:
+      SPRING_REDIS_HOST: ads-report-redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_REPOSITORIES_ENABLED: false
+      SPRING_CACHE_REDIS_TIME_TO_LIVE: 12h
     networks:
       - ads-report-network
     ## For production, is recomended to set the volumes for the properties of the app.
     ## For development you can comment the volumes bellow.
-    volumes:
-      - ./src/main/resources/ads.properties:/app/resources/ads.properties
-      - ./src/main/resources/credentials.json:/app/resources/credentials.json
+    #volumes:
+    #  - ./src/main/resources/ads.properties:/app/resources/ads.properties
+    #  - ./src/main/resources/credentials.json:/app/resources/credentials.json
     depends_on:
       - ads-report-redis
 
