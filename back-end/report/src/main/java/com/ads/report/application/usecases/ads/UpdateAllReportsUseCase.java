@@ -43,9 +43,8 @@ public class UpdateAllReportsUseCase {
      * <p/>
      *
      * @param updateAllReports the list of UpdateAllReports domain object.
-     * @throws IOException throws exception if fails
      */
-    public void updateReports(List<UpdateAllReports> updateAllReports) throws IOException {
+    public void updateReports(List<UpdateAllReports> updateAllReports) {
         // Iterating through the objects.
         updateAllReports.forEach(r -> {
             try {
@@ -73,7 +72,7 @@ public class UpdateAllReportsUseCase {
                     r.getClient() + "-grafico",
                     googleAdsUseCase.getTotalPerDay(r.getCustomerId(), r.getStartDate(), r.getEndDate())
                 );
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
