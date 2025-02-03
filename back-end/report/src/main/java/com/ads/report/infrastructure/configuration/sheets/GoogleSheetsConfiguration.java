@@ -26,7 +26,7 @@ import java.time.Instant;
 import java.util.Date;
 
 /**
- * The implementation of google sheets interface.
+ * The configuration of Google Sheets.
  *
  * @author Marcus Nastasi
  * @version 1.0.1
