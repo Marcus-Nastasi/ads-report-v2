@@ -5,7 +5,7 @@ import com.ads.report.adapters.mappers.GoogleAdsDtoMapper;
 import com.ads.report.adapters.output.TestResponseDto;
 import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
 import com.ads.report.application.usecases.sheets.GoogleSheetsUseCase;
-import com.ads.report.application.usecases.csv.JsonToCsvUseCase;
+import com.ads.report.application.usecases.csv.CsvUseCase;
 import com.ads.report.application.usecases.ads.UpdateAllReportsUseCase;
 import com.ads.report.domain.manager.ManagerAccountInfo;
 import com.ads.report.domain.account.AccountMetrics;
@@ -52,7 +52,7 @@ public class GoogleResource {
     @Autowired
     private Gson gson;
     @Autowired
-    private JsonToCsvUseCase jsonToCsv;
+    private CsvUseCase jsonToCsv;
 
     /**
      * Test the connection between the application and the google account.
@@ -110,7 +110,7 @@ public class GoogleResource {
         List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
-        jsonToCsv.convert(records, response);
+        jsonToCsv.fromJson(records, response);
     }
 
     /**
@@ -139,7 +139,7 @@ public class GoogleResource {
         List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
-        jsonToCsv.convert(records, response);
+        jsonToCsv.fromJson(records, response);
     }
 
     /**

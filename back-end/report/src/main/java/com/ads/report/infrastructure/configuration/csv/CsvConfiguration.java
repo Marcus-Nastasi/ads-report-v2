@@ -1,8 +1,8 @@
 package com.ads.report.infrastructure.configuration.csv;
 
-import com.ads.report.application.gateway.csv.JsonToCsvGateway;
-import com.ads.report.application.usecases.csv.JsonToCsvUseCase;
-import com.ads.report.infrastructure.gateway.csv.JsonToCsv;
+import com.ads.report.application.gateway.csv.CsvGateway;
+import com.ads.report.application.usecases.csv.CsvUseCase;
+import com.ads.report.infrastructure.gateway.csv.CsvRepoGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,17 +17,17 @@ import org.springframework.context.annotation.Configuration;
 public class CsvConfiguration {
 
     @Bean
-    public JsonToCsv jsonToCsvConverter() {
-        return new JsonToCsv();
+    public CsvRepoGateway jsonToCsvConverter() {
+        return new CsvRepoGateway();
     }
 
     @Bean
-    public JsonToCsvGateway jsonToCsvGateway() {
-        return new JsonToCsv();
+    public CsvGateway jsonToCsvGateway() {
+        return new CsvRepoGateway();
     }
 
     @Bean
-    public JsonToCsvUseCase jsonToCsvUseCase(JsonToCsvGateway jsonToCsvGateway) {
-        return new JsonToCsvUseCase(jsonToCsvGateway);
+    public CsvUseCase jsonToCsvUseCase(CsvGateway csvGateway) {
+        return new CsvUseCase(csvGateway);
     }
 }

@@ -1,12 +1,14 @@
 package com.ads.report.application.usecases.csv;
 
-import com.ads.report.application.gateway.csv.JsonToCsvGateway;
+import com.ads.report.application.exception.CsvException;
+import com.ads.report.application.gateway.csv.CsvGateway;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * The interface of the google ads api calls.
  *
  * <p>
@@ -18,22 +20,24 @@ import java.util.Map;
  * @version 1.0.1
  * @since 2025
  * */
-public class JsonToCsvUseCase {
+public class CsvUseCase {
 
-    private final JsonToCsvGateway jsonToCsvGateway;
+    private final CsvGateway csvGateway;
 
-    public JsonToCsvUseCase(JsonToCsvGateway jsonToCsvGateway) {
-        this.jsonToCsvGateway = jsonToCsvGateway;
+    public CsvUseCase(CsvGateway csvGateway) {
+        this.csvGateway = csvGateway;
     }
 
     /**
-     * Convert a json object to csv type file.
+     *
+     * <p>Convert a json object to csv type file.<p/>
      *
      * @param records The json.
      * @param response The response of the http call.
      * @return The response with the converted csv written.
+     * @throws CsvException if fails to parse from Json to CSV.
      */
-    public HttpServletResponse convert(List<Map<String, Object>> records, HttpServletResponse response) {
-        return jsonToCsvGateway.convert(records, response);
+    public HttpServletResponse fromJson(List<Map<String, Object>> records, HttpServletResponse response) throws CsvException {
+        return csvGateway.fromJson(records, response);
     }
 }

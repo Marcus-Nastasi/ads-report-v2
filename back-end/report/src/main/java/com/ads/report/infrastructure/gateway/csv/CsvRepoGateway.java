@@ -1,7 +1,7 @@
 package com.ads.report.infrastructure.gateway.csv;
 
 import com.ads.report.application.exception.CsvException;
-import com.ads.report.application.gateway.csv.JsonToCsvGateway;
+import com.ads.report.application.gateway.csv.CsvGateway;
 import com.opencsv.CSVWriter;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -16,23 +16,20 @@ import java.util.Map;
  * @version 1.0.1
  * @since 2025
  * */
-public class JsonToCsv implements JsonToCsvGateway {
+public class CsvRepoGateway implements CsvGateway {
 
     /**
      *
-     * Method to convert json to csv.
+     * Method to convert from json to csv.
      *
-     * <p>
-     * This method uses an algorithm and the CSVWriter library to convert the JSON to CSV type, and then
-     * write into the response.
-     * <p/>
+     * <p>This method uses an algorithm and the CSVWriter library to convert from JSON to CSV type, and write into response.<p/>
      *
      * @param records  The json object converte to raw type.
      * @param response The response object.
      * @throws CsvException if fails to parse Json to CSV.
      */
     @Override
-    public HttpServletResponse convert(List<Map<String, Object>> records, HttpServletResponse response) throws CsvException {
+    public HttpServletResponse fromJson(List<Map<String, Object>> records, HttpServletResponse response) throws CsvException {
         try (CSVWriter writer = new CSVWriter(response.getWriter())) {
             if (!records.isEmpty()) {
                 String[] headers = records.getFirst().keySet().toArray(new String[0]);
