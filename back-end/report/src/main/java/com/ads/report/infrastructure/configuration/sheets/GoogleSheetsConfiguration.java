@@ -2,6 +2,7 @@ package com.ads.report.infrastructure.configuration.sheets;
 
 import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.application.usecases.sheets.GoogleSheetsUseCase;
+import com.ads.report.infrastructure.exception.ForbiddenException;
 import com.ads.report.infrastructure.gateway.sheets.GoogleSheetsRepoGateway;
 import com.ads.report.infrastructure.gateway.redis.RedisOAuth2AuthorizedClient;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -52,31 +53,34 @@ public class GoogleSheetsConfiguration {
     @Bean
     @RequestScope
     public Sheets googleSheetsService(RedisOAuth2AuthorizedClient authorizedClientService,
-                                      OAuth2AuthorizedClientManager authorizedClientManager) throws IOException {
+                                      OAuth2AuthorizedClientManager authorizedClientManager) {
         // Getting authentication from session security context holder.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // Tests if the authentication granted is an OAuth2 instance, and associate it to oauthToken variable.
-        if (!(authentication instanceof OAuth2AuthenticationToken oauthToken))
-            throw new RuntimeException("User is not authenticated on Google OAuth2.");
+        if (!(authentication instanceof OAuth2AuthenticationToken oauthToken)) {
+            throw new ForbiddenException("User is not authenticated on Google OAuth2.");
+        }
         // Loading authorized client by token's information.
         OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(
             oauthToken.getAuthorizedClientRegistrationId(),
             oauthToken.getName()
         );
-        if (client == null)
-            throw new RuntimeException("OAuth2AuthorizedClient not found. The user may be not authenticated.");
+        if (client == null) {
+            throw new ForbiddenException("OAuth2AuthorizedClient not found. The user may be not authenticated.");
+        }
         // Automatically renew token if expired.
         client = authorizedClientManager.authorize(OAuth2AuthorizeRequest
             .withClientRegistrationId(oauthToken.getAuthorizedClientRegistrationId())
             .principal(oauthToken)
             .build());
-        if (client == null || client.getAccessToken() == null)
-            throw new RuntimeException("Failed to renew access_token. Logon again.");
+        if (client == null || client.getAccessToken() == null) {
+            throw new ForbiddenException("Failed to renew access_token. Logon again.");
+        }
         // Getting final access_token, expiration time and refresh_token.
         String accessToken = client.getAccessToken().getTokenValue();
         Instant expiresAt = client.getAccessToken().getExpiresAt();
         String refreshToken = (client.getRefreshToken() != null) ? client.getRefreshToken().getTokenValue() : "";
-        if (refreshToken.isEmpty()) throw new RuntimeException("refresh_token not found.");
+        if (refreshToken.isEmpty()) throw new ForbiddenException("refresh_token not found.");
         Date date = new Date();
         date.setTime(expiresAt.getEpochSecond());
         // Using UserCredentials to support the token's automatic renew.
