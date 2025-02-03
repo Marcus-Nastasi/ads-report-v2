@@ -81,8 +81,8 @@ public class GoogleAdsTests {
     AccountMetrics accountMetrics2 = new AccountMetrics(43827423L, "", 0L, 0L, 0d, 0d, 0d, 0d, 0d);
 
     // Campaign metrics from keywords object.
-    CampaignKeywordMetrics campaignKeywordMetrics1 = new CampaignKeywordMetrics("", "", "", "", "", "", 0L, 0L, 0d, 0d, 0d, 0d);
-    CampaignKeywordMetrics campaignKeywordMetrics2 = new CampaignKeywordMetrics("", "", "", "", "", "", 12L, 120L, 330d, 30d, 30d, 40d);
+    CampaignKeywordMetrics campaignKeywordMetrics1 = new CampaignKeywordMetrics("", "", "", "", "", "", "0L", 0L, 0L, 0d, 0d, 0d, 0.0);
+    CampaignKeywordMetrics campaignKeywordMetrics2 = new CampaignKeywordMetrics("", "", "", "", "", "", "12L", 120L, 330L, 30d, 30d, 40d, 0.0);
 
     // Campaign titles and descriptions object.
     CampaignTitleAndDescription campaignTitleAndDescription = new CampaignTitleAndDescription("", "", "", List.of(), List.of(), 900L, 322L, 4);

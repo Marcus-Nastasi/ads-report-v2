@@ -4,7 +4,6 @@ import com.ads.report.application.gateway.ads.GoogleAdsGateway;
 import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.domain.reports.UpdateAllReports;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
