@@ -1,6 +1,6 @@
-package com.ads.report.infrastructure.gateway;
+package com.ads.report.infrastructure.gateway.csv;
 
-import com.ads.report.application.gateway.JsonToCsvGateway;
+import com.ads.report.application.gateway.csv.JsonToCsvGateway;
 import com.opencsv.CSVWriter;
 import jakarta.servlet.http.HttpServletResponse;
 

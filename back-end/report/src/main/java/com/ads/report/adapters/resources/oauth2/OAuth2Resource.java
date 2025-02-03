@@ -1,4 +1,4 @@
-package com.ads.report.adapters.resources;
+package com.ads.report.adapters.resources.oauth2;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;

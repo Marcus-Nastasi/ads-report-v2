@@ -1,9 +1,9 @@
 package com.ads.report.infrastructure.configuration.ads;
 
 import com.ads.report.adapters.mappers.GoogleAdsDtoMapper;
-import com.ads.report.application.gateway.GoogleAdsGateway;
-import com.ads.report.application.usecases.GoogleAdsUseCase;
-import com.ads.report.infrastructure.gateway.GoogleAdsRepoGateway;
+import com.ads.report.application.gateway.ads.GoogleAdsGateway;
+import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
+import com.ads.report.infrastructure.gateway.ads.GoogleAdsRepoGateway;
 import com.ads.report.infrastructure.gateway.redis.RedisOAuth2AuthorizedClient;
 import com.google.ads.googleads.lib.GoogleAdsClient;
 import com.google.auth.oauth2.AccessToken;
@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -54,9 +53,8 @@ public class GoogleAdsConfiguration {
      */
     @Bean
     @RequestScope
-    public GoogleAdsClient googleAdsClient(
-            RedisOAuth2AuthorizedClient authorizedClientService,
-            OAuth2AuthorizedClientManager authorizedClientManager) {
+    public GoogleAdsClient googleAdsClient(RedisOAuth2AuthorizedClient authorizedClientService,
+                                           OAuth2AuthorizedClientManager authorizedClientManager) {
         // Getting authentication from session security context holder.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // Tests if the authentication granted is an OAuth2 instance, and associate it to oauthToken variable.

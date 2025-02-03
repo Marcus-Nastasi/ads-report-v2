@@ -1,4 +1,4 @@
-package com.ads.report.application.gateway;
+package com.ads.report.application.gateway.csv;
 
 import jakarta.servlet.http.HttpServletResponse;
 

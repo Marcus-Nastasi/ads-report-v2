@@ -1,8 +1,8 @@
 package com.ads.report.infrastructure.configuration.sheets;
 
-import com.ads.report.application.gateway.GoogleSheetsGateway;
-import com.ads.report.application.usecases.GoogleSheetsUseCase;
-import com.ads.report.infrastructure.gateway.GoogleSheetsRepoGateway;
+import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
+import com.ads.report.application.usecases.sheets.GoogleSheetsUseCase;
+import com.ads.report.infrastructure.gateway.sheets.GoogleSheetsRepoGateway;
 import com.ads.report.infrastructure.gateway.redis.RedisOAuth2AuthorizedClient;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
@@ -18,7 +18,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -52,9 +51,8 @@ public class GoogleSheetsConfiguration {
      */
     @Bean
     @RequestScope
-    public Sheets googleSheetsService(
-            RedisOAuth2AuthorizedClient authorizedClientService,
-            OAuth2AuthorizedClientManager authorizedClientManager) throws IOException {
+    public Sheets googleSheetsService(RedisOAuth2AuthorizedClient authorizedClientService,
+                                      OAuth2AuthorizedClientManager authorizedClientManager) throws IOException {
         // Getting authentication from session security context holder.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // Tests if the authentication granted is an OAuth2 instance, and associate it to oauthToken variable.

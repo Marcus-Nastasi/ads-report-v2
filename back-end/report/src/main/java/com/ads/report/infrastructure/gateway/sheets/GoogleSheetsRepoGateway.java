@@ -1,6 +1,6 @@
-package com.ads.report.infrastructure.gateway;
+package com.ads.report.infrastructure.gateway.sheets;
 
-import com.ads.report.application.gateway.GoogleSheetsGateway;
+import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
@@ -180,7 +180,7 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
         clearSheetTab(spreadsheetId, tab);
         List<List<Object>> sheetData = new ArrayList<>();
         sheetData.add(List
-            .of("date", "campaignName", "adGroupName", "keywordText", "matchType", "impressions", "clicks", "cost", "averageCpc", "conversions", "conversionRate", "dayOfWeek"));
+            .of("date", "campaignName", "adGroupName", "keywordText", "matchType", "impressions", "clicks", "cost", "averageCpc", "conversions", "conversionRate", "dayOfWeek", "chanel"));
         for (CampaignKeywordMetrics obj : campaignKeywordMetrics) {
             List<Object> row = List.of(
                 obj.getDate(),

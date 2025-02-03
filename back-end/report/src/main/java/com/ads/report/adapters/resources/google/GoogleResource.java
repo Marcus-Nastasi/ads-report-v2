@@ -1,12 +1,12 @@
-package com.ads.report.adapters.resources;
+package com.ads.report.adapters.resources.google;
 
 import com.ads.report.adapters.input.UpdateAllReportsRequestDto;
 import com.ads.report.adapters.mappers.GoogleAdsDtoMapper;
 import com.ads.report.adapters.output.TestResponseDto;
-import com.ads.report.application.usecases.GoogleAdsUseCase;
-import com.ads.report.application.usecases.GoogleSheetsUseCase;
-import com.ads.report.application.usecases.JsonToCsvUseCase;
-import com.ads.report.application.usecases.UpdateAllReportsUseCase;
+import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
+import com.ads.report.application.usecases.sheets.GoogleSheetsUseCase;
+import com.ads.report.application.usecases.csv.JsonToCsvUseCase;
+import com.ads.report.application.usecases.ads.UpdateAllReportsUseCase;
 import com.ads.report.domain.manager.ManagerAccountInfo;
 import com.ads.report.domain.account.AccountMetrics;
 import com.google.common.reflect.TypeToken;

@@ -18,6 +18,7 @@ public class CampaignKeywordMetrics implements Serializable {
     private String date;
     private String dayOfWeek;
     private String campaignName;
+    private String advertisingChannelType;
     private String adGroupName;
     private String keywordText;
     private String matchType;
@@ -28,10 +29,11 @@ public class CampaignKeywordMetrics implements Serializable {
     private double conversions;
     private double conversionRate;
 
-    public CampaignKeywordMetrics(String date, String dayOfWeek, String campaignName, String adGroupName, String keywordText, String matchType, Long impressions, Long clicks, double cost, double averageCpc, double conversions, double conversionRate) {
+    public CampaignKeywordMetrics(String date, String dayOfWeek, String campaignName, String advertisingChannelType, String adGroupName, String keywordText, String matchType, Long impressions, Long clicks, double cost, double averageCpc, double conversions, double conversionRate) {
         this.date = date;
         this.dayOfWeek = dayOfWeek;
         this.campaignName = campaignName;
+        this.advertisingChannelType = advertisingChannelType;
         this.adGroupName = adGroupName;
         this.keywordText = keywordText;
         this.matchType = matchType;
@@ -65,6 +67,14 @@ public class CampaignKeywordMetrics implements Serializable {
 
     public void setCampaignName(String campaignName) {
         this.campaignName = campaignName;
+    }
+
+    public String getAdvertisingChannelType() {
+        return advertisingChannelType;
+    }
+
+    public void setAdvertisingChannelType(String advertisingChannelType) {
+        this.advertisingChannelType = advertisingChannelType;
     }
 
     public String getAdGroupName() {

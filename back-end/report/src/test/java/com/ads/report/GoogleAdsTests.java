@@ -1,12 +1,12 @@
 package com.ads.report;
 
-import com.ads.report.application.usecases.GoogleAdsUseCase;
+import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
 import com.ads.report.domain.campaign.CampaignTitleAndDescription;
 import com.ads.report.domain.manager.ManagerAccountInfo;
-import com.ads.report.infrastructure.gateway.GoogleAdsRepoGateway;
+import com.ads.report.infrastructure.gateway.ads.GoogleAdsRepoGateway;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

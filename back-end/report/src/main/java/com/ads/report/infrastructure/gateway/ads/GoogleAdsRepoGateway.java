@@ -1,6 +1,6 @@
-package com.ads.report.infrastructure.gateway;
+package com.ads.report.infrastructure.gateway.ads;
 
-import com.ads.report.application.gateway.GoogleAdsGateway;
+import com.ads.report.application.gateway.ads.GoogleAdsGateway;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
@@ -296,23 +296,25 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
         String isActive = active ? "metrics.impressions > '0'" : "metrics.impressions >= '0'";
         List<CampaignKeywordMetrics> campaignKeywordMetrics = new ArrayList<>();
         String query = String.format("""
-            SELECT
-              segments.date,
-              segments.day_of_week,
-              campaign.name,
-              ad_group.name,
-              ad_group_criterion.keyword.text,
-              ad_group_criterion.keyword.match_type,
-              metrics.impressions,
-              metrics.clicks,
-              metrics.cost_micros,
-              metrics.average_cpc,
-              metrics.conversions,
-              metrics.conversions_from_interactions_rate
-            FROM keyword_view
-            WHERE segments.date >= '%s' AND segments.date <= '%s'
-            AND %s
-            ORDER BY segments.date ASC, metrics.conversions DESC
+           SELECT
+               segments.date,
+               segments.day_of_week,
+               campaign.name,
+               ad_group.name,
+               campaign.advertising_channel_type,
+               ad_group_criterion.keyword.text,
+               ad_group_criterion.keyword.match_type,
+               metrics.impressions,
+               metrics.clicks,
+               metrics.cost_micros,
+               metrics.average_cpc,
+               metrics.conversions,
+               metrics.conversions_from_interactions_rate
+           FROM keyword_view
+           WHERE segments.date >= '%s' AND segments.date <= '%s'
+           AND %s
+           AND ad_group_criterion.status != 'REMOVED'
+           ORDER BY segments.date ASC, metrics.conversions DESC
         """, startDate, endDate, isActive);
         try (GoogleAdsServiceClient client = googleAdsClient.getLatestVersion().createGoogleAdsServiceClient()) {
             // Build a new request with the customerId and query
@@ -334,6 +336,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
                     r.getSegments().getDate(),
                     r.getSegments().getDayOfWeek().name(),
                     r.getCampaign().getName(),
+                    r.getCampaign().getAdvertisingChannelType().name(),
                     r.getAdGroup().getName(),
                     r.getAdGroupCriterion().getKeyword().getText(),
                     r.getAdGroupCriterion().getKeyword().getMatchType().toString(),

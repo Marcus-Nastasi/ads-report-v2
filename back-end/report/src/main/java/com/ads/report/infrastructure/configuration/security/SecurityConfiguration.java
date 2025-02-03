@@ -42,7 +42,7 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/", "/login").permitAll()
-                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**").authenticated()
+                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**").permitAll()
                     .anyRequest().authenticated();
                 }
             ).oauth2Login(login -> {
@@ -60,7 +60,8 @@ public class SecurityConfiguration {
      */
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
-        ClientRegistration googleClientRegistration = ClientRegistration.withRegistrationId("google")
+        ClientRegistration googleClientRegistration = ClientRegistration
+            .withRegistrationId("google")
             .clientId(clientId)
             .clientSecret(clientSecret)
             .scope("openid", "profile", "email", "https://www.googleapis.com/auth/adwords", "https://www.googleapis.com/auth/spreadsheets")

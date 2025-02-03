@@ -1,6 +1,6 @@
-package com.ads.report.application.usecases;
+package com.ads.report.application.usecases.ads;
 
-import com.ads.report.application.gateway.GoogleAdsGateway;
+import com.ads.report.application.gateway.ads.GoogleAdsGateway;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
@@ -114,9 +114,8 @@ public class GoogleAdsUseCase {
             LocalDate date = LocalDate.parse(m.getDate());
             if (!metricsMap.containsKey(date)) {
                 metricsMap.put(date, new ArrayList<>());
-            } else {
-                metricsMap.get(date).add(m);
             }
+            metricsMap.get(date).add(m);
         }
         // Creating a list to have the complete results.
         List<CampaignPerDay> completeResults = new ArrayList<>();

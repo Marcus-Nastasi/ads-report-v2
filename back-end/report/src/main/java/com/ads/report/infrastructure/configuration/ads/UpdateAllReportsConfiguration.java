@@ -1,9 +1,9 @@
 package com.ads.report.infrastructure.configuration.ads;
 
-import com.ads.report.application.gateway.GoogleAdsGateway;
-import com.ads.report.application.gateway.GoogleSheetsGateway;
-import com.ads.report.application.usecases.GoogleAdsUseCase;
-import com.ads.report.application.usecases.UpdateAllReportsUseCase;
+import com.ads.report.application.gateway.ads.GoogleAdsGateway;
+import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
+import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
+import com.ads.report.application.usecases.ads.UpdateAllReportsUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

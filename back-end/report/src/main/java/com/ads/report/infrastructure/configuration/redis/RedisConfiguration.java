@@ -59,6 +59,12 @@ public class RedisConfiguration {
         return template;
     }
 
+    /**
+     *
+     * <p>The explicit configuration to Redis connection.<p/>
+     *
+     * @return An object of type LettuceConnectionFactory.
+     */
     @Bean
     public LettuceConnectionFactory lettuceConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();

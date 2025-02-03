@@ -1,4 +1,4 @@
-package com.ads.report.application.gateway;
+package com.ads.report.application.gateway.ads;
 
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;

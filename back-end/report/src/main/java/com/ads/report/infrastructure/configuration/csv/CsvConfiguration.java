@@ -1,8 +1,8 @@
 package com.ads.report.infrastructure.configuration.csv;
 
-import com.ads.report.application.gateway.JsonToCsvGateway;
-import com.ads.report.application.usecases.JsonToCsvUseCase;
-import com.ads.report.infrastructure.gateway.JsonToCsv;
+import com.ads.report.application.gateway.csv.JsonToCsvGateway;
+import com.ads.report.application.usecases.csv.JsonToCsvUseCase;
+import com.ads.report.infrastructure.gateway.csv.JsonToCsv;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

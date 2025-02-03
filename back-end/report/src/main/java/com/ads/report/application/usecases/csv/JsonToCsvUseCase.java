@@ -1,6 +1,6 @@
-package com.ads.report.application.usecases;
+package com.ads.report.application.usecases.csv;
 
-import com.ads.report.application.gateway.JsonToCsvGateway;
+import com.ads.report.application.gateway.csv.JsonToCsvGateway;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;

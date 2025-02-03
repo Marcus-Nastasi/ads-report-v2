@@ -1,6 +1,6 @@
-package com.ads.report.application.usecases;
+package com.ads.report.application.usecases.sheets;
 
-import com.ads.report.application.gateway.GoogleSheetsGateway;
+import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
