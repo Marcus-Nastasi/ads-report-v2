@@ -281,7 +281,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
             }
             return campaignPerDays;
         } catch (Exception e) {
-            throw new GoogleAdsException("Error searching per day metrics: " + e.getMessage(), e);
+            throw new GoogleAdsException("Error searching per day metrics: " + e.getMessage());
         }
     }
 
