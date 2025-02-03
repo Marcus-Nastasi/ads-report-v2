@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * The controller to the application.
  *
  * <p>
@@ -52,7 +53,7 @@ public class GoogleResource {
     @Autowired
     private Gson gson;
     @Autowired
-    private CsvUseCase jsonToCsv;
+    private CsvUseCase csvUseCase;
 
     /**
      * Test the connection between the application and the google account.
@@ -110,7 +111,7 @@ public class GoogleResource {
         List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
-        jsonToCsv.fromJson(records, response);
+        csvUseCase.fromJson(records, response);
     }
 
     /**
@@ -139,7 +140,7 @@ public class GoogleResource {
         List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
-        jsonToCsv.fromJson(records, response);
+        csvUseCase.fromJson(records, response);
     }
 
     /**

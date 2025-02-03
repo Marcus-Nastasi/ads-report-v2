@@ -18,17 +18,12 @@ import org.springframework.context.annotation.Configuration;
 public class CsvConfiguration {
 
     @Bean
-    public CsvRepoGateway jsonToCsvConverter() {
-        return new CsvRepoGateway();
-    }
-
-    @Bean
     public CsvGateway jsonToCsvGateway() {
         return new CsvRepoGateway();
     }
 
     @Bean
-    public CsvUseCase jsonToCsvUseCase(CsvGateway csvGateway) {
+    public CsvUseCase csvUseCase(CsvGateway csvGateway) {
         return new CsvUseCase(csvGateway);
     }
 }
