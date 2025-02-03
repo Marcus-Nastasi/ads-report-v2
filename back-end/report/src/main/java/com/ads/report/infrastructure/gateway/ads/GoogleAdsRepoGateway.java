@@ -1,5 +1,6 @@
 package com.ads.report.infrastructure.gateway.ads;
 
+import com.ads.report.application.exception.GoogleAdsException;
 import com.ads.report.application.gateway.ads.GoogleAdsGateway;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
@@ -35,10 +36,10 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * Test the connection with the adwords client.
      *
      * @return The status and a list of accessible customer accounts.
-     * @throws RuntimeException If fails to connect.
+     * @throws GoogleAdsException If fails to connect.
      * */
     @Override
-    public List<String> testConnection() throws RuntimeException {
+    public List<String> testConnection() throws GoogleAdsException {
         // Create the CustomerServiceClient
         try (CustomerServiceClient customerServiceClient = googleAdsClient.getLatestVersion().createCustomerServiceClient()) {
             final List<String> response = new ArrayList<>();
@@ -50,7 +51,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
             response.addAll(listed.getResourceNamesList());
             return response;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to connect to MCC: " + e.getMessage());
+            throw new GoogleAdsException("Failed to connect to MCC: " + e.getMessage());
         }
     }
 
@@ -60,7 +61,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * @param managerAccountId The id of an adwords customer (client).
      *
      * @return A ManagerAccountInfo type object.
-     * @throws RuntimeException If fails to request the data.
+     * @throws GoogleAdsException If fails to request the data.
      */
     @Override
     public ManagerAccountInfo getManagerAccount(String managerAccountId) {
@@ -104,7 +105,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
                 row.getCustomer().getConversionTrackingSetting().getConversionTrackingStatus().name()
             );
         } catch (Exception e) {
-            throw new RuntimeException("Error searching account information: " + e.getMessage(), e);
+            throw new GoogleAdsException("Error searching account information: " + e.getMessage());
         }
     }
 
@@ -115,7 +116,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * @param customerId The id of an adwords customer (client).
      *
      * @return The status and a list of CampaignMetrics objects.
-     * @throws RuntimeException If fails to request the data.
+     * @throws GoogleAdsException If fails to request the data.
      */
     @Override
     public List<CampaignMetrics> getCampaignMetrics(String customerId, String startDate, String endDate, boolean active) {
@@ -169,7 +170,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
             }
             return campaignMetricsList;
         } catch (Exception e) {
-            throw new RuntimeException("Error searching metrics: " + e.getMessage());
+            throw new GoogleAdsException("Error searching metrics: " + e.getMessage());
         }
     }
 
@@ -181,7 +182,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * @param endDate The end date of the analysis period.
      *
      * @return A ManagerAccountInfo type object.
-     * @throws RuntimeException If fails to request the data.
+     * @throws GoogleAdsException If fails to request the data.
      */
     @Override
     public List<AccountMetrics> getAccountMetrics(String customerId, String startDate, String endDate) {
@@ -223,7 +224,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
             }
             return accountMetricsList;
         } catch (Exception e) {
-            throw new RuntimeException("Error searching account metrics: " + e.getMessage(), e);
+            throw new GoogleAdsException("Error searching account metrics: " + e.getMessage());
         }
     }
 
@@ -241,6 +242,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
      * @return Returns a list of TotalPerDay object.
+     * @throws GoogleAdsException If fails to request the data.
      */
     @Override
     public List<CampaignPerDay> getTotalPerDay(String customerId, String startDate, String endDate) {
@@ -279,7 +281,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
             }
             return campaignPerDays;
         } catch (Exception e) {
-            throw new RuntimeException("Error searching per day metrics: " + e.getMessage(), e);
+            throw new GoogleAdsException("Error searching per day metrics: " + e.getMessage(), e);
         }
     }
 
@@ -290,6 +292,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
      * @return A list of KeywordMetrics object.
+     * @throws GoogleAdsException If fails to request the data.
      */
     @Override
     public List<CampaignKeywordMetrics> getKeywordMetrics(String customerId, String startDate, String endDate, boolean active) {
@@ -351,7 +354,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
             }
             return campaignKeywordMetrics;
         } catch (Exception e) {
-            throw new RuntimeException("Error searching keyword metrics: " + e.getMessage(), e);
+            throw new GoogleAdsException("Error searching keyword metrics: " + e.getMessage());
         }
     }
 
@@ -362,6 +365,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
      * @return A list of AdTitleAndDescriptionInfo object.
+     * @throws GoogleAdsException If fails to request the data.
      */
     @Override
     public List<CampaignTitleAndDescription> getAdTitleAndDescriptions(String customerId, String startDate, String endDate) {
@@ -426,7 +430,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
             }
             return campaignTitleAndDescriptions;
         } catch (Exception e) {
-            throw new RuntimeException("Error searching Ad metrics: " + e.getMessage(), e);
+            throw new GoogleAdsException("Error searching Ad metrics: " + e.getMessage());
         }
     }
 }

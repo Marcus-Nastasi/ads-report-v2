@@ -1,5 +1,6 @@
 package com.ads.report.application.gateway.ads;
 
+import com.ads.report.application.exception.GoogleAdsException;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
@@ -37,9 +38,9 @@ public interface GoogleAdsGateway {
      * @param customerId The id of an adwords customer (client).
      *
      * @return The status and a list of CampaignMetrics objects.
-     * @throws RuntimeException If fails to request the data.
+     * @throws GoogleAdsException If fails to request the data.
      */
-    List<CampaignMetrics> getCampaignMetrics(String customerId, String startDate, String endDate, boolean active);
+    List<CampaignMetrics> getCampaignMetrics(String customerId, String startDate, String endDate, boolean active) throws GoogleAdsException;
 
     /**
      * Get general information of manager account.
