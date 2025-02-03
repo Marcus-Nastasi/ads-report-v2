@@ -27,6 +27,7 @@ import java.time.Instant;
 import java.util.Date;
 
 /**
+ *
  * The configuration of Google Sheets.
  *
  * @author Marcus Nastasi

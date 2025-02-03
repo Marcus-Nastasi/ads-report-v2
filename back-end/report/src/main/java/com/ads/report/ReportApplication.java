@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ *
  * The Google Ads Report API.
  *
  * <p>This version allows any Google user to log in with their Google account, and use the software.<p/>

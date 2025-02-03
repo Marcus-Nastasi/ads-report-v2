@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
+ *
  * The security configuration class.
  *
  * @author Marcus Nastasi

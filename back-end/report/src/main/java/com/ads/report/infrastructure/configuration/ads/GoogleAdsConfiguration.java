@@ -26,6 +26,7 @@ import java.time.Instant;
 import java.util.Date;
 
 /**
+ *
  * The Google Ads configuration class.
  *
  * <p>Here we create the adwords beans..<p/>
