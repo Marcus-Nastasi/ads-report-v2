@@ -1,5 +1,8 @@
 package com.ads.report.adapters.handler;
 
+import com.ads.report.application.exception.CsvException;
+import com.ads.report.application.exception.GoogleAdsException;
+import com.ads.report.application.exception.GoogleSheetsException;
 import com.ads.report.infrastructure.exception.ForbiddenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<Object> handleForbiddenException(ForbiddenException exception, WebRequest request) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("error", exception.getMessage()));
+    }
+
+    @ExceptionHandler(GoogleAdsException.class)
+    public ResponseEntity<Object> handleAdsException(GoogleAdsException exception, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", exception.getMessage()));
+    }
+
+    @ExceptionHandler(GoogleSheetsException.class)
+    public ResponseEntity<Object> handleSheetsException(GoogleSheetsException exception, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", exception.getMessage()));
+    }
+
+    @ExceptionHandler(CsvException.class)
+    public ResponseEntity<Object> handleCsvException(CsvException exception, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", exception.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)
