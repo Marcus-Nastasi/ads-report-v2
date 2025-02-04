@@ -1,0 +1,92 @@
+package com.ads.report.adapters.resources.csv;
+
+import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
+import com.ads.report.application.usecases.csv.CsvUseCase;
+import com.ads.report.domain.account.AccountMetrics;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("v2/csv")
+public class CsvResource {
+
+    @Autowired
+    private GoogleAdsUseCase googleAdsUseCase;
+    @Autowired
+    private Gson gson;
+    @Autowired
+    private CsvUseCase csvUseCase;
+
+    /**
+     *
+     * Endpoint to get All campaigns metrics.
+     *
+     * <p>
+     * This method uses an algorithm and the CSVWriter library
+     * to convert the JSON to CSV type.
+     * <p/>
+     *
+     * @param customerId The id of an adwords customer (client).
+     * @param response The response object.
+     */
+    @GetMapping("/campaign/{customerId}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(
+            summary = "Get all campaign metrics (CSV)",
+            description = "In this route you can get all metrics separated by campaigns, in a certain period."
+    )
+    @ApiResponse(responseCode = "200", description = "Returning the CSV with campaign metrics.")
+    public void getAllCampaignMetrics(
+            @PathVariable String customerId,
+            @PathParam("start_date") String start_date,
+            @PathParam("end_date") String end_date,
+            @PathParam("active") boolean active,
+            HttpServletResponse response) {
+        String json = gson.toJson(googleAdsUseCase.getCampaignMetrics(customerId, start_date, end_date, active));
+        String fileName = "campaigns-"+customerId+".csv";
+        List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
+        csvUseCase.fromJson(records, response);
+    }
+
+    /**
+     *
+     * Endpoint to get aggregated metrics from one client account.
+     *
+     * @param customerId The id of an adwords customer (client).
+     * @param start_date The start date of the analysis period.
+     * @param end_date The end date of the analysis period.
+     */
+    @GetMapping("/account/{customerId}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(
+            summary = "Get all account metrics (CSV)",
+            description = "In this route you can get all metrics of an account, in a certain period."
+    )
+    @ApiResponse(responseCode = "200", description = "Returning the CSV with account metrics.")
+    public void getAccountMetrics(
+            @PathVariable("customerId") String customerId,
+            @PathParam("start_date") String start_date,
+            @PathParam("end_date") String end_date,
+            @PathParam("type") String type,
+            HttpServletResponse response) {
+        List<AccountMetrics> accountMetrics = googleAdsUseCase.getAccountMetrics(customerId, start_date, end_date);
+        String json = gson.toJson(accountMetrics);
+        String fileName = "account-metrics-"+accountMetrics.getFirst().getDescriptiveName()+"-"+start_date+"-"+end_date+".csv";
+        List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
+        csvUseCase.fromJson(records, response);
+    }
+}
