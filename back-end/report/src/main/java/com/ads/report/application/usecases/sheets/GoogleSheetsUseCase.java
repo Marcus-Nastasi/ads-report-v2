@@ -94,9 +94,10 @@ public class GoogleSheetsUseCase {
      * @param spreadsheetId The Google Sheets id.
      * @param tab The sheets tab to write.
      * @param campaignPerDays the list of TotalPerDay objects.
+     *
      * @throws GoogleAdsException throws IOException if fails.
      */
-    public void totalPerDaysToSheet(
+    public void sendTotalPerDaysToSpreadsheet(
             String spreadsheetId,
             String tab,
             List<CampaignPerDay> campaignPerDays) throws GoogleAdsException {

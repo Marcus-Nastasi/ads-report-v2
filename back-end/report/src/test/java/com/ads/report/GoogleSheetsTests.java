@@ -1,11 +1,11 @@
 package com.ads.report;
 
-import com.ads.report.application.exception.GoogleAdsException;
 import com.ads.report.application.exception.GoogleSheetsException;
 import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.application.usecases.sheets.GoogleSheetsUseCase;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
+import com.ads.report.domain.campaign.CampaignPerDay;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,6 +39,12 @@ public class GoogleSheetsTests {
     List<CampaignMetrics> campaignMetrics1 = new ArrayList<>(List.of(campaignMetric1));
     List<CampaignMetrics> campaignMetrics2 = new ArrayList<>(List.of(campaignMetric2));
 
+    // Campaign per day mock object.
+    CampaignPerDay campaignPerDay1 = new CampaignPerDay("2025-01-01", 2312312L, 42342L, 423d, 12323d, 4, "MONDAY");
+    CampaignPerDay campaignPerDay2 = new CampaignPerDay("2025-01-05", 439284L, 8942L, 231d, 54343d, 8, "MONDAY");
+    List<CampaignPerDay> campaignPerDays1 = new ArrayList<>(List.of(campaignPerDay1));
+    List<CampaignPerDay> campaignPerDays2 = new ArrayList<>(List.of(campaignPerDay2));
+
     /**
      *
      * Testing the method sendAccountMetricsToSpreadsheet.
@@ -64,7 +70,7 @@ public class GoogleSheetsTests {
 
     /**
      *
-     * Testing the method sendAccountMetricsToSpreadsheet.
+     * Testing the method sendCampaignMetricsToSpreadsheet.
      *
      */
     @Test
@@ -83,5 +89,28 @@ public class GoogleSheetsTests {
 
         // Verifying calls.
         verify(googleSheetsGateway, times(2)).campaignMetricsToSheets(anyString(), anyString(), anyList());
+    }
+
+    /**
+     *
+     * Testing the method sendTotalPerDaysToSpreadsheet.
+     *
+     */
+    @Test
+    void sendTotalPerDaysToSpreadsheet() {
+        // Mocking results and throws.
+        doNothing().when(googleSheetsGateway).totalPerDayToSheets("123", "dma", campaignPerDays1);
+        doThrow(GoogleSheetsException.class).when(googleSheetsGateway).totalPerDayToSheets("234", "am", campaignPerDays2);
+
+        // Asserting behavior.
+        assertDoesNotThrow(() -> {
+            googleSheetsUseCase.sendTotalPerDaysToSpreadsheet("123", "dma", campaignPerDays1);
+        });
+        assertThrows(GoogleSheetsException.class, () -> {
+            googleSheetsUseCase.sendTotalPerDaysToSpreadsheet("234", "am", campaignPerDays2);
+        });
+
+        // Verifying calls.
+        verify(googleSheetsGateway, times(2)).totalPerDayToSheets(anyString(), anyString(), anyList());
     }
 }

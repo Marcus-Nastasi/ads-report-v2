@@ -112,7 +112,7 @@ public class SheetsResource {
             @PathParam("end_date") String end_date,
             @PathParam("spreadsheet_id") String spreadsheet_id,
             @PathParam("tab") String tab) throws IOException {
-        googleSheetsUseCase.totalPerDaysToSheet(spreadsheet_id, tab, googleAdsUseCase.getTotalPerDay(customer_id, start_date, end_date));
+        googleSheetsUseCase.sendTotalPerDaysToSpreadsheet(spreadsheet_id, tab, googleAdsUseCase.getTotalPerDay(customer_id, start_date, end_date));
         return ResponseEntity.ok("");
     }
 
