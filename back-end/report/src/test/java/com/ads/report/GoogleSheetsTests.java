@@ -4,6 +4,7 @@ import com.ads.report.application.exception.GoogleSheetsException;
 import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.application.usecases.sheets.GoogleSheetsUseCase;
 import com.ads.report.domain.account.AccountMetrics;
+import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.ads.report.domain.campaign.CampaignMetrics;
 import com.ads.report.domain.campaign.CampaignPerDay;
 import org.junit.jupiter.api.Test;
@@ -44,6 +45,12 @@ public class GoogleSheetsTests {
     CampaignPerDay campaignPerDay2 = new CampaignPerDay("2025-01-05", 439284L, 8942L, 231d, 54343d, 8, "MONDAY");
     List<CampaignPerDay> campaignPerDays1 = new ArrayList<>(List.of(campaignPerDay1));
     List<CampaignPerDay> campaignPerDays2 = new ArrayList<>(List.of(campaignPerDay2));
+
+    // Keyword metrics mock object.
+    CampaignKeywordMetrics campaignKeywordMetric1 = new CampaignKeywordMetrics("2025-01-01", "MONDAY", "campaignName 1", "act", "adGroupName 1", "text", "matchType", 43213L, 42342L, 0, 0, 23, 0);
+    CampaignKeywordMetrics campaignKeywordMetric2 = new CampaignKeywordMetrics("2025-01-8", "MONDAY", "campaignName 2", "act", "adGroupName 2", "text", "matchType", 43213L, 42342L, 0, 0, 23, 0);
+    List<CampaignKeywordMetrics> campaignKeywordMetrics1 = new ArrayList<>(List.of(campaignKeywordMetric1));
+    List<CampaignKeywordMetrics> campaignKeywordMetrics2 = new ArrayList<>(List.of(campaignKeywordMetric2));
 
     /**
      *
@@ -112,5 +119,28 @@ public class GoogleSheetsTests {
 
         // Verifying calls.
         verify(googleSheetsGateway, times(2)).totalPerDayToSheets(anyString(), anyString(), anyList());
+    }
+
+    /**
+     *
+     * Testing the method sendKeywordMetricsToSpreadsheet.
+     *
+     */
+    @Test
+    void sendKeywordMetricsToSpreadsheet() {
+        // Mocking results and throws.
+        doNothing().when(googleSheetsGateway).sendKeywordMetrics("123", "dma", campaignKeywordMetrics1);
+        doThrow(GoogleSheetsException.class).when(googleSheetsGateway).sendKeywordMetrics("234", "am", campaignKeywordMetrics2);
+
+        // Asserting behavior.
+        assertDoesNotThrow(() -> {
+            googleSheetsUseCase.sendKeywordMetricsToSpreadsheet("123", "dma", campaignKeywordMetrics1);
+        });
+        assertThrows(GoogleSheetsException.class, () -> {
+            googleSheetsUseCase.sendKeywordMetricsToSpreadsheet("234", "am", campaignKeywordMetrics2);
+        });
+
+        // Verifying calls.
+        verify(googleSheetsGateway, times(2)).sendKeywordMetrics(anyString(), anyString(), anyList());
     }
 }

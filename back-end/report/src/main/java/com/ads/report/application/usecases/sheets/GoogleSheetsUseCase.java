@@ -106,14 +106,15 @@ public class GoogleSheetsUseCase {
 
     /**
      *
-     * This method allows the user to send keyword metrics to sheets.
+     * This method allows the user to send keyword metrics to a spreadsheets.
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The Google Sheets id.
      * @param tab The sheets tab to write.
      * @param campaignKeywordMetrics the list of TotalPerDay objects.
+     *
      * @throws GoogleAdsException throws IOException if fails.
      */
-    public void sendKeywordMetrics(
+    public void sendKeywordMetricsToSpreadsheet(
             String spreadsheetId,
             String tab,
             List<CampaignKeywordMetrics> campaignKeywordMetrics) throws GoogleAdsException {
