@@ -2,6 +2,14 @@ package com.ads.report.infrastructure.exception;
 
 import java.io.Serial;
 
+/**
+ *
+ * <p>The Forbidden Exception.<p/>
+ *
+ * @author Marcus Nastasi
+ * @version 1.0.2
+ * @since 2025
+ * */
 public class ForbiddenException extends RuntimeException {
 
     @Serial
