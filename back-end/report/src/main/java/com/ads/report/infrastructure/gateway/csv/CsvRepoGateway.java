@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  *
- * The class that contains the methods that convert json objects to csv files.
+ * The class that contains the methods to handle csv files.
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -22,10 +22,11 @@ public class CsvRepoGateway implements CsvGateway {
      *
      * Method to convert from json to csv.
      *
-     * <p>This method uses an algorithm and the CSVWriter library to convert from JSON to CSV type, and write into response.<p/>
+     * <p>This method uses an algorithm and the CSVWriter library to convert from JSON to CSV, and write into response.<p/>
      *
      * @param records  The json object converte to raw type.
      * @param response The response object.
+     *
      * @throws CsvException if fails to parse Json to CSV.
      */
     @Override
@@ -35,7 +36,7 @@ public class CsvRepoGateway implements CsvGateway {
                 String[] headers = records.getFirst().keySet().toArray(new String[0]);
                 writer.writeNext(headers);
             }
-            for (Map<String, Object> record : records) {
+            for (Map<String, Object> record: records) {
                 String[] data = record.values().stream().map(String::valueOf).toArray(String[]::new);
                 writer.writeNext(data);
             }

@@ -42,8 +42,8 @@ public class CsvResource {
     @GetMapping("/campaign/{customerId}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(
-            summary = "Get all campaign metrics (CSV)",
-            description = "In this route you can get all metrics separated by campaigns, in a certain period."
+        summary = "Get all campaign metrics (CSV)",
+        description = "In this route you can get all metrics separated by campaigns, in a certain period."
     )
     @ApiResponse(responseCode = "200", description = "Returning the CSV with campaign metrics.")
     public void getAllCampaignMetrics(
@@ -71,15 +71,14 @@ public class CsvResource {
     @GetMapping("/account/{customerId}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(
-            summary = "Get all account metrics (CSV)",
-            description = "In this route you can get all metrics of an account, in a certain period."
+        summary = "Get all account metrics (CSV)",
+        description = "In this route you can get all metrics of an account, in a certain period."
     )
     @ApiResponse(responseCode = "200", description = "Returning the CSV with account metrics.")
     public void getAccountMetrics(
             @PathVariable("customerId") String customerId,
             @PathParam("start_date") String start_date,
             @PathParam("end_date") String end_date,
-            @PathParam("type") String type,
             HttpServletResponse response) {
         List<AccountMetrics> accountMetrics = googleAdsUseCase.getAccountMetrics(customerId, start_date, end_date);
         String json = gson.toJson(accountMetrics);

@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  *
- * The controller to the application.
+ * The controller to general Google resources.
  *
- * <p>
- * This represents the controller of the application, making possible to request api calls.
- * To test request, you can request from route /api/reports and look at the routs bellow.
- * <p/>
+ * <p>This class represents the controller of general Google resources. To make api calls, you can request
+ * from route /v2/reports and look at the routs bellow.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -39,9 +37,13 @@ public class GoogleResource {
     private UpdateAllReportsUseCase updateAllReportsUseCase;
 
     /**
-     * Test the connection between the application and the Google Account.
      *
-     * @return The TestResponseDto
+     * est the connection between the application and the Google Account.
+     *
+     * <p>This route returns an object that consists in the connection status,
+     * and a list of user's accessible accounts.<p/>
+     *
+     * @return The TestResponseDto.
      */
     @GetMapping("/test")
     @ResponseStatus(HttpStatus.OK)
@@ -52,7 +54,10 @@ public class GoogleResource {
     }
 
     /**
+     *
      * Recover the general data of the manager account specified.
+     *
+     * <p>In this route you can recover generic information from a manager account (MCC).<p/>
      *
      * @param id The id of an adwords customer (client).
      * @return An object of type ManagerAccountInfo, that contains the general MCC info.
@@ -67,13 +72,13 @@ public class GoogleResource {
 
     /**
      *
-     * This endpoint allows the user to send data to sheets, from various accounts.
+     * This endpoint allows the user to send a conjunct of data to sheets, from various accounts.
      *
      * <p>By passing the customer id, start date, end date, spreadsheet id, client and active flag,
      * you can update the sheets tables with ease.<p/>
      *
      * @param allReportsRequestDto the list of UpdateAllReports domain object.
-     * @return ok if the cll is successful
+     * @return ok if the cll is successful.
      */
     @PostMapping("/generate")
     @ResponseStatus(HttpStatus.OK)

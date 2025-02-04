@@ -23,21 +23,20 @@ public class SheetsResource {
 
     /**
      *
-     * This method allows the user to send campaign metrics directly from google ads to google sheets.
+     * This method allows the user to send campaign metrics directly from Google Ads to Google Sheets.
      *
-     * <p>Here the user can pass a adwords customer id, a spreadsheet id and tab, to send the data
-     * directly without needing to download a csv.<p/>
+     * <p>Here the user can pass an adwords customer id, a spreadsheet id and a tab, to send the data directly.<p/>
      *
      * @param customer_id The id of an adwords customer (client).
-     * @param spreadsheet_id The google sheets id.
-     * @param tab The sheets tab to write.
-     * @return Returns a response entity ok if successful.
+     * @param spreadsheet_id The Google Sheets id.
+     * @param tab The spreadsheet's tab to write.
+     * @return Returns a response entity 'ok' if successful.
      */
     @GetMapping("/campaign/{customer_id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(
-            summary = "Send all campaign metrics to sheets",
-            description = "In this route you can send all metrics of a account separated by campaigns, in a certain period."
+        summary = "Send all campaign metrics to sheets",
+        description = "In this route you can send all metrics of a account separated by campaigns, in a certain period."
     )
     @ApiResponse(responseCode = "200", description = "Returning 200 and sending to sheets.")
     public ResponseEntity<String> campaignMetricsToSheets(
@@ -55,22 +54,21 @@ public class SheetsResource {
      *
      * This method allows the user to send client account metrics directly from Google Ads to google sheets.
      *
-     * <p>Here the user can pass a adwords customer id, a start date, end date,
-     * a spreadsheet id and tab, to send the data directly without needing
-     * to download a csv.<p/>
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
+     * a spreadsheet id and tab, to send the data directly.<p/>
      *
      * @param customer_id The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.
      * @param end_date The end date of the analysis period.
-     * @param spreadsheet_id The google sheets id.
-     * @param tab The sheets tab to write.
-     * @return Returns a response entity ok if successful.
+     * @param spreadsheet_id The Google Sheets id.
+     * @param tab The spreadsheets tab to write.
+     * @return Returns a response entity 'ok' if successful.
      */
     @GetMapping("/account/{customer_id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(
-            summary = "Send all account metrics to sheets",
-            description = "In this route you can send all metrics of a account, in a certain period."
+        summary = "Send all account metrics to sheets",
+        description = "In this route you can send all metrics of a account, in a certain period."
     )
     @ApiResponse(responseCode = "200", description = "Returning 200 and sending to sheets.")
     public ResponseEntity<String> accountMetricsToSheet(
@@ -104,8 +102,8 @@ public class SheetsResource {
     @GetMapping("/campaign/days/{customer_id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(
-            summary = "Send all campaign metrics to sheets, separated by days",
-            description = "In this route you can send all metrics of a campaign, separated by campaigns and days, in a certain period."
+        summary = "Send all campaign metrics to sheets, separated by days",
+        description = "In this route you can send all metrics of a campaign, separated by campaigns and days, in a certain period."
     )
     @ApiResponse(responseCode = "200", description = "Returning 200 and sending to sheets.")
     public ResponseEntity<String> getTotalPerDay(
@@ -130,8 +128,8 @@ public class SheetsResource {
     @GetMapping("/keywords/{customerId}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(
-            summary = "Send all keyword metrics to sheets",
-            description = "In this route you can send all keyword metrics in a certain period."
+        summary = "Send all keyword metrics to sheets",
+        description = "In this route you can send all keyword metrics in a certain period."
     )
     @ApiResponse(responseCode = "200", description = "Returning 200 and sending to sheets.")
     public ResponseEntity<String> sendKeywordMetrics(
@@ -157,8 +155,8 @@ public class SheetsResource {
     @GetMapping("/headlines/{customerId}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(
-            summary = "Send all title and descriptions, and its metrics to sheets",
-            description = "In this route you can send all title, descriptions and its metrics, in a certain period."
+        summary = "Send all title and descriptions, and its metrics to sheets",
+        description = "In this route you can send all title, descriptions and its metrics, in a certain period."
     )
     @ApiResponse(responseCode = "200", description = "Returning 200 and sending to sheets.")
     public ResponseEntity<String> sendAdTitle(

@@ -32,9 +32,10 @@ public class OAuth2Resource {
 
     /**
      *
-     * <p>This endpoint allows users to retrieve their personal google account object.<p/>
+     * Validates if user is logged in.
      *
-     * <p>Validates if user is logged in.<p/>
+     * <p>This endpoint allows users to retrieve their personal Google Account object,
+     * to check if it's logged in.<p/>
      *
      * @param user The Oidc User object.
      * @param authentication The authentication token.

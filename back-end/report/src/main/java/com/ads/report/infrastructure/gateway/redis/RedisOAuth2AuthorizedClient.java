@@ -59,6 +59,7 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
      *
      * @param clientRegistrationId The client ID that is registered.
      * @param principalName The username saved as the key on Redis.
+     *
      * @return Return the OAuth2AuthorizedClient object that we've had parsed from Redis.
      */
     @Override
@@ -75,8 +76,7 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
         );
         // Refreshing the refresh_token.
         OAuth2RefreshToken refreshToken = dto.getRefreshToken() != null
-            ? new OAuth2RefreshToken(dto.getRefreshToken(), Instant.now())
-            : null;
+            ? new OAuth2RefreshToken(dto.getRefreshToken(), Instant.now()) : null;
         // Manually constructing the OAuth2AuthorizedClient.
         return new OAuth2AuthorizedClient(
             clientRegistrationRepository.findByRegistrationId(dto.getClientRegistrationId()),
