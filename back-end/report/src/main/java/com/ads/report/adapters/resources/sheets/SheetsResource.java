@@ -46,7 +46,7 @@ public class SheetsResource {
             @PathParam("spreadsheet_id") String spreadsheet_id,
             @PathParam("tab") String tab,
             @PathParam("active") boolean active) throws IOException {
-        googleSheetsUseCase.campaignMetricsToSheets(spreadsheet_id, tab, googleAdsUseCase.getCampaignMetrics(customer_id, start_date, end_date, active));
+        googleSheetsUseCase.sendCampaignMetricsToSpreadsheet(spreadsheet_id, tab, googleAdsUseCase.getCampaignMetrics(customer_id, start_date, end_date, active));
         return ResponseEntity.ok("");
     }
 

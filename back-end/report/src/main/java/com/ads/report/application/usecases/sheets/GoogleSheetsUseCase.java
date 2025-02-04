@@ -61,20 +61,21 @@ public class GoogleSheetsUseCase {
 
     /**
      *
-     * This method allows the user to send campaign metrics directly from google ads to google sheets.
+     * This method allows the user to send campaign metrics directly from Google Ads to Google Sheets.
      *
      * <p>
-     * Here the user can pass a adwords customer id, a start date, end date,
-     * a google sheets id and tab, to send the data directly without needing
+     * Here the user can pass an adwords customer id, a start date, end date,
+     * a Google Sheets id and tab, to send the data directly without needing
      * to download a csv.
      * <p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The Google Sheets id.
      * @param tab The sheets tab to write.
      * @param campaignMetrics A list of AccountMetrics object.
+     *
      * @throws GoogleAdsException Throws exception if fails.
      */
-    public void campaignMetricsToSheets(
+    public void sendCampaignMetricsToSpreadsheet(
             String spreadsheetId,
             String tab,
             List<CampaignMetrics> campaignMetrics) throws GoogleAdsException {
@@ -84,15 +85,13 @@ public class GoogleSheetsUseCase {
     /**
      *
      * This method allows the user to send client account metrics, separated per days,
-     * directly from google ads to google sheets.
+     * directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass a adwords customer id, a start date, end date,
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
      * a spreadsheet id and tab, to send metrics per day directly without needing
-     * to download a csv.
-     * <p/>
+     * to download a csv.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The Google Sheets id.
      * @param tab The sheets tab to write.
      * @param campaignPerDays the list of TotalPerDay objects.
      * @throws GoogleAdsException throws IOException if fails.
