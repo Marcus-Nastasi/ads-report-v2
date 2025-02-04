@@ -7,6 +7,7 @@ import com.ads.report.domain.reports.UpdateAllReports;
 import java.util.List;
 
 /**
+ *
  * The use case to update various reports.
  *
  * @author Marcus Nastasi

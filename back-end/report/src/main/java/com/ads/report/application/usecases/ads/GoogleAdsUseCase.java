@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * The use cases of google ads api calls.
  * <p>
  * This class uses the interface contract to call the implementations.
@@ -33,6 +34,7 @@ public class GoogleAdsUseCase {
     }
 
     /**
+     *
      * Get campaigns and it's metrics.
      *
      * @param customerId The id of an adwords customer (client).
@@ -45,6 +47,7 @@ public class GoogleAdsUseCase {
     }
 
     /**
+     *
      * Test the connection with the adwords client.
      *
      * @return The status and a list of accessible customer accounts.
@@ -55,6 +58,7 @@ public class GoogleAdsUseCase {
     }
 
     /**
+     *
      * Get general information of manager account.
      *
      * @param managerAccountId The id of an adwords customer (client).
@@ -67,6 +71,7 @@ public class GoogleAdsUseCase {
     }
 
     /**
+     *
      * Get general information of manager account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -81,6 +86,7 @@ public class GoogleAdsUseCase {
     }
 
     /**
+     *
      * This method allows the user to send client account metrics, separated per days,
      * directly from google ads to google sheets.
      *
@@ -93,6 +99,7 @@ public class GoogleAdsUseCase {
      * @param customerId The id of an adwords customer (client).
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
+     *
      * @return Returns a list of TotalPerDay object.
      */
     public List<CampaignPerDay> getTotalPerDay(String customerId, String startDate, String endDate) {
@@ -131,11 +138,13 @@ public class GoogleAdsUseCase {
     }
 
     /**
+     *
      * Use of getting all keyword metrics from an account.
      *
      * @param customerId The id of an adwords customer (client).
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
+     *
      * @return A list of KeywordMetrics object.
      */
     public List<CampaignKeywordMetrics> getKeywordMetrics(String customerId, String startDate, String endDate, boolean active) {
@@ -143,11 +152,13 @@ public class GoogleAdsUseCase {
     }
 
     /**
+     *
      * This method allows to get all campaigns, ad groups, titles, descriptions, and its metrics.
      *
      * @param customerId The id of an adwords customer (client).
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
+     *
      * @return A list of AdTitleAndDescriptionInfo object.
      */
     public List<CampaignTitleAndDescription> getAdTitleAndDescriptions(String customerId, String startDate, String endDate) {

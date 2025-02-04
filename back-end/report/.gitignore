@@ -37,4 +37,6 @@ ads.properties
 src/main/resources/credentials.json
 oauth2-client.json
 info
+info.txt
 info-data
+pipeline.groovy

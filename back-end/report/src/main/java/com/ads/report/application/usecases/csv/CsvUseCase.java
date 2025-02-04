@@ -34,6 +34,7 @@ public class CsvUseCase {
      *
      * @param records The json.
      * @param response The response of the http call.
+     *
      * @return The response with the converted csv written.
      * @throws CsvException if fails to parse from Json to CSV.
      */

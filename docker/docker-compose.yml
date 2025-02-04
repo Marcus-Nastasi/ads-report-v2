@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   ads-report-redis:
     image: redis:latest
     container_name: ads-report-redis
