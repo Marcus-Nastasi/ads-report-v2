@@ -77,7 +77,7 @@ public class SheetsResource {
             @PathParam("end_date") String end_date,
             @PathParam("spreadsheet_id") String spreadsheet_id,
             @PathParam("tab") String tab) throws IOException {
-        googleSheetsUseCase.accountMetricsToSheets(spreadsheet_id, tab, googleAdsUseCase.getAccountMetrics(customer_id, start_date, end_date));
+        googleSheetsUseCase.sendAccountMetricsToSpreadsheet(spreadsheet_id, tab, googleAdsUseCase.getAccountMetrics(customer_id, start_date, end_date));
         return ResponseEntity.ok("");
     }
 

@@ -49,9 +49,10 @@ public class GoogleSheetsUseCase {
      * @param spreadsheetId The google sheets id.
      * @param tab The sheets tab to write.
      * @param accountMetrics A list of AccountMetrics object.
+     *
      * @throws GoogleAdsException Throws exception if fails.
      */
-    public void accountMetricsToSheets(
+    public void sendAccountMetricsToSpreadsheet(
             String spreadsheetId,
             String tab,
             List<AccountMetrics> accountMetrics) throws GoogleAdsException {
