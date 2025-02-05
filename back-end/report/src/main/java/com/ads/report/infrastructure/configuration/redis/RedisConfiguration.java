@@ -17,9 +17,9 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 
 /**
  *
- * <p>The Redis configuration.<p/>
+ * The Redis configuration.
  *
- * <p>This class allows us to configure Redis.<p/>
+ * <p>This class contains the Redis configurations.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.2
@@ -35,9 +35,12 @@ public class RedisConfiguration {
 
     /**
      *
-     * <p>The redis template config.<p/>
+     * The redis template config.
+     *
+     * <p>This method configures a Redis template to handle saving on a specific types of key and value.<p/>
      *
      * @param factory The redis connection factory base object.
+     *
      * @return Return a template to represent the saving of a String as key, and OAuth2AuthorizedClientDto as value.
      */
     @Bean
@@ -61,7 +64,9 @@ public class RedisConfiguration {
 
     /**
      *
-     * <p>The explicit configuration to Redis connection.<p/>
+     * The explicit configuration to Redis connection.
+     *
+     * <p>This method explicit configure Redis connection factory.<p/>
      *
      * @return An object of type LettuceConnectionFactory.
      */

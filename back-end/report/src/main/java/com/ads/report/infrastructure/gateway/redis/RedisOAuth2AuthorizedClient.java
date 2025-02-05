@@ -13,9 +13,10 @@ import java.time.Instant;
 
 /**
  *
- * <p>The Redis implementation for OAuth2AuthorizedClientService.<p/>
+ * The Redis implementation for OAuth2AuthorizedClientService.
  *
- * <p>This class allows us to use Redis as the default session saving tool.<p/>
+ * <p>This class allows us to use Redis as the default session saving tool by implementing
+ * OAuth2AuthorizedClientService methods.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.2
@@ -34,9 +35,9 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
 
     /**
      *
-     * <p>The function that allows the application to save the login on Redis.<p/>
+     * <p>This function allows the application to save the login authorizations on Redis.<p/>
      *
-     * @param authorizedClient The client object that has logged.
+     * @param authorizedClient The client object that has logged in.
      * @param principal The authentication object.
      */
     @Override
@@ -55,7 +56,7 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
 
     /**
      *
-     * <p>The function that allows the application to load back the user information form Redis.<p/>
+     * <p>This function allows the application to load back the user authorized form Redis.<p/>
      *
      * @param clientRegistrationId The client ID that is registered.
      * @param principalName The username saved as the key on Redis.

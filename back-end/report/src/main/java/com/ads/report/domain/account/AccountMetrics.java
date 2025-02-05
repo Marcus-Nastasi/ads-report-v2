@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
+ *
  * The domain of the object that returns from the account metrics api call.
  *
  * @author Marcus Nastasi
