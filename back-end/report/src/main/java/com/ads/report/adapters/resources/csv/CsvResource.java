@@ -4,6 +4,7 @@ import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
 import com.ads.report.application.usecases.csv.CsvUseCase;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
+import com.ads.report.domain.campaign.CampaignPerDay;
 import com.ads.report.domain.campaign.CampaignTitleAndDescription;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -146,6 +147,35 @@ public class CsvResource {
         List<CampaignTitleAndDescription> campaignTitleAndDescriptions = googleAdsUseCase.getAdTitleAndDescriptions(customerId, start_date, end_date);
         String json = gson.toJson(campaignTitleAndDescriptions);
         String fileName = "headlines-"+campaignTitleAndDescriptions.getFirst().getResponsiveHeadlines()+"-"+start_date+"-"+end_date+".csv";
+        List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
+        csvUseCase.fromJson(records, response);
+    }
+
+    /**
+     *
+     * Endpoint to get titles and descriptions from a client.
+     *
+     * @param customerId The id of an adwords customer (client).
+     * @param start_date The start date of the analysis period.
+     * @param end_date The end date of the analysis period.
+     */
+    @GetMapping("/campaign/days/{customerId}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(
+        summary = "Get campaign per days metrics on CSV format",
+        description = "In this route you can get campaign per days metrics form a client, in a certain period."
+    )
+    @ApiResponse(responseCode = "200", description = "Returning the CSV with campaign per days metrics.")
+    public void getCampaignPerDaysMetrics(
+            @PathVariable("customerId") String customerId,
+            @PathParam("start_date") String start_date,
+            @PathParam("end_date") String end_date,
+            HttpServletResponse response) {
+        List<CampaignPerDay> campaignPerDays = googleAdsUseCase.getTotalPerDay(customerId, start_date, end_date);
+        String json = gson.toJson(campaignPerDays);
+        String fileName = "campaign-per-days-"+customerId+"-"+start_date+"-"+end_date+".csv";
         List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
