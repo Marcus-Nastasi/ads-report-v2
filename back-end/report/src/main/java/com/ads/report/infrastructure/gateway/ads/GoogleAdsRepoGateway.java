@@ -20,10 +20,8 @@ import java.util.List;
  *
  * The implementation of GoogleAdsGateway interface.
  *
- * <p>
- * This class implements the interface contract with the goal of
- * requesting data from API, by using the google ads client.
- * <p/>
+ * <p>This class implements the interface contract with the goal of
+ * requesting data from API, by using the Google Ads client.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -237,11 +235,9 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      * This method allows the user to send client account metrics, separated per days,
      * directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass an adwords customer id, a start date, end date,
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
      * a spreadsheet id and tab, to send metrics per day directly without needing
-     * to download a csv.
-     * <p/>
+     * to download a csv.<p/>
      *
      * @param customerId The id of an adwords customer (client).
      * @param startDate The start date of the analysis period.

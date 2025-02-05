@@ -47,13 +47,12 @@ public class GoogleAdsConfiguration {
 
     /**
      *
-     * <p>Bean that generates the Google Ads client.<p/>
+     * Bean that generates the Google Ads client.
      *
      * @param authorizedClientService An implementations of OAuth2AuthorizedClientService for server states config.
      * @param authorizedClientManager An OAuth2AuthorizedClientManager to manage the client logged on.
      *
      * @return Return the adwords client based on the OAuth2.0 login.
-     * @throws IOException If fails to create the client with builder.
      */
     @Bean
     @RequestScope

@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  *
- * The implementation of google sheets interface.
+ * The implementation of Google Sheets interface.
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -32,8 +32,9 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
      *
      * This method clenas the spreadsheet.
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to clear.
+     *
      * @throws GoogleSheetsException throws GoogleSheetsException if fails.
      */
     @Override
@@ -48,17 +49,16 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
 
     /**
      *
-     * This method allows the user to send account metrics directly from google ads to google sheets.
+     * This method allows the user to send account metrics directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass a adwords customer id, a start date, end date,
-     * a google sheets id and tab, to send the data directly without needing
-     * to download a csv.
-     * <p/>
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
+     * a spreadsheet id and tab, to send the data directly without needing
+     * to download a csv.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param accountMetrics A list of AccountMetrics object.
+     *
      * @throws GoogleSheetsException Throws exception if fails.
      */
     @Override
@@ -99,16 +99,15 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
 
     /**
      *
-     * This method allows the user to send campaign metrics directly from google ads to google sheets.
+     * This method allows the user to send campaign metrics directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass a adwords customer id, a google sheets id and tab, to send the data
-     * directly without needing to download a csv.
-     * <p/>
+     * <p>Here the user can pass an adwords customer id, a spreadsheet id and tab, to send the data
+     * directly without needing to download a csv.<p/>
      *
      * @param spreadsheetId The id of an adwords customer (client).
      * @param tab The sheets tab to write.
      * @param campaignMetrics A list of CampaignMetrics object.
+     *
      * @throws GoogleSheetsException if fails to send data.
      */
     @Override
@@ -153,16 +152,17 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
 
     /**
      *
-     * This method allows the user to send client account metrics, separated per days, directly from google ads to google sheets.
+     * This method allows the user to send client account metrics, separated per days, directly from Google Ads to Google Sheets.
      *
      * <p>
-     * Here the user can pass a adwords customer id, a start date, end date, a spreadsheet id and tab, to send metrics
+     * Here the user can pass an adwords customer id, a start date, end date, a spreadsheet id and tab, to send metrics
      * per day directly without needing to download a csv.
      * <p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignPerDays the list of TotalPerDay objects.
+     *
      * @throws GoogleSheetsException throws IOException if fails.
      */
     @Override
@@ -199,11 +199,12 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
 
     /**
      *
-     * This method implements the keyword metrics sending to sheets.
+     * This method implements the keyword metrics sending to spreadsheet.
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignKeywordMetrics the list of TotalPerDay objects.
+     *
      * @throws GoogleSheetsException throws IOException if fails.
      */
     @Override
@@ -245,11 +246,12 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
 
     /**
      *
-     * This method allows the user to send titles and descriptions to sheets.
+     * This method allows the user to send titles and descriptions to spreadsheet.
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignTitleAndDescriptions the list of AdTitleAndDescriptionInfo objects.
+     *
      * @throws GoogleSheetsException throws IOException if fails.
      */
     @Override

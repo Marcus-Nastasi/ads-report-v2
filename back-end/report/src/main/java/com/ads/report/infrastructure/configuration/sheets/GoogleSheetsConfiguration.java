@@ -49,7 +49,6 @@ public class GoogleSheetsConfiguration {
      * <p>Google Sheets client bean using OAuth2 dynamic authentication.<p/>
      *
      * @return A dynamically authenticated Sheets client.
-     * @throws IOException If fails to authenticate.
      */
     @Bean
     @RequestScope

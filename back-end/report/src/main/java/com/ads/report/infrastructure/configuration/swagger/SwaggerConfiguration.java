@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ *
  * The swagger ui configuration.
  *
  * @author Marcus Nastasi

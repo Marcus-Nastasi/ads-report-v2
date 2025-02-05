@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  *
- * The class that contains the methods to handle csv files.
+ * The class that contains the methods to handle CSV files.
  *
  * @author Marcus Nastasi
  * @version 1.0.1

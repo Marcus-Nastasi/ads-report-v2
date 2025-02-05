@@ -4,7 +4,7 @@ import java.io.Serial;
 
 /**
  *
- * <p>The Forbidden Exception.<p/>
+ * The Forbidden Exception.
  *
  * @author Marcus Nastasi
  * @version 1.0.2

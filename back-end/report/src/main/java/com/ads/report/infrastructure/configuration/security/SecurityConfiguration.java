@@ -32,7 +32,9 @@ public class SecurityConfiguration {
 
     /**
      *
-     * <p>Security filter chain configuration.<p/>
+     * Security filter chain configuration.
+     *
+     * <p>Configured to handle OAuth 2 logins with default handling.<p/>
      *
      * @param http A HttpSecurity type object.
      * @return The security filter chain modified.
@@ -56,7 +58,7 @@ public class SecurityConfiguration {
 
     /**
      *
-     * <p>Configuration of the details of authentication, like scopes, URIs, redirection, etc.<p/>
+     * Configuration of the details of authentication, like scopes, URIs, redirection, etc.
      *
      * @return A new object of ClientRegistrationRepository, with the details.
      */
