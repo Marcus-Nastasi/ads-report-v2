@@ -4,7 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The domain of the object that returns from the campaign api call.
+ *
+ * The domain of the object of campaign metrics api call.
  *
  * @author Marcus Nastasi
  * @version 1.0.1

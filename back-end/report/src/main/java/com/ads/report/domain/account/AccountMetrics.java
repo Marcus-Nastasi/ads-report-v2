@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  *
- * The domain of the object that returns from the account metrics api call.
+ * The domain of the object that represents account metrics.
  *
  * @author Marcus Nastasi
  * @version 1.0.1

@@ -4,7 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The domain of the object that represents the account metrics, granulated by days, based on a period.
+ *
+ * The domain of the object of account metrics, granulated by days, based on a period.
  *
  * @author Marcus Nastasi
  * @version 1.0.1

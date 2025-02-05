@@ -4,8 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The domain of the object that returns from the manager
- * account generic information api call.
+ *
+ * The domain of the object of manager account generic information.
  *
  * @author Marcus Nastasi
  * @version 1.0.1
