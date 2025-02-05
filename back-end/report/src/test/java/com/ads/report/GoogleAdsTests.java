@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,11 +82,11 @@ public class GoogleAdsTests {
     AccountMetrics accountMetrics2 = new AccountMetrics(43827423L, "", 0L, 0L, 0d, 0d, 0d, 0d, 0d);
 
     // Campaign metrics from keywords object.
-    CampaignKeywordMetrics campaignKeywordMetrics1 = new CampaignKeywordMetrics("", "", "", "", "", "", "0L", 0L, 0L, 0d, 0d, 0d, 0.0);
-    CampaignKeywordMetrics campaignKeywordMetrics2 = new CampaignKeywordMetrics("", "", "", "", "", "", "12L", 120L, 330L, 30d, 30d, 40d, 0.0);
+    CampaignKeywordMetrics campaignKeywordMetrics1 = new CampaignKeywordMetrics("2025-02-01", "", "", "", "", "", "0L", 0L, 0L, 0d, 0d, 0d, 0.0);
+    CampaignKeywordMetrics campaignKeywordMetrics2 = new CampaignKeywordMetrics("2025-03-01", "", "", "", "", "", "12L", 120L, 330L, 30d, 30d, 40d, 0.0);
 
     // Campaign titles and descriptions object.
-    CampaignTitleAndDescription campaignTitleAndDescription = new CampaignTitleAndDescription("", "", "", List.of(), List.of(), 900L, 322L, 4);
+    CampaignTitleAndDescription campaignTitleAndDescription = new CampaignTitleAndDescription("2025-01-02", "", "", List.of(), List.of(), 900L, 322L, 4);
 
     /**
      *
@@ -101,13 +102,13 @@ public class GoogleAdsTests {
         assertDoesNotThrow(() -> googleAdsUseCase.getCampaignMetrics("1234", "2025-01-01", "2025-01-31", true));
         // Tests if the call's response for campaign id of the first object equals to the campaignMetrics1's id.
         assertEquals(
-            campaignMetrics1.getCampaignId(),
-            googleAdsUseCase.getCampaignMetrics("1234", "2025-01-01", "2025-01-31", true).getFirst().getCampaignId()
+            "2025-01-01",
+            googleAdsUseCase.getCampaignMetrics("1234", "2025-01-01", "2025-01-31", true).getFirst().getDate()
         );
         // Tests if the call's response for day of week of the second object equals to the campaignMetrics2's day of week.
         assertEquals(
-            campaignMetrics2.getDayOfWeek(),
-            googleAdsUseCase.getCampaignMetrics("1234", "2025-01-01", "2025-01-31", true).get(1).getDayOfWeek()
+            LocalDate.of(2025, 1, 1).getDayOfWeek().name(),
+            googleAdsUseCase.getCampaignMetrics("1234", "2025-01-01", "2025-01-31", true).getFirst().getDayOfWeek()
         );
         // Tests if response's campaign id of the first object is null.
         assertNotNull(googleAdsUseCase.getCampaignMetrics("1234", "2025-01-01", "2025-01-31", true).getFirst().getCampaignId());
@@ -225,14 +226,14 @@ public class GoogleAdsTests {
             .thenReturn(List.of(campaignKeywordMetrics1, campaignKeywordMetrics2));
 
         // Tests if the call throws an exception.
-        assertDoesNotThrow(() -> googleAdsUseCase.getKeywordMetrics("123", "", "", true));
+        assertDoesNotThrow(() -> googleAdsUseCase.getKeywordMetrics("1231212", "2024-01-01", "2024-01-30", false));
         // Tests if the call's first index's response equals to the 'campaign name'.
         assertEquals(
-            campaignKeywordMetrics2.getCampaignName(),
-            googleAdsUseCase.getKeywordMetrics("123", "", "", true).get(1).getCampaignName()
+            "2024-01-01",
+            googleAdsUseCase.getKeywordMetrics("1231212", "2024-01-01", "2024-01-30", true).getFirst().getDate()
         );
         // Tests if response's account metrics of the first object is null.
-        assertNotNull(googleAdsUseCase.getKeywordMetrics("123", "", "", true));
+        assertNotNull(googleAdsUseCase.getKeywordMetrics("1231212", "2024-01-01", "2024-01-30", true));
 
         // Verifies how many times 'getKeywordMetrics' was called.
         verify(googleAdsRepoGateway, times(3)).getKeywordMetrics(anyString(), anyString(), anyString(), anyBoolean());
@@ -250,14 +251,14 @@ public class GoogleAdsTests {
             .thenReturn(List.of(campaignTitleAndDescription));
 
         // Tests if the call throws an exception.
-        assertDoesNotThrow(() -> googleAdsUseCase.getAdTitleAndDescriptions("123", "", ""));
+        assertDoesNotThrow(() -> googleAdsUseCase.getAdTitleAndDescriptions("1231212", "2024-01-01", "2024-01-30"));
         // Tests if the call's first index's response equals to the 'campaign name'.
         assertEquals(
-            campaignTitleAndDescription.getCampaignName(),
-            googleAdsUseCase.getAdTitleAndDescriptions("123", "", "").getFirst().getCampaignName()
+            "2024-01-01",
+            googleAdsUseCase.getAdTitleAndDescriptions("1231212", "2024-01-01", "2024-01-30").getFirst().getDate()
         );
         // Tests if response is null.
-        assertNotNull(googleAdsUseCase.getAdTitleAndDescriptions("123", "", ""));
+        assertNotNull(googleAdsUseCase.getAdTitleAndDescriptions("1231212", "2024-01-01", "2024-01-30"));
 
         // Verifies how many times 'getAdTitleAndDescriptions' was called.
         verify(googleAdsRepoGateway, times(3)).getAdTitleAndDescriptions(anyString(), anyString(), anyString());
