@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  *
- * <p>The controller to the OAuth2 verification.<p/>
+ * The controller to the OAuth2 verification.
  *
  * @author Marcus Nastasi
  * @version 1.0.2

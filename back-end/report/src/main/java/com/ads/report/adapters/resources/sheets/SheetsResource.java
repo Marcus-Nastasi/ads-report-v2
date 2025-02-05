@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+/**
+ *
+ * The Google Sheets resource controller class.
+ *
+ * @author Marcus Nastasi
+ * @version 1.0.1
+ * @since 2025
+ * */
 @RestController
 @RequestMapping("v2/spreadsheets")
 public class SheetsResource {
@@ -30,6 +38,7 @@ public class SheetsResource {
      * @param customer_id The id of an adwords customer (client).
      * @param spreadsheet_id The Google Sheets id.
      * @param tab The spreadsheet's tab to write.
+     *
      * @return Returns a response entity 'ok' if successful.
      */
     @GetMapping("/campaign/{customer_id}")
@@ -62,6 +71,7 @@ public class SheetsResource {
      * @param end_date The end date of the analysis period.
      * @param spreadsheet_id The Google Sheets id.
      * @param tab The spreadsheets tab to write.
+     *
      * @return Returns a response entity 'ok' if successful.
      */
     @GetMapping("/account/{customer_id}")
@@ -84,19 +94,18 @@ public class SheetsResource {
     /**
      *
      * This method allows the user to send client account metrics, separated per days,
-     * directly from Google Ads to google sheets.
+     * directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass an adwords customer id, a start date, end date,
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
      * a spreadsheet id and tab, to send metrics per day directly without needing
-     * to download a csv.
-     * <p/>
+     * to download a csv.<p/>
      *
      * @param customer_id The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.
      * @param end_date The end date of the analysis period.
-     * @param spreadsheet_id The google sheets id.
+     * @param spreadsheet_id The spreadsheet id.
      * @param tab The sheets tab to write.
+     *
      * @return Returns a response entity ok if successful.
      */
     @GetMapping("/campaign/days/{customer_id}")
@@ -123,6 +132,7 @@ public class SheetsResource {
      * @param customerId The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.
      * @param end_date The end date of the analysis period.
+     *
      * @return Returns a response entity ok if successful.
      */
     @GetMapping("/keywords/{customerId}")
@@ -150,6 +160,7 @@ public class SheetsResource {
      * @param customerId The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.
      * @param end_date The end date of the analysis period.
+     *
      * @return Returns a response entity ok if successful.
      */
     @GetMapping("/headlines/{customerId}")

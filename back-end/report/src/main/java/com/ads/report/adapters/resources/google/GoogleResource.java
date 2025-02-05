@@ -60,6 +60,7 @@ public class GoogleResource {
      * <p>In this route you can recover generic information from a manager account (MCC).<p/>
      *
      * @param id The id of an adwords customer (client).
+     *
      * @return An object of type ManagerAccountInfo, that contains the general MCC info.
      */
     @GetMapping("/manager/{id}")
@@ -78,6 +79,7 @@ public class GoogleResource {
      * you can update the sheets tables with ease.<p/>
      *
      * @param allReportsRequestDto the list of UpdateAllReports domain object.
+     *
      * @return ok if the cll is successful.
      */
     @PostMapping("/generate")

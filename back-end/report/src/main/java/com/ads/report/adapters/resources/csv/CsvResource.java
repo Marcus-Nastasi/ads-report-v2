@@ -19,6 +19,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * The CSV Resource Controller class.
+ *
+ * @author Marcus Nastasi
+ * @version 1.0.1
+ * @since 2025
+ * */
 @RestController
 @RequestMapping("v2/csv")
 public class CsvResource {
@@ -32,12 +40,9 @@ public class CsvResource {
 
     /**
      *
-     * Endpoint to get All campaigns metrics.
+     * Endpoint to get campaigns metrics.
      *
-     * <p>
-     * This method uses an algorithm and the CSVWriter library
-     * to convert the JSON to CSV type.
-     * <p/>
+     * <p>This method allows users to get campaign metrics in CSV type.<p/>
      *
      * @param customerId The id of an adwords customer (client).
      * @param response The response object.
@@ -67,6 +72,8 @@ public class CsvResource {
      *
      * Endpoint to get aggregated metrics from one client account.
      *
+     * <p>This method allows users to get account metrics in CSV type.<p/>
+     *
      * @param customerId The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.
      * @param end_date The end date of the analysis period.
@@ -95,6 +102,8 @@ public class CsvResource {
     /**
      *
      * Endpoint to get keyword metrics from a client.
+     *
+     * <p>This method allows users to get keyword metrics in CSV type.<p/>
      *
      * @param customerId The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.
@@ -128,6 +137,8 @@ public class CsvResource {
      *
      * Endpoint to get titles and descriptions from a client.
      *
+     * <p>This method allows users to get title and description metrics in CSV type.<p/>
+     *
      * @param customerId The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.
      * @param end_date The end date of the analysis period.
@@ -156,6 +167,8 @@ public class CsvResource {
     /**
      *
      * Endpoint to get titles and descriptions from a client.
+     *
+     * <p>This method allows users to get account metrics per day in CSV type.<p/>
      *
      * @param customerId The id of an adwords customer (client).
      * @param start_date The start date of the analysis period.

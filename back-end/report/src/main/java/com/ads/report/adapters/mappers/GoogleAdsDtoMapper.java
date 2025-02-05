@@ -5,7 +5,8 @@ import com.ads.report.adapters.output.TestResponseDto;
 import java.util.List;
 
 /**
- * The class that contains the adwords dto mappers.
+ *
+ * The class that contains the adwords DTO mappers.
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -15,7 +16,10 @@ public class GoogleAdsDtoMapper {
 
     /**
      *
-     * @param googleAdsRows A list of strings that contains the rows returned by adwords
+     * Map from Google Ads Rows to TestResponseDto.
+     *
+     * @param googleAdsRows A list of strings that contains the rows returned by adwords.
+     *
      * @return Return the dto 'TestResponseDto'
      */
     public TestResponseDto mapToResponse(List<String> googleAdsRows) {
