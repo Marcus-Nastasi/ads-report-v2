@@ -4,6 +4,7 @@ import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
 import com.ads.report.application.usecases.csv.CsvUseCase;
 import com.ads.report.domain.account.AccountMetrics;
 import com.ads.report.domain.campaign.CampaignKeywordMetrics;
+import com.ads.report.domain.campaign.CampaignTitleAndDescription;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import io.swagger.v3.oas.annotations.Operation;
@@ -116,6 +117,35 @@ public class CsvResource {
             .getKeywordMetrics(customerId, start_date, end_date, active);
         String json = gson.toJson(campaignKeywordMetrics);
         String fileName = "keyword-metrics-"+campaignKeywordMetrics.getFirst().getAdvertisingChannelType()+"-"+start_date+"-"+end_date+".csv";
+        List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
+        csvUseCase.fromJson(records, response);
+    }
+
+    /**
+     *
+     * Endpoint to get titles and descriptions from a client.
+     *
+     * @param customerId The id of an adwords customer (client).
+     * @param start_date The start date of the analysis period.
+     * @param end_date The end date of the analysis period.
+     */
+    @GetMapping("/headlines/{customerId}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(
+        summary = "Get title and descriptions on CSV format",
+        description = "In this route you can get all title and descriptions form a client, in a certain period."
+    )
+    @ApiResponse(responseCode = "200", description = "Returning the CSV with titles and descriptions.")
+    public void getTitleAndDescriptionMetrics(
+            @PathVariable("customerId") String customerId,
+            @PathParam("start_date") String start_date,
+            @PathParam("end_date") String end_date,
+            HttpServletResponse response) {
+        List<CampaignTitleAndDescription> campaignTitleAndDescriptions = googleAdsUseCase.getAdTitleAndDescriptions(customerId, start_date, end_date);
+        String json = gson.toJson(campaignTitleAndDescriptions);
+        String fileName = "headlines-"+campaignTitleAndDescriptions.getFirst().getResponsiveHeadlines()+"-"+start_date+"-"+end_date+".csv";
         List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
