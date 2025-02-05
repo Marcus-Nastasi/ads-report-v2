@@ -67,16 +67,17 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
         String key = REDIS_KEY_PREFIX + principalName;
         // Getting the object from Redis by its key.
         OAuth2AuthorizedClientDto dto = redisTemplate.opsForValue().get(key);
-        // Constructing the OAuth2AuthorizedClient manually.
+        // Constructing the OAuth2AccessToken manually.
         OAuth2AccessToken accessToken = new OAuth2AccessToken(
             OAuth2AccessToken.TokenType.BEARER,
             dto.getAccessToken(),
             Instant.now(),
             Instant.ofEpochMilli(dto.getAccessTokenExpiresAt())
         );
-        // Refreshing the refresh_token.
+        // Refreshing the token.
         OAuth2RefreshToken refreshToken = dto.getRefreshToken() != null
-            ? new OAuth2RefreshToken(dto.getRefreshToken(), Instant.now()) : null;
+            ? new OAuth2RefreshToken(dto.getRefreshToken(), Instant.now())
+            : null;
         // Manually constructing the OAuth2AuthorizedClient.
         return new OAuth2AuthorizedClient(
             clientRegistrationRepository.findByRegistrationId(dto.getClientRegistrationId()),
@@ -95,7 +96,6 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
      */
     @Override
     public void removeAuthorizedClient(String clientRegistrationId, String principalName) {
-        String key = REDIS_KEY_PREFIX + principalName;
-        redisTemplate.delete(key);
+        redisTemplate.delete(REDIS_KEY_PREFIX + principalName);
     }
 }
