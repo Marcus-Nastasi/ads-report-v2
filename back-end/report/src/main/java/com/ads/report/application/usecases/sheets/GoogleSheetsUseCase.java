@@ -131,6 +131,7 @@ public class GoogleSheetsUseCase {
      * @param spreadsheetId The google sheets id.
      * @param tab The sheets tab to write.
      * @param campaignTitleAndDescriptions the list of AdTitleAndDescriptionInfo objects.
+     *
      * @throws GoogleAdsException throws IOException if fails.
      */
     public void sendAdTitleAndDescription(

@@ -36,6 +36,7 @@ public class SecurityConfiguration {
      *
      * @param http A HttpSecurity type object.
      * @return The security filter chain modified.
+     *
      * @throws Exception If fails to configure the security filter chain.
      */
     @Bean
