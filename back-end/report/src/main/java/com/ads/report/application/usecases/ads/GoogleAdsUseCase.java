@@ -44,16 +44,7 @@ public class GoogleAdsUseCase {
      */
     public List<CampaignMetrics> getCampaignMetrics(String customerId, String startDate, String endDate, boolean active) {
         List<CampaignMetrics> campaignMetrics = googleAdsGateway.getCampaignMetrics(customerId, startDate, endDate, active);
-        List<LocalDate> allDates = new ArrayList<>();
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
-        if (start.isAfter(end)) {
-            throw new IllegalArgumentException("The start date is after the end date");
-        }
-        while (!start.isAfter(end)) {
-            allDates.add(start);
-            start = start.plusDays(1);
-        }
+        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
         // Creating a map to group metrics of a single date.
         Map<LocalDate, List<CampaignMetrics>> metricsMap = new HashMap<>();
         for (CampaignMetrics m: campaignMetrics) {
@@ -137,16 +128,7 @@ public class GoogleAdsUseCase {
     public List<CampaignPerDay> getTotalPerDay(String customerId, String startDate, String endDate) {
         List<CampaignPerDay> campaignPerDays = googleAdsGateway.getTotalPerDay(customerId, startDate, endDate);
         // Creating a list with all dates from the given period.
-        List<LocalDate> allDates = new ArrayList<>();
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
-        if (start.isAfter(end)) {
-            throw new IllegalArgumentException("The start date is after the end date");
-        }
-        while (!start.isAfter(end)) {
-            allDates.add(start);
-            start = start.plusDays(1);
-        }
+        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
         // Creating a map to group metrics of a single date.
         Map<LocalDate, List<CampaignPerDay>> metricsMap = new HashMap<>();
         for (CampaignPerDay m: campaignPerDays) {
@@ -180,19 +162,9 @@ public class GoogleAdsUseCase {
      * @return A list of KeywordMetrics object.
      */
     public List<CampaignKeywordMetrics> getKeywordMetrics(String customerId, String startDate, String endDate, boolean active) {
-//        return googleAdsGateway.getKeywordMetrics(customerId, startDate, endDate, active);
         List<CampaignKeywordMetrics> campaignKeywordMetrics = googleAdsGateway.getKeywordMetrics(customerId, startDate, endDate, active);
         // Creating a list with all dates from the given period.
-        List<LocalDate> allDates = new ArrayList<>();
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
-        if (start.isAfter(end)) {
-            throw new IllegalArgumentException("The start date is after the end date");
-        }
-        while (!start.isAfter(end)) {
-            allDates.add(start);
-            start = start.plusDays(1);
-        }
+        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
         // Creating a map to group metrics of a single date.
         Map<LocalDate, List<CampaignKeywordMetrics>> metricsMap = new HashMap<>();
         for (CampaignKeywordMetrics m: campaignKeywordMetrics) {
@@ -228,6 +200,42 @@ public class GoogleAdsUseCase {
      * @return A list of AdTitleAndDescriptionInfo object.
      */
     public List<CampaignTitleAndDescription> getAdTitleAndDescriptions(String customerId, String startDate, String endDate) {
-        return googleAdsGateway.getAdTitleAndDescriptions(customerId, startDate, endDate);
+        List<CampaignTitleAndDescription> campaignTitleAndDescriptions = googleAdsGateway.getAdTitleAndDescriptions(customerId, startDate, endDate);
+        // Creating a list with all dates from the given period.
+        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
+        // Creating a map to group metrics of a single date.
+        Map<LocalDate, List<CampaignTitleAndDescription>> metricsMap = new HashMap<>();
+        for (CampaignTitleAndDescription m: campaignTitleAndDescriptions) {
+            LocalDate date = LocalDate.parse(m.getDate());
+            if (!metricsMap.containsKey(date)) {
+                metricsMap.put(date, new ArrayList<>());
+            }
+            metricsMap.get(date).add(m);
+        }
+        // Creating a list to have the complete results.
+        List<CampaignTitleAndDescription> completeResults = new ArrayList<>();
+        for (LocalDate date: allDates) {
+            List<CampaignTitleAndDescription> dailyMetrics = metricsMap.get(date);
+            if (dailyMetrics == null || dailyMetrics.isEmpty()) {
+                completeResults.add(new CampaignTitleAndDescription(date.toString(), "null", "null", List.of("null"), List.of("null"), 0L, 0L, 0d));
+            } else {
+                completeResults.addAll(dailyMetrics);
+            }
+        }
+        return completeResults;
+    }
+
+    private List<LocalDate> getPeriodDaysList(String startDate, String endDate) {
+        List<LocalDate> allDates = new ArrayList<>();
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        if (start.isAfter(end)) {
+            throw new IllegalArgumentException("The start date is after the end date");
+        }
+        while (!start.isAfter(end)) {
+            allDates.add(start);
+            start = start.plusDays(1);
+        }
+        return allDates;
     }
 }
