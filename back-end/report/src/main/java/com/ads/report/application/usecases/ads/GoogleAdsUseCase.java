@@ -180,7 +180,41 @@ public class GoogleAdsUseCase {
      * @return A list of KeywordMetrics object.
      */
     public List<CampaignKeywordMetrics> getKeywordMetrics(String customerId, String startDate, String endDate, boolean active) {
-        return googleAdsGateway.getKeywordMetrics(customerId, startDate, endDate, active);
+//        return googleAdsGateway.getKeywordMetrics(customerId, startDate, endDate, active);
+        List<CampaignKeywordMetrics> campaignKeywordMetrics = googleAdsGateway.getKeywordMetrics(customerId, startDate, endDate, active);
+        // Creating a list with all dates from the given period.
+        List<LocalDate> allDates = new ArrayList<>();
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        if (start.isAfter(end)) {
+            throw new IllegalArgumentException("The start date is after the end date");
+        }
+        while (!start.isAfter(end)) {
+            allDates.add(start);
+            start = start.plusDays(1);
+        }
+        // Creating a map to group metrics of a single date.
+        Map<LocalDate, List<CampaignKeywordMetrics>> metricsMap = new HashMap<>();
+        for (CampaignKeywordMetrics m: campaignKeywordMetrics) {
+            LocalDate date = LocalDate.parse(m.getDate());
+            if (!metricsMap.containsKey(date)) {
+                metricsMap.put(date, new ArrayList<>());
+            }
+            metricsMap.get(date).add(m);
+        }
+        // Creating a list to have the complete results.
+        List<CampaignKeywordMetrics> completeResults = new ArrayList<>();
+        for (LocalDate date: allDates) {
+            List<CampaignKeywordMetrics> dailyMetrics = metricsMap.get(date);
+            if (dailyMetrics == null || dailyMetrics.isEmpty()) {
+                completeResults.add(new CampaignKeywordMetrics(
+                    date.toString(), date.getDayOfWeek().name(), "null", "null", "null", "null", "null", 0L, 0L, 0d, 0d, 0d, 0d
+                ));
+            } else {
+                completeResults.addAll(dailyMetrics);
+            }
+        }
+        return completeResults;
     }
 
     /**
