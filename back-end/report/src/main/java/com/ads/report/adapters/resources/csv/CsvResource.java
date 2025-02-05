@@ -3,6 +3,7 @@ package com.ads.report.adapters.resources.csv;
 import com.ads.report.application.usecases.ads.GoogleAdsUseCase;
 import com.ads.report.application.usecases.csv.CsvUseCase;
 import com.ads.report.domain.account.AccountMetrics;
+import com.ads.report.domain.campaign.CampaignKeywordMetrics;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import io.swagger.v3.oas.annotations.Operation;
@@ -83,6 +84,38 @@ public class CsvResource {
         List<AccountMetrics> accountMetrics = googleAdsUseCase.getAccountMetrics(customerId, start_date, end_date);
         String json = gson.toJson(accountMetrics);
         String fileName = "account-metrics-"+accountMetrics.getFirst().getDescriptiveName()+"-"+start_date+"-"+end_date+".csv";
+        List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
+        csvUseCase.fromJson(records, response);
+    }
+
+    /**
+     *
+     * Endpoint to get keyword metrics from a client.
+     *
+     * @param customerId The id of an adwords customer (client).
+     * @param start_date The start date of the analysis period.
+     * @param end_date The end date of the analysis period.
+     * @param active Flag to check if the campaign is enabled.
+     */
+    @GetMapping("/keywords/{customerId}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(
+        summary = "Get all keyword metrics on CSV format",
+        description = "In this route you can get all keyword metrics form a client, in a certain period."
+    )
+    @ApiResponse(responseCode = "200", description = "Returning the CSV with keyword metrics.")
+    public void getCampaignKeywordMetrics(
+            @PathVariable("customerId") String customerId,
+            @PathParam("start_date") String start_date,
+            @PathParam("end_date") String end_date,
+            @PathParam("active") boolean active,
+            HttpServletResponse response) {
+        List<CampaignKeywordMetrics> campaignKeywordMetrics = googleAdsUseCase
+            .getKeywordMetrics(customerId, start_date, end_date, active);
+        String json = gson.toJson(campaignKeywordMetrics);
+        String fileName = "keyword-metrics-"+campaignKeywordMetrics.getFirst().getAdvertisingChannelType()+"-"+start_date+"-"+end_date+".csv";
         List<Map<String, Object>> records = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=" + '"' + fileName + '"');
