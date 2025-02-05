@@ -16,10 +16,9 @@ import java.util.Map;
 
 /**
  *
- * The use cases of google ads api calls.
- * <p>
- * This class uses the interface contract to call the implementations.
- * <p/>
+ * The use cases of Google Ads api calls.
+ *
+ * <p>This class uses the interface contract to call the implementations.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.1
