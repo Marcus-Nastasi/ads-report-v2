@@ -4,7 +4,7 @@ import java.io.Serial;
 
 /**
  *
- * <p>The Google Ads Exception.<p/>
+ * The Google Ads Exception.
  *
  * @author Marcus Nastasi
  * @version 1.0.2

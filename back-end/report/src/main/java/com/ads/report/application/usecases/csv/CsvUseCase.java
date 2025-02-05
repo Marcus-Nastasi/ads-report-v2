@@ -9,12 +9,10 @@ import java.util.Map;
 
 /**
  *
- * The interface of the google ads api calls.
+ * The interface of the Google Ads api calls.
  *
- * <p>
- * This represents the interface that communicates the application with the infra layer,
- * making possible to make api calls.
- * <p/>
+ * <p>This represents the interface that communicates the application with the infra layer,
+ * making possible to make api calls.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -30,7 +28,7 @@ public class CsvUseCase {
 
     /**
      *
-     * <p>Convert a json object to csv type file.<p/>
+     * Convert a json object to csv type file.
      *
      * @param records The json.
      * @param response The response of the http call.

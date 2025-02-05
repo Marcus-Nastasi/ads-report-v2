@@ -12,11 +12,9 @@ import java.util.List;
 
 /**
  *
- * The use cases of google sheets.
+ * The use cases of Google Sheets.
  *
- * <p>
- * This represents all the google sheets use cases.
- * <p/>
+ * <p>This represents all the Google Sheets use cases.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -28,9 +26,9 @@ public class GoogleSheetsUseCase {
 
     /**
      *
-     * Constructor of google sheets use case class.
+     * Constructor of Google Sheets use case class.
      *
-     * @param googleSheetsGateway the interface contract of google sheets available methods.
+     * @param googleSheetsGateway the interface contract of Google Sheets available methods.
      */
     public GoogleSheetsUseCase(GoogleSheetsGateway googleSheetsGateway) {
         this.googleSheetsGateway = googleSheetsGateway;
@@ -38,15 +36,13 @@ public class GoogleSheetsUseCase {
 
     /**
      *
-     * This method allows the user to send account metrics directly from google ads to google sheets.
+     * This method allows the user to send account metrics directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass a adwords customer id, a start date, end date,
-     * a google sheets id and tab, to send the data directly without needing
-     * to download a csv.
-     * <p/>
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
+     * a Google Sheets id and tab, to send the data directly without needing
+     * to download a csv.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param accountMetrics A list of AccountMetrics object.
      *
@@ -63,13 +59,11 @@ public class GoogleSheetsUseCase {
      *
      * This method allows the user to send campaign metrics directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass an adwords customer id, a start date, end date,
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
      * a Google Sheets id and tab, to send the data directly without needing
-     * to download a csv.
-     * <p/>
+     * to download a csv.<p/>
      *
-     * @param spreadsheetId The Google Sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignMetrics A list of AccountMetrics object.
      *
@@ -91,7 +85,7 @@ public class GoogleSheetsUseCase {
      * a spreadsheet id and tab, to send metrics per day directly without needing
      * to download a csv.<p/>
      *
-     * @param spreadsheetId The Google Sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignPerDays the list of TotalPerDay objects.
      *
@@ -108,7 +102,7 @@ public class GoogleSheetsUseCase {
      *
      * This method allows the user to send keyword metrics to a spreadsheets.
      *
-     * @param spreadsheetId The Google Sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignKeywordMetrics the list of TotalPerDay objects.
      *
@@ -128,7 +122,7 @@ public class GoogleSheetsUseCase {
      *
      * This method allows the user to send titles and descriptions to sheets.
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignTitleAndDescriptions the list of AdTitleAndDescriptionInfo objects.
      *

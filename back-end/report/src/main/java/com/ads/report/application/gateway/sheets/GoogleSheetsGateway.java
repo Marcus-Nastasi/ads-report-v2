@@ -21,34 +21,30 @@ public interface GoogleSheetsGateway {
 
     /**
      *
-     * This method allows the user to send data directly from google ads to google sheets.
+     * This method allows the user to send data directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass a adwords customer id, a start date, end date,
-     * a google sheets id and tab, to send the data directly without needing
-     * to download a csv.
-     * <p/>
+     * <p>This method allows the user to pass an adwords customer id, a start date, end date,
+     * a spreadsheet id and tab, to send the data directly.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param accountMetrics A list of AccountMetrics object.
+     *
      * @throws GoogleSheetsException Throws exception if fails.
      */
     void accountMetricsToSheets(String spreadsheetId, String tab, List<AccountMetrics> accountMetrics) throws GoogleSheetsException;
 
     /**
      *
-     * This method allows the user to send data directly from google ads to google sheets.
+     * This method allows the user to send data directly from Google Ads to Google Sheets.
      *
-     * <p>
-     * Here the user can pass a adwords customer id, a start date, end date,
-     * a google sheets id and tab, to send the data directly without needing
-     * to download a csv.
-     * <p/>
+     * <p>Here the user can pass an adwords customer id, a start date, end date,
+     * a spreadsheet id and tab, to send the data directly.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The Google Sheets id.
      * @param tab The sheets tab to write.
      * @param campaignMetrics A list of AccountMetrics object.
+     *
      * @throws GoogleSheetsException Throws if fails.
      */
     void campaignMetricsToSheets(String spreadsheetId, String tab, List<CampaignMetrics> campaignMetrics) throws GoogleSheetsException;
@@ -56,11 +52,12 @@ public interface GoogleSheetsGateway {
     /**
      *
      * <p>This method allows the user to send client account metrics, separated per days,
-     * directly from google ads to google sheets.<p/>
+     * directly from Google Ads to Google Sheets.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignPerDays the list of TotalPerDay objects.
+     *
      * @throws GoogleSheetsException throws GoogleSheetsException if fails.
      */
     void totalPerDayToSheets(String spreadsheetId, String tab, List<CampaignPerDay> campaignPerDays) throws GoogleSheetsException;
@@ -69,9 +66,10 @@ public interface GoogleSheetsGateway {
      *
      * <p>This method allows the user to send keyword metrics to sheets.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignKeywordMetrics the list of KeywordMetrics objects.
+     *
      * @throws GoogleSheetsException throws IOException if fails.
      */
     void sendKeywordMetrics(String spreadsheetId, String tab, List<CampaignKeywordMetrics> campaignKeywordMetrics) throws GoogleSheetsException;
@@ -80,9 +78,10 @@ public interface GoogleSheetsGateway {
      *
      * <p>This method allows the user to send titles and descriptions to sheets.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to write.
      * @param campaignTitleAndDescriptions the list of AdTitleAndDescriptionInfo objects.
+     *
      * @throws GoogleSheetsException throws IOException if fails.
      */
     void sendAdTitleAndDescription(String spreadsheetId, String tab, List<CampaignTitleAndDescription> campaignTitleAndDescriptions) throws GoogleSheetsException;
@@ -91,8 +90,9 @@ public interface GoogleSheetsGateway {
      *
      * <p>This method clenas the spreadsheet.<p/>
      *
-     * @param spreadsheetId The google sheets id.
+     * @param spreadsheetId The spreadsheet id.
      * @param tab The sheets tab to clear.
+     *
      * @throws GoogleSheetsException throws IOException if fails.
      */
     void clearSheetTab(String spreadsheetId, String tab) throws GoogleSheetsException;

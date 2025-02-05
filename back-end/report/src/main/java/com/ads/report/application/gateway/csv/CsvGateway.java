@@ -8,12 +8,10 @@ import java.util.Map;
 
 /**
  *
- * The interface of the google ads api calls.
+ * The interface of the CSV parser class.
  *
- * <p>
- * This represents the interface that communicates the application with the infra layer,
- * making possible to make api calls.
- * <p/>
+ * <p>This represents the interface that communicates the application with the infra layer,
+ * isolating the domain and application.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -27,6 +25,7 @@ public interface CsvGateway {
      *
      * @param records The json.
      * @param response The response of the http call.
+     *
      * @return The response with the converted csv written.
      * @throws CsvException if fails to parse Json to CSV.
      */

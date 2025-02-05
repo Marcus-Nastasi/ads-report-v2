@@ -4,7 +4,7 @@ import java.io.Serial;
 
 /**
  *
- * <p>The CSV Exception.<p/>
+ * The CSV Exception.
  *
  * @author Marcus Nastasi
  * @version 1.0.2

@@ -11,12 +11,11 @@ import com.ads.report.domain.manager.ManagerAccountInfo;
 import java.util.List;
 
 /**
- * The interface of the google ads api calls.
  *
- * <p>
- * This represents the interface that communicates the application with the infra layer,
- * making possible to make api calls.
- * <p/>
+ * The interface of the Google Ads api.
+ *
+ * <p>This class represents the interface that communicates the application with the infra layer,
+ * making possible to isolate the application and domain.<p/>
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -25,6 +24,7 @@ import java.util.List;
 public interface GoogleAdsGateway {
 
     /**
+     *
      * Test the connection with the adwords client.
      *
      * @return The status and a list of accessible customer accounts.
@@ -33,6 +33,7 @@ public interface GoogleAdsGateway {
     List<String> testConnection() throws GoogleAdsException;
 
     /**
+     *
      * Get campaigns and it's metrics.
      *
      * @param customerId The id of an adwords customer (client).
@@ -47,6 +48,7 @@ public interface GoogleAdsGateway {
             boolean active) throws GoogleAdsException;
 
     /**
+     *
      * Get general information of manager account.
      *
      * @param managerAccountId The id of an adwords customer (client).
@@ -57,6 +59,7 @@ public interface GoogleAdsGateway {
     ManagerAccountInfo getManagerAccount(String managerAccountId) throws GoogleAdsException;
 
     /**
+     *
      * Get general information of manager account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -69,24 +72,28 @@ public interface GoogleAdsGateway {
     List<AccountMetrics> getAccountMetrics(String customerId, String startDate, String endDate) throws GoogleAdsException;
 
     /**
+     *
      * This method allows the user to send client account metrics, separated per days,
-     * directly from google ads to google sheets.
+     * directly from Google Ads to Google Sheets.
      *
      * @param customerId The id of an adwords customer (client).
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
+     *
      * @return Returns a list of TotalPerDay object.
      * @throws GoogleAdsException if fails.
      */
     List<CampaignPerDay> getTotalPerDay(String customerId, String startDate, String endDate) throws GoogleAdsException;
 
     /**
+     *
      * This method allows to get all keyword metrics from an account.
      *
      * @param customerId The id of an adwords customer (client).
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
      * @param active Select if the keyword have had any impressions or cost.
+     *
      * @return A list of KeywordMetrics object.
      * @throws GoogleAdsException if fails to request.
      */
@@ -97,11 +104,13 @@ public interface GoogleAdsGateway {
             boolean active) throws GoogleAdsException;
 
     /**
+     *
      * This method allows to get all campaigns, ad groups, titles, descriptions, and its metrics.
      *
      * @param customerId The id of an adwords customer (client).
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
+     *
      * @return A list of AdTitleAndDescriptionInfo object.
      * @throws GoogleAdsException if fails to request.
      */

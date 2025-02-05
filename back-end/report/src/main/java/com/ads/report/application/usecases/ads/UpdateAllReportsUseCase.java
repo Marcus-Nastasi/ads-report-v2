@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * The use case to update various reports.
+ * The use case of updating various reports.
  *
  * @author Marcus Nastasi
  * @version 1.0.1
@@ -22,10 +22,10 @@ public class UpdateAllReportsUseCase {
 
     /**
      *
-     * The constructor uses the google ads and google sheets gateway interfaces to make the calls.
+     * The constructor uses the Google Ads and Google Sheets gateway interfaces to make the calls.
      *
-     * @param googleAdsGateway the google ads gateway
-     * @param googleSheetsGateway the google sheets gateway
+     * @param googleAdsGateway the Google Ads gateway
+     * @param googleSheetsGateway the Google Sheets gateway
      */
     public UpdateAllReportsUseCase(GoogleAdsGateway googleAdsGateway, GoogleSheetsGateway googleSheetsGateway, GoogleAdsUseCase googleAdsUseCase) {
         this.googleAdsGateway = googleAdsGateway;
@@ -37,10 +37,8 @@ public class UpdateAllReportsUseCase {
      *
      * This method allows the user to send data to sheets, from various accounts.
      *
-     * <p>
-     * By passing a list of the customer id, start date, end date, spreadsheet id, client and active flag,
-     * you can update the sheets tables with ease.
-     * <p/>
+     * <p>By passing a list of the customer id, start date, end date, spreadsheet id, client and active flag,
+     * you can update the sheets tables with ease.<p/>
      *
      * @param updateAllReports the list of UpdateAllReports domain object.
      */
