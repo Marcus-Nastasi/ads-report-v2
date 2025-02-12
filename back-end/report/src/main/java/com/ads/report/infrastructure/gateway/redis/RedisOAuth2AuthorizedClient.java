@@ -42,9 +42,9 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
      */
     @Override
     public void saveAuthorizedClient(OAuth2AuthorizedClient authorizedClient, Authentication principal) {
-        String key = REDIS_KEY_PREFIX + principal.getName();
+        final String key = REDIS_KEY_PREFIX + principal.getName();
         // Manually creating the Dto object to save in Redis.
-        OAuth2AuthorizedClientDto dto = new OAuth2AuthorizedClientDto(
+        final OAuth2AuthorizedClientDto dto = new OAuth2AuthorizedClientDto(
             authorizedClient.getClientRegistration().getRegistrationId(),
             principal.getName(),
             authorizedClient.getAccessToken().getTokenValue(),
@@ -65,18 +65,18 @@ public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientServic
      */
     @Override
     public OAuth2AuthorizedClient loadAuthorizedClient(String clientRegistrationId, String principalName) {
-        String key = REDIS_KEY_PREFIX + principalName;
+        final String key = REDIS_KEY_PREFIX + principalName;
         // Getting the object from Redis by its key.
-        OAuth2AuthorizedClientDto dto = redisTemplate.opsForValue().get(key);
+        final OAuth2AuthorizedClientDto dto = redisTemplate.opsForValue().get(key);
         // Constructing the OAuth2AccessToken manually.
-        OAuth2AccessToken accessToken = new OAuth2AccessToken(
+        final OAuth2AccessToken accessToken = new OAuth2AccessToken(
             OAuth2AccessToken.TokenType.BEARER,
             dto.getAccessToken(),
             Instant.now(),
             Instant.ofEpochMilli(dto.getAccessTokenExpiresAt())
         );
         // Refreshing the token.
-        OAuth2RefreshToken refreshToken = dto.getRefreshToken() != null
+        final OAuth2RefreshToken refreshToken = dto.getRefreshToken() != null
             ? new OAuth2RefreshToken(dto.getRefreshToken(), Instant.now())
             : null;
         // Manually constructing the OAuth2AuthorizedClient.
