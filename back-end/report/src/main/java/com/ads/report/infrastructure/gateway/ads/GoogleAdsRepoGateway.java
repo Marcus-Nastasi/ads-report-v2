@@ -45,9 +45,9 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
         try (CustomerServiceClient customerServiceClient = googleAdsClient.getLatestVersion().createCustomerServiceClient()) {
             final List<String> response = new ArrayList<>();
             // Creates request
-            ListAccessibleCustomersRequest request = ListAccessibleCustomersRequest.newBuilder().build();
+            final ListAccessibleCustomersRequest request = ListAccessibleCustomersRequest.newBuilder().build();
             // Call the API to list the accessible clients
-            ListAccessibleCustomersResponse listed = customerServiceClient.listAccessibleCustomers(request);
+            final ListAccessibleCustomersResponse listed = customerServiceClient.listAccessibleCustomers(request);
             response.add("Successful connection.");
             response.addAll(listed.getResourceNamesList());
             return response;
@@ -69,7 +69,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     public ManagerAccountInfo getManagerAccount(String managerAccountId) {
         // Connect to Google Ads service client.
         try (GoogleAdsServiceClient client = googleAdsClient.getLatestVersion().createGoogleAdsServiceClient()) {
-            String query = """
+            final String query = """
                 SELECT
                     customer.id,
                     customer.descriptive_name,
@@ -86,11 +86,11 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
                 FROM customer
             """;
             // Build a new request with the customerId and query.
-            SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
+            final SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
                 .setCustomerId(managerAccountId)
                 .setQuery(query)
                 .build();
-            GoogleAdsRow row = client.search(request).iterateAll().iterator().next(); // Expects unique return.
+            final GoogleAdsRow row = client.search(request).iterateAll().iterator().next(); // Expects unique return.
             return new ManagerAccountInfo(
                 String.valueOf(row.getCustomer().getId()),
                 row.getCustomer().getDescriptiveName(),
@@ -123,9 +123,9 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     public List<CampaignMetrics> getCampaignMetrics(String customerId, String startDate, String endDate, boolean active) {
         // Connect to google ads service client.
         try (GoogleAdsServiceClient client = googleAdsClient.getLatestVersion().createGoogleAdsServiceClient()) {
-            String isActive = active ? "metrics.impressions > '0'" : "metrics.impressions >= '0'";
-            List<CampaignMetrics> campaignMetricsList = new ArrayList<>();
-            String query = String.format("""
+            final String isActive = active ? "metrics.impressions > '0'" : "metrics.impressions >= '0'";
+            final List<CampaignMetrics> campaignMetricsList = new ArrayList<>();
+            final String query = String.format("""
                 SELECT
                     segments.date,
                     segments.day_of_week,
@@ -146,13 +146,13 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
                 ORDER BY segments.date ASC, metrics.conversions DESC
             """, isActive, startDate, endDate);
             // Build a new request with the customerId and query.
-            SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
+            final SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
                 .setCustomerId(customerId)
                 .setQuery(query)
                 .build();
             // Iterating GoogleAdsRow objects to convert to CampaignMetrics.
             for (GoogleAdsRow r: client.search(request).iterateAll()) {
-                CampaignMetrics campaignMetrics = new CampaignMetrics(
+                final CampaignMetrics campaignMetrics = new CampaignMetrics(
                     r.getSegments().getDate(),
                     r.getSegments().getDayOfWeek().name(),
                     r.getCampaign().getId(),
@@ -188,8 +188,8 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      */
     @Override
     public List<AccountMetrics> getAccountMetrics(String customerId, String startDate, String endDate) {
-        List<AccountMetrics> accountMetricsList = new ArrayList<>();
-        String query = String.format("""
+        final List<AccountMetrics> accountMetricsList = new ArrayList<>();
+        final String query = String.format("""
             SELECT
                 customer.id,
                 customer.descriptive_name,
@@ -205,13 +205,13 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
         """, startDate, endDate);
         try (GoogleAdsServiceClient client = googleAdsClient.getLatestVersion().createGoogleAdsServiceClient()) {
             // Build a new request with the customerId and query.
-            SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
+            final SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
                 .setCustomerId(customerId)
                 .setQuery(query)
                 .build();
             // Iterating GoogleAdsRow objects to convert to CampaignMetrics.
             for (GoogleAdsRow r: client.search(request).iterateAll()) {
-                AccountMetrics accountMetrics = new AccountMetrics(
+                final AccountMetrics accountMetrics = new AccountMetrics(
                     r.getCustomer().getId(),
                     r.getCustomer().getDescriptiveName(),
                     r.getMetrics().getImpressions(),
@@ -248,8 +248,8 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      */
     @Override
     public List<CampaignPerDay> getTotalPerDay(String customerId, String startDate, String endDate) {
-        List<CampaignPerDay> campaignPerDays = new ArrayList<>();
-        String query = String.format("""
+        final List<CampaignPerDay> campaignPerDays = new ArrayList<>();
+        final String query = String.format("""
             SELECT
               segments.date,
               metrics.impressions,
@@ -264,13 +264,13 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
         """, startDate, endDate);
         try (GoogleAdsServiceClient client = googleAdsClient.getLatestVersion().createGoogleAdsServiceClient()) {
             // Build a new request with the customerId and query.
-            SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
+            final SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
                 .setCustomerId(customerId)
                 .setQuery(query)
                 .build();
             // Iterating GoogleAdsRow objects to convert to TotalPerDay.
             for (GoogleAdsRow r: client.search(request).iterateAll()) {
-                CampaignPerDay campaignPerDay = new CampaignPerDay(
+                final CampaignPerDay campaignPerDay = new CampaignPerDay(
                     r.getSegments().getDate(),
                     r.getMetrics().getImpressions(),
                     r.getMetrics().getClicks(),
@@ -300,9 +300,9 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      */
     @Override
     public List<CampaignKeywordMetrics> getKeywordMetrics(String customerId, String startDate, String endDate, boolean active) {
-        String isActive = active ? "metrics.impressions > '0'" : "metrics.impressions >= '0'";
-        List<CampaignKeywordMetrics> campaignKeywordMetrics = new ArrayList<>();
-        String query = String.format("""
+        final String isActive = active ? "metrics.impressions > '0'" : "metrics.impressions >= '0'";
+        final List<CampaignKeywordMetrics> campaignKeywordMetrics = new ArrayList<>();
+        final String query = String.format("""
            SELECT
                segments.date,
                segments.day_of_week,
@@ -325,7 +325,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
         """, startDate, endDate, isActive);
         try (GoogleAdsServiceClient client = googleAdsClient.getLatestVersion().createGoogleAdsServiceClient()) {
             // Build a new request with the customerId and query.
-            SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
+            final SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
                 .setCustomerId(customerId)
                 .setQuery(query)
                 .build();
@@ -339,7 +339,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
 //                        .multiply(BigDecimal.valueOf(100));
 //                }
                 // Create KeywordMetrics object.
-                CampaignKeywordMetrics keywordMetric = new CampaignKeywordMetrics(
+                final CampaignKeywordMetrics keywordMetric = new CampaignKeywordMetrics(
                     r.getSegments().getDate(),
                     r.getSegments().getDayOfWeek().name(),
                     r.getCampaign().getName(),
@@ -376,8 +376,8 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
      */
     @Override
     public List<CampaignTitleAndDescription> getAdTitleAndDescriptions(String customerId, String startDate, String endDate) {
-        List<CampaignTitleAndDescription> campaignTitleAndDescriptions = new ArrayList<>();
-        String query = String.format("""
+        final List<CampaignTitleAndDescription> campaignTitleAndDescriptions = new ArrayList<>();
+        final String query = String.format("""
             SELECT
                 segments.date,
                 campaign.name,
@@ -396,7 +396,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
         """, startDate, endDate);
         try (GoogleAdsServiceClient client = googleAdsClient.getLatestVersion().createGoogleAdsServiceClient()) {
             // Build a new request with the customerId and query.
-            SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
+            final SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
                 .setCustomerId(customerId)
                 .setQuery(query)
                 .build();
@@ -423,7 +423,7 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
                         .toList();
                 }
                 // Build domain object.
-                CampaignTitleAndDescription adInfo = new CampaignTitleAndDescription(
+                final CampaignTitleAndDescription adInfo = new CampaignTitleAndDescription(
                     r.getSegments().getDate(),
                     r.getCampaign().getName(),
                     r.getAdGroup().getName(),
