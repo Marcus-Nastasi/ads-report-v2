@@ -40,7 +40,7 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
     @Override
     public void clearSheetTab(String spreadsheetId, String tab) throws GoogleSheetsException {
         try {
-            String range = tab + "!A:Z";
+            final String range = tab + "!A:Z";
             sheetsClient.spreadsheets().values().clear(spreadsheetId, range, new ClearValuesRequest()).execute();
         } catch (Exception e) {
             throw new GoogleSheetsException("Could not clear the tab: " + e.getMessage());
@@ -68,12 +68,12 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
             List<AccountMetrics> accountMetrics) throws GoogleSheetsException {
         try {
             clearSheetTab(spreadsheetId, tab);
-            List<List<Object>> sheetData = new ArrayList<>();
+            final List<List<Object>> sheetData = new ArrayList<>();
             // added sheets headers.
             sheetData.add(List.of("customerId", "descriptiveName", "impressions", "clicks", "cost", "conversions", "averageCpa", "ctr",	"averageCpc"));
             // iterates in all account metrics objects, and add as a row on sheetData list.
             for (AccountMetrics obj : accountMetrics) {
-                List<Object> row = List.of(
+                final List<Object> row = List.of(
                     obj.getCustomerId(),
                     obj.getDescriptiveName(),
                     obj.getImpressions(),
@@ -86,7 +86,7 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
                 );
                 sheetData.add(row);
             }
-            ValueRange body = new ValueRange().setValues(sheetData);
+            final ValueRange body = new ValueRange().setValues(sheetData);
             tab = tab + "!A:Z"; // sets tab and interval.
             sheetsClient.spreadsheets().values()
                 .update(spreadsheetId, tab, body)
@@ -117,12 +117,12 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
             List<CampaignMetrics> campaignMetrics) throws GoogleSheetsException {
         try {
             clearSheetTab(spreadsheetId, tab);
-            List<List<Object>> sheetData = new ArrayList<>();
+            final List<List<Object>> sheetData = new ArrayList<>();
             // added sheets headers.
             sheetData.add(List.of("date", "dayOfWeek", "campaignId", "campaignName", "adGroupName", "status", "impressions", "clicks", "cost", "conversions", "averageCpa", "ctr", "averageCpc"));
             // iterates in all campaign metrics objects, and add as a row on sheetData list.
             for (CampaignMetrics obj : campaignMetrics) {
-                List<Object> row = List.of(
+                final List<Object> row = List.of(
                     obj.getDate(),
                     obj.getDayOfWeek(),
                     obj.getCampaignId(),
@@ -139,7 +139,7 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
                 );
                 sheetData.add(row);
             }
-            ValueRange body = new ValueRange().setValues(sheetData);
+            final ValueRange body = new ValueRange().setValues(sheetData);
             tab = tab + "!A:Z"; // sets tab and interval.
             sheetsClient.spreadsheets().values()
                 .update(spreadsheetId, tab, body)
@@ -172,10 +172,10 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
             List<CampaignPerDay> campaignPerDays) throws GoogleSheetsException {
         try {
             clearSheetTab(spreadsheetId, tab);
-            List<List<Object>> sheetData = new ArrayList<>();
+            final List<List<Object>> sheetData = new ArrayList<>();
             sheetData.add(List.of("date", "impressions", "clicks", "conversions", "cost", "hour", "dayOfWeek"));
             for (CampaignPerDay obj : campaignPerDays) {
-                List<Object> row = List.of(
+                final List<Object> row = List.of(
                     obj.getDate(),
                     obj.getImpressions(),
                     obj.getClicks(),
@@ -186,7 +186,7 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
                 );
                 sheetData.add(row);
             }
-            ValueRange body = new ValueRange().setValues(sheetData);
+            final ValueRange body = new ValueRange().setValues(sheetData);
             tab = tab + "!A:Z"; // sets tab and interval.
             sheetsClient.spreadsheets().values()
                 .update(spreadsheetId, tab, body)
@@ -214,10 +214,10 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
             List<CampaignKeywordMetrics> campaignKeywordMetrics) throws GoogleSheetsException {
         try {
             clearSheetTab(spreadsheetId, tab);
-            List<List<Object>> sheetData = new ArrayList<>();
+            final List<List<Object>> sheetData = new ArrayList<>();
             sheetData.add(List.of("date", "campaignName", "adGroupName", "keywordText", "matchType", "impressions", "clicks", "cost", "averageCpc", "conversions", "conversionRate", "dayOfWeek", "chanel"));
             for (CampaignKeywordMetrics obj : campaignKeywordMetrics) {
-                List<Object> row = List.of(
+                final List<Object> row = List.of(
                     obj.getDate(),
                     obj.getCampaignName(),
                     obj.getAdGroupName(),
@@ -233,7 +233,7 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
                 );
                 sheetData.add(row);
             }
-            ValueRange body = new ValueRange().setValues(sheetData);
+            final ValueRange body = new ValueRange().setValues(sheetData);
             tab = tab + "!A:Z"; // sets tab and interval.
             sheetsClient.spreadsheets().values()
                 .update(spreadsheetId, tab, body)
@@ -261,10 +261,10 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
             List<CampaignTitleAndDescription> campaignTitleAndDescriptions) throws GoogleSheetsException {
         try {
             clearSheetTab(spreadsheetId, tab);
-            List<List<Object>> sheetData = new ArrayList<>();
+            final List<List<Object>> sheetData = new ArrayList<>();
             sheetData.add(List.of("date", "campaignName", "adGroupName", "responsiveHeadlines", "responsiveDescriptions", "clicks", "impressions", "conversions"));
             for (CampaignTitleAndDescription obj : campaignTitleAndDescriptions) {
-                List<Object> row = List.of(
+                final List<Object> row = List.of(
                     obj.getDate(),
                     obj.getCampaignName(),
                     obj.getAdName(),
@@ -276,7 +276,7 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
                 );
                 sheetData.add(row);
             }
-            ValueRange body = new ValueRange().setValues(sheetData);
+            final ValueRange body = new ValueRange().setValues(sheetData);
             tab = tab + "!A:Z"; // sets tab and interval.
             sheetsClient.spreadsheets().values()
                 .update(spreadsheetId, tab, body)
