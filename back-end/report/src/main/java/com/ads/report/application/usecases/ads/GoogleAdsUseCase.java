@@ -85,7 +85,7 @@ public class GoogleAdsUseCase {
         final List<LocalDate> allDates = new ArrayList<>();
         // Parsing the date strings to LocalDate.
         LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        final LocalDate end = LocalDate.parse(endDate);
         // Check if the start date is after the end date.
         if (start.isAfter(end)) {
             throw new IllegalArgumentException("The start date is after the end date");
@@ -109,21 +109,21 @@ public class GoogleAdsUseCase {
      */
     public List<CampaignMetrics> getCampaignMetrics(String customerId, String startDate, String endDate, boolean active) {
         // Getting campaign metrics from Google Ads.
-        List<CampaignMetrics> campaignMetrics = googleAdsGateway.getCampaignMetrics(customerId, startDate, endDate, active);
-        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
+        final List<CampaignMetrics> campaignMetrics = googleAdsGateway.getCampaignMetrics(customerId, startDate, endDate, active);
+        final List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
         // Creating a map to group metrics of a single date.
-        Map<LocalDate, List<CampaignMetrics>> metricsMap = new HashMap<>();
+        final Map<LocalDate, List<CampaignMetrics>> metricsMap = new HashMap<>();
         for (CampaignMetrics m: campaignMetrics) {
-            LocalDate date = LocalDate.parse(m.getDate());
+            final LocalDate date = LocalDate.parse(m.getDate());
             if (!metricsMap.containsKey(date)) {
                 metricsMap.put(date, new ArrayList<>());
             }
             metricsMap.get(date).add(m);
         }
         // Creating a list to have the complete results.
-        List<CampaignMetrics> completeResults = new ArrayList<>();
+        final List<CampaignMetrics> completeResults = new ArrayList<>();
         for (LocalDate date: allDates) {
-            List<CampaignMetrics> dailyMetrics = metricsMap.get(date);
+            final List<CampaignMetrics> dailyMetrics = metricsMap.get(date);
             if (dailyMetrics == null || dailyMetrics.isEmpty()) {
                 completeResults.add(new CampaignMetrics(
                     date.toString(), date.getDayOfWeek().name(), 0L, "null", "null", "null", 0L, 0L, 0d, 0d, 0d, 0d, 0d
@@ -149,19 +149,19 @@ public class GoogleAdsUseCase {
      */
     public List<CampaignPerDay> getTotalPerDay(String customerId, String startDate, String endDate) {
         // Getting metrics per days.
-        List<CampaignPerDay> campaignPerDays = googleAdsGateway.getTotalPerDay(customerId, startDate, endDate);
-        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
+        final List<CampaignPerDay> campaignPerDays = googleAdsGateway.getTotalPerDay(customerId, startDate, endDate);
+        final List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
         // Creating a map to group metrics of a single date.
-        Map<LocalDate, List<CampaignPerDay>> metricsMap = new HashMap<>();
+        final Map<LocalDate, List<CampaignPerDay>> metricsMap = new HashMap<>();
         for (CampaignPerDay m: campaignPerDays) {
-            LocalDate date = LocalDate.parse(m.getDate());
+            final LocalDate date = LocalDate.parse(m.getDate());
             if (!metricsMap.containsKey(date)) {
                 metricsMap.put(date, new ArrayList<>());
             }
             metricsMap.get(date).add(m);
         }
         // Creating a list to have the complete results.
-        List<CampaignPerDay> completeResults = new ArrayList<>();
+        final List<CampaignPerDay> completeResults = new ArrayList<>();
         for (LocalDate date: allDates) {
             List<CampaignPerDay> dailyMetrics = metricsMap.get(date);
             if (dailyMetrics == null || dailyMetrics.isEmpty()) {
@@ -185,22 +185,22 @@ public class GoogleAdsUseCase {
      */
     public List<CampaignKeywordMetrics> getKeywordMetrics(String customerId, String startDate, String endDate, boolean active) {
         // Getting keyword metrics form Google Ads.
-        List<CampaignKeywordMetrics> campaignKeywordMetrics = googleAdsGateway.getKeywordMetrics(customerId, startDate, endDate, active);
+        final List<CampaignKeywordMetrics> campaignKeywordMetrics = googleAdsGateway.getKeywordMetrics(customerId, startDate, endDate, active);
         // Creating a list with all dates from the given period.
-        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
+        final List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
         // Creating a map to group metrics of a single date.
-        Map<LocalDate, List<CampaignKeywordMetrics>> metricsMap = new HashMap<>();
+        final Map<LocalDate, List<CampaignKeywordMetrics>> metricsMap = new HashMap<>();
         for (CampaignKeywordMetrics m: campaignKeywordMetrics) {
-            LocalDate date = LocalDate.parse(m.getDate());
+            final LocalDate date = LocalDate.parse(m.getDate());
             if (!metricsMap.containsKey(date)) {
                 metricsMap.put(date, new ArrayList<>());
             }
             metricsMap.get(date).add(m);
         }
         // Creating a list to have the complete results.
-        List<CampaignKeywordMetrics> completeResults = new ArrayList<>();
+        final List<CampaignKeywordMetrics> completeResults = new ArrayList<>();
         for (LocalDate date: allDates) {
-            List<CampaignKeywordMetrics> dailyMetrics = metricsMap.get(date);
+            final List<CampaignKeywordMetrics> dailyMetrics = metricsMap.get(date);
             if (dailyMetrics == null || dailyMetrics.isEmpty()) {
                 completeResults.add(new CampaignKeywordMetrics(
                     date.toString(), date.getDayOfWeek().name(), "null", "null", "null", "null", "null", 0L, 0L, 0d, 0d, 0d, 0d
@@ -224,20 +224,20 @@ public class GoogleAdsUseCase {
      */
     public List<CampaignTitleAndDescription> getAdTitleAndDescriptions(String customerId, String startDate, String endDate) {
         // Getting title and description metrics from Google Ads.
-        List<CampaignTitleAndDescription> campaignTitleAndDescriptions = googleAdsGateway.getAdTitleAndDescriptions(customerId, startDate, endDate);
+        final List<CampaignTitleAndDescription> campaignTitleAndDescriptions = googleAdsGateway.getAdTitleAndDescriptions(customerId, startDate, endDate);
         // Creating a list with all dates from the given period.
-        List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
+        final List<LocalDate> allDates = getPeriodDaysList(startDate, endDate);
         // Creating a map to group metrics of a single date.
-        Map<LocalDate, List<CampaignTitleAndDescription>> metricsMap = new HashMap<>();
+        final Map<LocalDate, List<CampaignTitleAndDescription>> metricsMap = new HashMap<>();
         for (CampaignTitleAndDescription m: campaignTitleAndDescriptions) {
-            LocalDate date = LocalDate.parse(m.getDate());
+            final LocalDate date = LocalDate.parse(m.getDate());
             if (!metricsMap.containsKey(date)) {
                 metricsMap.put(date, new ArrayList<>());
             }
             metricsMap.get(date).add(m);
         }
         // Creating a list to have the complete results.
-        List<CampaignTitleAndDescription> completeResults = new ArrayList<>();
+        final List<CampaignTitleAndDescription> completeResults = new ArrayList<>();
         for (LocalDate date: allDates) {
             List<CampaignTitleAndDescription> dailyMetrics = metricsMap.get(date);
             if (dailyMetrics == null || dailyMetrics.isEmpty()) {
