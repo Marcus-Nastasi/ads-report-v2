@@ -22,7 +22,6 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.context.annotation.RequestScope;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
 

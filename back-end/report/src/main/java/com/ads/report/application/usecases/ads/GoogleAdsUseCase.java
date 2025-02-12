@@ -73,7 +73,7 @@ public class GoogleAdsUseCase {
 
     /**
      *
-     * This auxiliar method provides a list of all days of a given period.
+     * This auxiliar method provides a list of days in a given period.
      *
      * @param startDate The start date of the analysis period.
      * @param endDate The end date of the analysis period.
@@ -82,7 +82,7 @@ public class GoogleAdsUseCase {
      */
     private List<LocalDate> getPeriodDaysList(String startDate, String endDate) {
         // Creating a list with all dates from the given period.
-        List<LocalDate> allDates = new ArrayList<>();
+        final List<LocalDate> allDates = new ArrayList<>();
         // Parsing the date strings to LocalDate.
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
