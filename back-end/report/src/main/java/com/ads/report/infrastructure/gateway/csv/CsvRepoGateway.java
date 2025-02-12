@@ -33,11 +33,11 @@ public class CsvRepoGateway implements CsvGateway {
     public HttpServletResponse fromJson(List<Map<String, Object>> records, HttpServletResponse response) throws CsvException {
         try (CSVWriter writer = new CSVWriter(response.getWriter())) {
             if (!records.isEmpty()) {
-                String[] headers = records.getFirst().keySet().toArray(new String[0]);
+                final String[] headers = records.getFirst().keySet().toArray(new String[0]);
                 writer.writeNext(headers);
             }
             for (Map<String, Object> record: records) {
-                String[] data = record.values().stream().map(String::valueOf).toArray(String[]::new);
+                final String[] data = record.values().stream().map(String::valueOf).toArray(String[]::new);
                 writer.writeNext(data);
             }
             return response;
