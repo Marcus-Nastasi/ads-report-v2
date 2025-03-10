@@ -51,7 +51,7 @@ public class RedisConfiguration {
         // Creating and config the ObjectMapper to JSON.
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        // Using jackson 2 serializer to JSON to Redis.
+        // Using jackson 2 serializer to JSON for Redis.
         Jackson2JsonRedisSerializer<OAuth2AuthorizedClientDto> serializer = new Jackson2JsonRedisSerializer<>(
             objectMapper,
             OAuth2AuthorizedClientDto.class

@@ -1,5 +1,6 @@
 package com.ads.report.application.usecases.ads;
 
+import com.ads.report.application.exception.GoogleSheetsException;
 import com.ads.report.application.gateway.ads.GoogleAdsGateway;
 import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.domain.reports.UpdateAllReports;
@@ -71,7 +72,7 @@ public class UpdateAllReportsUseCase {
                     googleAdsUseCase.getTotalPerDay(r.getCustomerId(), r.getStartDate(), r.getEndDate())
                 );
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new GoogleSheetsException(e.getMessage());
             }
         });
     }

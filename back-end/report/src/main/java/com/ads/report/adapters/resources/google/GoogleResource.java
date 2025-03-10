@@ -43,7 +43,7 @@ public class GoogleResource {
      * <p>This route returns an object that consists in the connection status,
      * and a list of user's accessible accounts.<p/>
      *
-     * @return The TestResponseDto.
+     * @return The {@link TestResponseDto} object.
      */
     @GetMapping("/test")
     @ResponseStatus(HttpStatus.OK)
@@ -61,7 +61,7 @@ public class GoogleResource {
      *
      * @param id The id of an adwords customer (client).
      *
-     * @return An object of type ManagerAccountInfo, that contains the general MCC info.
+     * @return An object of type {@link ManagerAccountInfo}, that contains the general MCC info.
      */
     @GetMapping("/manager/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -78,7 +78,7 @@ public class GoogleResource {
      * <p>By passing the customer id, start date, end date, spreadsheet id, client and active flag,
      * you can update the sheets tables with ease.<p/>
      *
-     * @param allReportsRequestDto the list of UpdateAllReports domain object.
+     * @param allReportsRequestDto the list of {@link com.ads.report.domain.reports.UpdateAllReports} domain object.
      *
      * @return ok if the cll is successful.
      */

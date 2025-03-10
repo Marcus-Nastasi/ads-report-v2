@@ -43,7 +43,7 @@ public class OAuth2Resource {
      */
     @GetMapping("/user")
     public Map<String, Object> getUser(@AuthenticationPrincipal OidcUser user, OAuth2AuthenticationToken authentication) {
-        // Using OAuth2AuthorizedClientService to load the user that is logged.
+        // Using OAuth2AuthorizedClientService to load the logged user.
         OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
             authentication.getAuthorizedClientRegistrationId(),
             authentication.getName()

@@ -125,9 +125,10 @@ public class GoogleAdsUseCase {
         for (LocalDate date: allDates) {
             final List<CampaignMetrics> dailyMetrics = metricsMap.get(date);
             if (dailyMetrics == null || dailyMetrics.isEmpty()) {
-                completeResults.add(new CampaignMetrics(
-                    date.toString(), date.getDayOfWeek().name(), 0L, "null", "null", "null", 0L, 0L, 0d, 0d, 0d, 0d, 0d
-                ));
+                completeResults.add(
+                    new CampaignMetrics(date.toString(), date.getDayOfWeek().name(), 0L,
+                        "null", "null", "null", 0L, 0L, 0d, 0d, 0d, 0d, 0d)
+                );
             } else {
                 completeResults.addAll(dailyMetrics);
             }
@@ -202,9 +203,10 @@ public class GoogleAdsUseCase {
         for (LocalDate date: allDates) {
             final List<CampaignKeywordMetrics> dailyMetrics = metricsMap.get(date);
             if (dailyMetrics == null || dailyMetrics.isEmpty()) {
-                completeResults.add(new CampaignKeywordMetrics(
-                    date.toString(), date.getDayOfWeek().name(), "null", "null", "null", "null", "null", 0L, 0L, 0d, 0d, 0d, 0d
-                ));
+                completeResults.add(
+                    new CampaignKeywordMetrics(date.toString(), date.getDayOfWeek().name(),
+                        "null", "null", "null", "null", "null", 0L, 0L, 0d, 0d, 0d, 0d)
+                );
             } else {
                 completeResults.addAll(dailyMetrics);
             }
@@ -241,7 +243,9 @@ public class GoogleAdsUseCase {
         for (LocalDate date: allDates) {
             List<CampaignTitleAndDescription> dailyMetrics = metricsMap.get(date);
             if (dailyMetrics == null || dailyMetrics.isEmpty()) {
-                completeResults.add(new CampaignTitleAndDescription(date.toString(), "null", "null", List.of("null"), List.of("null"), 0L, 0L, 0d));
+                completeResults.add(
+                    new CampaignTitleAndDescription(date.toString(), "null", "null", List.of("null"), List.of("null"), 0L, 0L, 0d)
+                );
             } else {
                 completeResults.addAll(dailyMetrics);
             }
