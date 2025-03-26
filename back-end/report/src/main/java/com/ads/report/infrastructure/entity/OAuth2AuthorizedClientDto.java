@@ -8,7 +8,6 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- *
  * The Redis Dto to represent the OAuth2AuthorizedClient.
  *
  * <p>This class allows us to use a Dto to save the session's credentials on Redis.<p/>

@@ -31,7 +31,6 @@ public class OAuth2Resource {
     }
 
     /**
-     *
      * Validates if user is logged in.
      *
      * <p>This endpoint allows users to retrieve their personal Google Account object,
