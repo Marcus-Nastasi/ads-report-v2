@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * The implementation of GoogleAdsGateway interface.
  *
  * <p>This class implements the interface contract with the goal of
@@ -33,7 +32,6 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     private GoogleAdsClient googleAdsClient;
 
     /**
-     *
      * Test the connection with the adwords client.
      *
      * @return The status and a list of accessible customer accounts.
@@ -57,7 +55,6 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     }
 
     /**
-     *
      * Get general information of manager account.
      *
      * @param managerAccountId The id of an adwords customer (client).
@@ -112,7 +109,6 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     }
 
     /**
-     *
      * Get campaigns and it's metrics.
      *
      * @param customerId The id of an adwords customer (client).
@@ -176,7 +172,6 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     }
 
     /**
-     *
      * Get general information of manager account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -231,7 +226,6 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     }
 
     /**
-     *
      * This method allows the user to send client account metrics, separated per days,
      * directly from Google Ads to Google Sheets.
      *
@@ -288,7 +282,6 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     }
 
     /**
-     *
      * Implementation to get all keyword metrics from an account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -364,7 +357,6 @@ public class GoogleAdsRepoGateway implements GoogleAdsGateway {
     }
 
     /**
-     *
      * Implementation to get all campaigns, ad groups, titles and descriptions, and its metrics.
      *
      * @param customerId The id of an adwords customer (client).

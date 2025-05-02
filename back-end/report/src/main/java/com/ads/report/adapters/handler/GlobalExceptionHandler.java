@@ -13,7 +13,6 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Map;
 
 /**
- *
  * The exception handler class.
  *
  * @author Marcus Nastasi
@@ -24,7 +23,6 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     /**
-     *
      * Handler to forbidden exception, with 403 code.
      *
      * @param exception An instance of type ForbiddenException.
@@ -38,7 +36,6 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     *
      * Handler to ads exception, with 400 code.
      *
      * @param exception An instance of type GoogleAdsException.
@@ -52,7 +49,6 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     *
      * Handler to sheets exception, with 400 code.
      *
      * @param exception An instance of type GoogleSheetsException.
@@ -66,7 +62,6 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     *
      * Handler to CSV exception, with 400 code.
      *
      * @param exception An instance of type CsvException.
@@ -80,7 +75,6 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     *
      * Handler to unknown runtime exceptions, with 500 code.
      *
      * @param exception An instance of type RuntimeException.
@@ -94,7 +88,6 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     *
      * Handler to unknown exceptions, with 500 code.
      *
      * @param exception An instance of type Exception.

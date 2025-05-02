@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * The controller to the OAuth2 verification.
  *
  * @author Marcus Nastasi

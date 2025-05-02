@@ -5,7 +5,6 @@ import com.ads.report.domain.reports.UpdateAllReports;
 import java.util.List;
 
 /**
- *
  * The DTO to update various reports.
  *
  * @author Marcus Nastasi

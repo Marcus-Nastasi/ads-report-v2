@@ -3,7 +3,6 @@ package com.ads.report.application.exception;
 import java.io.Serial;
 
 /**
- *
  * The CSV Exception.
  *
  * @author Marcus Nastasi

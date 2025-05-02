@@ -7,8 +7,9 @@ import com.ads.report.application.usecases.ads.UpdateAllReportsUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.concurrent.Executor;
+
 /**
- *
  * The configuration of the use case of updating various reports at same time.
  *
  * <p>Here we create the adwords beans..<p/>
@@ -21,7 +22,10 @@ import org.springframework.context.annotation.Configuration;
 public class UpdateAllReportsConfiguration {
 
     @Bean
-    public UpdateAllReportsUseCase updateAllReportsUseCase(GoogleAdsGateway googleAdsGateway, GoogleSheetsGateway googleSheetsGateway, GoogleAdsUseCase googleAdsUseCase) {
-        return new UpdateAllReportsUseCase(googleAdsGateway, googleSheetsGateway, googleAdsUseCase);
+    public UpdateAllReportsUseCase updateAllReportsUseCase(GoogleAdsGateway googleAdsGateway,
+                                                           GoogleSheetsGateway googleSheetsGateway,
+                                                           GoogleAdsUseCase googleAdsUseCase,
+                                                           Executor contextAwareExecutor) {
+        return new UpdateAllReportsUseCase(googleAdsGateway, googleSheetsGateway, googleAdsUseCase, contextAwareExecutor);
     }
 }

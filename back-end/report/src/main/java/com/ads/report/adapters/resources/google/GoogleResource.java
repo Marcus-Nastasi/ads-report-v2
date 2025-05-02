@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- *
  * The controller to general Google resources.
  *
  * <p>This class represents the controller of general Google resources. To make api calls, you can request
@@ -31,14 +30,15 @@ public class GoogleResource {
 
     @Autowired
     private GoogleAdsUseCase googleAdsUseCase;
+
     @Autowired
     private GoogleAdsDtoMapper googleAdsDtoMapper;
+
     @Autowired
     private UpdateAllReportsUseCase updateAllReportsUseCase;
 
     /**
-     *
-     * est the connection between the application and the Google Account.
+     * Test the connection between the application and the Google Account.
      *
      * <p>This route returns an object that consists in the connection status,
      * and a list of user's accessible accounts.<p/>
@@ -54,7 +54,6 @@ public class GoogleResource {
     }
 
     /**
-     *
      * Recover the general data of the manager account specified.
      *
      * <p>In this route you can recover generic information from a manager account (MCC).<p/>
@@ -72,7 +71,6 @@ public class GoogleResource {
     }
 
     /**
-     *
      * This endpoint allows the user to send a conjunct of data to sheets, from various accounts.
      *
      * <p>By passing the customer id, start date, end date, spreadsheet id, client and active flag,
@@ -80,7 +78,7 @@ public class GoogleResource {
      *
      * @param allReportsRequestDto the list of {@link com.ads.report.domain.reports.UpdateAllReports} domain object.
      *
-     * @return ok if the cll is successful.
+     * @return ok if the response is successful.
      */
     @PostMapping("/generate")
     @ResponseStatus(HttpStatus.OK)

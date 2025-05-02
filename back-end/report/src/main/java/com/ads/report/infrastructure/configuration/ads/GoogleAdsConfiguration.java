@@ -13,19 +13,21 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.time.Instant;
 import java.util.Date;
 
 /**
- *
  * The Google Ads configuration class.
  *
  * <p>Here we create the adwords beans..<p/>
@@ -39,13 +41,14 @@ public class GoogleAdsConfiguration {
 
     @Value("${api.googleads.clientId}")
     private String clientId;
+
     @Value("${api.googleads.clientSecret}")
     private String clientSecret;
+
     @Value("${api.googleads.developerToken}")
     private String developerToken;
 
     /**
-     *
      * Bean that generates the Google Ads client.
      *
      * @param authorizedClientService An implementations of OAuth2AuthorizedClientService for server states config.
@@ -55,6 +58,7 @@ public class GoogleAdsConfiguration {
      */
     @Bean
     @RequestScope
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public GoogleAdsClient googleAdsClient(RedisOAuth2AuthorizedClient authorizedClientService,
                                            OAuth2AuthorizedClientManager authorizedClientManager) {
         // Getting authentication from session security context holder.

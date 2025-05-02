@@ -11,7 +11,6 @@ import com.ads.report.domain.campaign.CampaignPerDay;
 import java.util.List;
 
 /**
- *
  * The use cases of Google Sheets.
  *
  * <p>This represents all the Google Sheets use cases.<p/>
@@ -25,7 +24,6 @@ public class GoogleSheetsUseCase {
     private final GoogleSheetsGateway googleSheetsGateway;
 
     /**
-     *
      * Constructor of Google Sheets use case class.
      *
      * @param googleSheetsGateway the interface contract of Google Sheets available methods.
@@ -35,7 +33,6 @@ public class GoogleSheetsUseCase {
     }
 
     /**
-     *
      * This method allows the user to send account metrics directly from Google Ads to Google Sheets.
      *
      * <p>Here the user can pass an adwords customer id, a start date, end date,
@@ -56,7 +53,6 @@ public class GoogleSheetsUseCase {
     }
 
     /**
-     *
      * This method allows the user to send campaign metrics directly from Google Ads to Google Sheets.
      *
      * <p>Here the user can pass an adwords customer id, a start date, end date,
@@ -77,7 +73,6 @@ public class GoogleSheetsUseCase {
     }
 
     /**
-     *
      * This method allows the user to send client account metrics, separated per days,
      * directly from Google Ads to Google Sheets.
      *
@@ -99,7 +94,6 @@ public class GoogleSheetsUseCase {
     }
 
     /**
-     *
      * This method allows the user to send keyword metrics to a spreadsheets.
      *
      * @param spreadsheetId The spreadsheet id.
@@ -119,7 +113,6 @@ public class GoogleSheetsUseCase {
     }
 
     /**
-     *
      * This method allows the user to send titles and descriptions to sheets.
      *
      * @param spreadsheetId The spreadsheet id.

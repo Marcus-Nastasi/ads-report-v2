@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * The domain of titles and descriptions api call.
  *
  * @author Marcus Nastasi

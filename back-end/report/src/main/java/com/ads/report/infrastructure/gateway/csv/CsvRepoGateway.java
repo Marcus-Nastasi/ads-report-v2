@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * The class that contains the methods to handle CSV files.
  *
  * @author Marcus Nastasi
@@ -19,7 +18,6 @@ import java.util.Map;
 public class CsvRepoGateway implements CsvGateway {
 
     /**
-     *
      * Method to convert from json to csv.
      *
      * <p>This method uses an algorithm and the CSVWriter library to convert from JSON to CSV, and write into response.<p/>

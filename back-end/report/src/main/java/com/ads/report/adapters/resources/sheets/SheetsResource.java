@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 /**
- *
  * The Google Sheets resource controller class.
  *
  * @author Marcus Nastasi
@@ -24,13 +23,17 @@ import java.io.IOException;
 @RequestMapping("v2/spreadsheets")
 public class SheetsResource {
 
+    private final GoogleAdsUseCase googleAdsUseCase;
+
+    private final GoogleSheetsUseCase googleSheetsUseCase;
+
     @Autowired
-    private GoogleAdsUseCase googleAdsUseCase;
-    @Autowired
-    private GoogleSheetsUseCase googleSheetsUseCase;
+    public SheetsResource(GoogleAdsUseCase googleAdsUseCase, GoogleSheetsUseCase googleSheetsUseCase) {
+        this.googleAdsUseCase = googleAdsUseCase;
+        this.googleSheetsUseCase = googleSheetsUseCase;
+    }
 
     /**
-     *
      * This method allows the user to send campaign metrics directly from Google Ads to Google Sheets.
      *
      * <p>Here the user can pass an adwords customer id, a spreadsheet id and a tab, to send the data directly.<p/>
@@ -60,7 +63,6 @@ public class SheetsResource {
     }
 
     /**
-     *
      * This method allows the user to send client account metrics directly from Google Ads to google sheets.
      *
      * <p>Here the user can pass an adwords customer id, a start date, end date,
@@ -92,7 +94,6 @@ public class SheetsResource {
     }
 
     /**
-     *
      * This method allows the user to send client account metrics, separated per days,
      * directly from Google Ads to Google Sheets.
      *
@@ -126,7 +127,6 @@ public class SheetsResource {
     }
 
     /**
-     *
      * This method allows the user to send all the keyword metrics from an account, filtering by period.
      *
      * @param customerId The id of an adwords customer (client).
@@ -154,7 +154,6 @@ public class SheetsResource {
     }
 
     /**
-     *
      * This method allows the user to send all the title and description metrics from an account, filtering by period.
      *
      * @param customerId The id of an adwords customer (client).

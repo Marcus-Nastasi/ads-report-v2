@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * The use cases of Google Ads api calls.
  *
  * <p>This class uses the interface contract to call the implementations.<p/>
@@ -33,7 +32,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * Test the connection with the adwords client.
      *
      * @return The status and a list of accessible customer accounts.
@@ -44,7 +42,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * Get general information of manager account.
      *
      * @param managerAccountId The id of an adwords customer (client).
@@ -57,7 +54,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * Get general information of manager account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -72,7 +68,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * This auxiliar method provides a list of days in a given period.
      *
      * @param startDate The start date of the analysis period.
@@ -99,7 +94,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * This method allows to get campaigns metrics.
      *
      * @param customerId The id of an adwords customer (client).
@@ -137,7 +131,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * This method allows the user to get client account metrics separated by days.
      *
      * <p>Here the user can pass an adwords customer id, a start date, end date.<p/>
@@ -175,7 +168,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * This method allows to get keyword metrics from an account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -215,7 +207,6 @@ public class GoogleAdsUseCase {
     }
 
     /**
-     *
      * This method allows to get all campaigns, ad groups, titles, descriptions, and its metrics.
      *
      * @param customerId The id of an adwords customer (client).

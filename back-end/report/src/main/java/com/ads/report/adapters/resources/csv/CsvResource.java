@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * The CSV Resource Controller class.
  *
  * @author Marcus Nastasi
@@ -31,15 +30,20 @@ import java.util.Map;
 @RequestMapping("v2/csv")
 public class CsvResource {
 
+    private final GoogleAdsUseCase googleAdsUseCase;
+
+    private final Gson gson;
+
+    private final CsvUseCase csvUseCase;
+
     @Autowired
-    private GoogleAdsUseCase googleAdsUseCase;
-    @Autowired
-    private Gson gson;
-    @Autowired
-    private CsvUseCase csvUseCase;
+    public CsvResource(GoogleAdsUseCase googleAdsUseCase, Gson gson, CsvUseCase csvUseCase) {
+        this.googleAdsUseCase = googleAdsUseCase;
+        this.gson = gson;
+        this.csvUseCase = csvUseCase;
+    }
 
     /**
-     *
      * Endpoint to get campaigns metrics.
      *
      * <p>This method allows users to get campaign metrics in CSV type.<p/>
@@ -69,7 +73,6 @@ public class CsvResource {
     }
 
     /**
-     *
      * Endpoint to get aggregated metrics from one client account.
      *
      * <p>This method allows users to get account metrics in CSV type.<p/>
@@ -100,7 +103,6 @@ public class CsvResource {
     }
 
     /**
-     *
      * Endpoint to get keyword metrics from a client.
      *
      * <p>This method allows users to get keyword metrics in CSV type.<p/>
@@ -134,7 +136,6 @@ public class CsvResource {
     }
 
     /**
-     *
      * Endpoint to get titles and descriptions from a client.
      *
      * <p>This method allows users to get title and description metrics in CSV type.<p/>
@@ -165,7 +166,6 @@ public class CsvResource {
     }
 
     /**
-     *
      * Endpoint to get titles and descriptions from a client.
      *
      * <p>This method allows users to get account metrics per day in CSV type.<p/>

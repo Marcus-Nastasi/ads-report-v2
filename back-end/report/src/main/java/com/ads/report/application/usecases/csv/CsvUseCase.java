@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * The interface of the Google Ads api calls.
  *
  * <p>This represents the interface that communicates the application with the infra layer,
@@ -27,7 +26,6 @@ public class CsvUseCase {
     }
 
     /**
-     *
      * Convert a json object to csv type file.
      *
      * @param records The json.

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * The interface of the CSV parser class.
  *
  * <p>This represents the interface that communicates the application with the infra layer,
@@ -20,7 +19,6 @@ import java.util.Map;
 public interface CsvGateway {
 
     /**
-     *
      * Convert a json object to csv type file.
      *
      * @param records The json.

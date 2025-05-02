@@ -10,7 +10,6 @@ import com.ads.report.domain.campaign.CampaignPerDay;
 import java.util.List;
 
 /**
- *
  * The Google Sheets interface.
  *
  * @author Marcus Nastasi
@@ -20,7 +19,6 @@ import java.util.List;
 public interface GoogleSheetsGateway {
 
     /**
-     *
      * This method allows the user to send data directly from Google Ads to Google Sheets.
      *
      * <p>This method allows the user to pass an adwords customer id, a start date, end date,
@@ -35,7 +33,6 @@ public interface GoogleSheetsGateway {
     void accountMetricsToSheets(String spreadsheetId, String tab, List<AccountMetrics> accountMetrics) throws GoogleSheetsException;
 
     /**
-     *
      * This method allows the user to send data directly from Google Ads to Google Sheets.
      *
      * <p>Here the user can pass an adwords customer id, a start date, end date,
@@ -50,7 +47,6 @@ public interface GoogleSheetsGateway {
     void campaignMetricsToSheets(String spreadsheetId, String tab, List<CampaignMetrics> campaignMetrics) throws GoogleSheetsException;
 
     /**
-     *
      * <p>This method allows the user to send client account metrics, separated per days,
      * directly from Google Ads to Google Sheets.<p/>
      *
@@ -63,7 +59,6 @@ public interface GoogleSheetsGateway {
     void totalPerDayToSheets(String spreadsheetId, String tab, List<CampaignPerDay> campaignPerDays) throws GoogleSheetsException;
 
     /**
-     *
      * <p>This method allows the user to send keyword metrics to sheets.<p/>
      *
      * @param spreadsheetId The spreadsheet id.
@@ -75,7 +70,6 @@ public interface GoogleSheetsGateway {
     void sendKeywordMetrics(String spreadsheetId, String tab, List<CampaignKeywordMetrics> campaignKeywordMetrics) throws GoogleSheetsException;
 
     /**
-     *
      * <p>This method allows the user to send titles and descriptions to sheets.<p/>
      *
      * @param spreadsheetId The spreadsheet id.
@@ -87,7 +81,6 @@ public interface GoogleSheetsGateway {
     void sendAdTitleAndDescription(String spreadsheetId, String tab, List<CampaignTitleAndDescription> campaignTitleAndDescriptions) throws GoogleSheetsException;
 
     /**
-     *
      * <p>This method clenas the spreadsheet.<p/>
      *
      * @param spreadsheetId The spreadsheet id.

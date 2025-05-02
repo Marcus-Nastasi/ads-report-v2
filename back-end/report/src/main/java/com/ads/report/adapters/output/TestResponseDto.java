@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * The test response DTO record.
  *
  * @author Marcus Nastasi

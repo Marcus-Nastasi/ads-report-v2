@@ -2,9 +2,9 @@ package com.ads.report;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- *
  * The Google Ads Report API.
  *
  * <p>This version allows any Google user to log in with their Google account, and use the software.<p/>
@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2025
  * */
 @SpringBootApplication
+@EnableAsync
 public class ReportApplication {
 
 	public static void main(String[] args) {

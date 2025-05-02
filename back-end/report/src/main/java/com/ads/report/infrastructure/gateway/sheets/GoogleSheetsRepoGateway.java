@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * The implementation of Google Sheets interface.
  *
  * @author Marcus Nastasi
@@ -29,7 +28,6 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
     private Sheets sheetsClient;
 
     /**
-     *
      * This method clenas the spreadsheet.
      *
      * @param spreadsheetId The spreadsheet id.
@@ -48,7 +46,6 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
     }
 
     /**
-     *
      * This method allows the user to send account metrics directly from Google Ads to Google Sheets.
      *
      * <p>Here the user can pass an adwords customer id, a start date, end date,
@@ -98,7 +95,6 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
     }
 
     /**
-     *
      * This method allows the user to send campaign metrics directly from Google Ads to Google Sheets.
      *
      * <p>Here the user can pass an adwords customer id, a spreadsheet id and tab, to send the data
@@ -151,7 +147,6 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
     }
 
     /**
-     *
      * This method allows the user to send client account metrics, separated per days, directly from Google Ads to Google Sheets.
      *
      * <p>
@@ -198,7 +193,6 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
     }
 
     /**
-     *
      * This method implements the keyword metrics sending to spreadsheet.
      *
      * @param spreadsheetId The spreadsheet id.
@@ -245,7 +239,6 @@ public class GoogleSheetsRepoGateway implements GoogleSheetsGateway {
     }
 
     /**
-     *
      * This method allows the user to send titles and descriptions to spreadsheet.
      *
      * @param spreadsheetId The spreadsheet id.

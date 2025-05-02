@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- *
  * The security configuration class.
  *
  * @author Marcus Nastasi
@@ -27,11 +26,11 @@ public class SecurityConfiguration {
 
     @Value("${api.googleads.clientId}")
     private String clientId;
+
     @Value("${api.googleads.clientSecret}")
     private String clientSecret;
 
     /**
-     *
      * Security filter chain configuration.
      *
      * <p>Configured to handle OAuth 2 logins with default handling.<p/>
@@ -57,7 +56,6 @@ public class SecurityConfiguration {
     }
 
     /**
-     *
      * Configuration of the details of authentication, like scopes, URIs, redirection, etc.
      *
      * @return A new object of ClientRegistrationRepository, with the details.

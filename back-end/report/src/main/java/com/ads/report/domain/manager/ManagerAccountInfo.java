@@ -4,7 +4,6 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- *
  * The domain of the object of manager account generic information.
  *
  * @author Marcus Nastasi

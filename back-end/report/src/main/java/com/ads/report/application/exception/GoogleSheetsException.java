@@ -3,7 +3,6 @@ package com.ads.report.application.exception;
 import java.io.Serial;
 
 /**
- *
  * The Google Sheets Exception.
  *
  * @author Marcus Nastasi

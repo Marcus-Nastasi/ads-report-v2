@@ -11,7 +11,6 @@ import com.ads.report.domain.manager.ManagerAccountInfo;
 import java.util.List;
 
 /**
- *
  * The interface of the Google Ads api.
  *
  * <p>This class represents the interface that communicates the application with the infra layer,
@@ -24,7 +23,6 @@ import java.util.List;
 public interface GoogleAdsGateway {
 
     /**
-     *
      * Test the connection with the adwords client.
      *
      * @return The status and a list of accessible customer accounts.
@@ -33,7 +31,6 @@ public interface GoogleAdsGateway {
     List<String> testConnection() throws GoogleAdsException;
 
     /**
-     *
      * Get campaigns and it's metrics.
      *
      * @param customerId The id of an adwords customer (client).
@@ -48,7 +45,6 @@ public interface GoogleAdsGateway {
             boolean active) throws GoogleAdsException;
 
     /**
-     *
      * Get general information of manager account.
      *
      * @param managerAccountId The id of an adwords customer (client).
@@ -59,7 +55,6 @@ public interface GoogleAdsGateway {
     ManagerAccountInfo getManagerAccount(String managerAccountId) throws GoogleAdsException;
 
     /**
-     *
      * Get general information of manager account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -72,7 +67,6 @@ public interface GoogleAdsGateway {
     List<AccountMetrics> getAccountMetrics(String customerId, String startDate, String endDate) throws GoogleAdsException;
 
     /**
-     *
      * This method allows the user to send client account metrics, separated per days,
      * directly from Google Ads to Google Sheets.
      *
@@ -86,7 +80,6 @@ public interface GoogleAdsGateway {
     List<CampaignPerDay> getTotalPerDay(String customerId, String startDate, String endDate) throws GoogleAdsException;
 
     /**
-     *
      * This method allows to get all keyword metrics from an account.
      *
      * @param customerId The id of an adwords customer (client).
@@ -104,7 +97,6 @@ public interface GoogleAdsGateway {
             boolean active) throws GoogleAdsException;
 
     /**
-     *
      * This method allows to get all campaigns, ad groups, titles, descriptions, and its metrics.
      *
      * @param customerId The id of an adwords customer (client).

@@ -3,7 +3,6 @@ package com.ads.report.infrastructure.exception;
 import java.io.Serial;
 
 /**
- *
  * The Forbidden Exception.
  *
  * @author Marcus Nastasi

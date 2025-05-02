@@ -24,7 +24,9 @@ import java.time.Instant;
 public class RedisOAuth2AuthorizedClient implements OAuth2AuthorizedClientService {
 
     private final RedisTemplate<String, OAuth2AuthorizedClientDto> redisTemplate;
+
     private final ClientRegistrationRepository clientRegistrationRepository;
+
     private static final String REDIS_KEY_PREFIX = "oauth2:client:";
 
     public RedisOAuth2AuthorizedClient(RedisTemplate<String, OAuth2AuthorizedClientDto> redisTemplate,

@@ -26,7 +26,6 @@ import java.time.Instant;
 import java.util.Date;
 
 /**
- *
  * The configuration of Google Sheets.
  *
  * @author Marcus Nastasi
@@ -38,13 +37,14 @@ public class GoogleSheetsConfiguration {
 
     @Value("${api.googleads.clientId}")
     private String clientId;
+
     @Value("${api.googleads.clientSecret}")
     private String clientSecret;
+
     @Value("${api.googleads.developerToken}")
     private String developerToken;
 
     /**
-     *
      * <p>Google Sheets client bean using OAuth2 dynamic authentication.<p/>
      *
      * @return A dynamically authenticated Sheets client.
