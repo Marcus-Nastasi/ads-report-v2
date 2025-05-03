@@ -24,8 +24,7 @@ public class UpdateAllReportsConfiguration {
     @Bean
     public UpdateAllReportsUseCase updateAllReportsUseCase(GoogleAdsGateway googleAdsGateway,
                                                            GoogleSheetsGateway googleSheetsGateway,
-                                                           GoogleAdsUseCase googleAdsUseCase,
                                                            Executor contextAwareExecutor) {
-        return new UpdateAllReportsUseCase(googleAdsGateway, googleSheetsGateway, googleAdsUseCase, contextAwareExecutor);
+        return new UpdateAllReportsUseCase(googleAdsGateway, googleSheetsGateway, contextAwareExecutor);
     }
 }

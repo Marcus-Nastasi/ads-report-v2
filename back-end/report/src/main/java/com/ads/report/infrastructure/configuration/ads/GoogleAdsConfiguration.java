@@ -22,7 +22,6 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.time.Instant;
 import java.util.Date;
@@ -57,7 +56,6 @@ public class GoogleAdsConfiguration {
      * @return Return the adwords client based on the OAuth2.0 login.
      */
     @Bean
-    @RequestScope
     @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public GoogleAdsClient googleAdsClient(RedisOAuth2AuthorizedClient authorizedClientService,
                                            OAuth2AuthorizedClientManager authorizedClientManager) {

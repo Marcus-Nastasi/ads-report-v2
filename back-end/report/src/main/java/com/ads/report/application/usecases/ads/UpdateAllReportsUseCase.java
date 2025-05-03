@@ -23,8 +23,6 @@ public class UpdateAllReportsUseCase {
 
     private final GoogleSheetsGateway googleSheetsGateway;
 
-    private final GoogleAdsUseCase googleAdsUseCase;
-
     private final Executor contextAwareExecutor;
 
     /**
@@ -35,11 +33,9 @@ public class UpdateAllReportsUseCase {
      */
     public UpdateAllReportsUseCase(GoogleAdsGateway googleAdsGateway,
                                    GoogleSheetsGateway googleSheetsGateway,
-                                   GoogleAdsUseCase googleAdsUseCase,
                                    Executor contextAwareExecutor) {
         this.googleAdsGateway = googleAdsGateway;
         this.googleSheetsGateway = googleSheetsGateway;
-        this.googleAdsUseCase = googleAdsUseCase;
         this.contextAwareExecutor = contextAwareExecutor;
     }
 
@@ -64,8 +60,7 @@ public class UpdateAllReportsUseCase {
                         r.getSpreadsheetId(),
                         r.getClient() + "-campanhas",
                         googleAdsGateway.getCampaignMetrics(
-                                r.getCustomerId(), r.getStartDate(), r.getEndDate(), r.getActive()
-                        )
+                            r.getCustomerId(), r.getStartDate(), r.getEndDate(), r.getActive())
                     ), contextAwareExecutor
                 ));
                 futures.add(CompletableFuture.runAsync(() ->
@@ -73,8 +68,7 @@ public class UpdateAllReportsUseCase {
                         r.getSpreadsheetId(),
                         r.getClient() + "-anuncios",
                         googleAdsGateway.getAdTitleAndDescriptions(
-                                r.getCustomerId(), r.getStartDate(), r.getEndDate()
-                        )
+                            r.getCustomerId(), r.getStartDate(), r.getEndDate())
                     ), contextAwareExecutor
                 ));
                 futures.add(CompletableFuture.runAsync(() ->
@@ -82,17 +76,15 @@ public class UpdateAllReportsUseCase {
                         r.getSpreadsheetId(),
                         r.getClient() + "-keywords",
                         googleAdsGateway.getKeywordMetrics(
-                                r.getCustomerId(), r.getStartDate(), r.getEndDate(), r.getActive()
-                        )
+                            r.getCustomerId(), r.getStartDate(), r.getEndDate(), r.getActive())
                     ), contextAwareExecutor
                 ));
                 futures.add(CompletableFuture.runAsync(() ->
                     googleSheetsGateway.totalPerDayToSheets(
                         r.getSpreadsheetId(),
                         r.getClient() + "-grafico",
-                        googleAdsUseCase.getTotalPerDay(
-                                r.getCustomerId(), r.getStartDate(), r.getEndDate()
-                        )
+                        googleAdsGateway.getTotalPerDay(
+                            r.getCustomerId(), r.getStartDate(), r.getEndDate())
                     ), contextAwareExecutor
                 ));
             }
