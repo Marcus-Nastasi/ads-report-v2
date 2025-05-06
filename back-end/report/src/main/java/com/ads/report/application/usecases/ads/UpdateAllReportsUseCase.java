@@ -1,7 +1,6 @@
 package com.ads.report.application.usecases.ads;
 
 import com.ads.report.application.exception.GoogleSheetsException;
-import com.ads.report.application.gateway.ads.GoogleAdsGateway;
 import com.ads.report.application.gateway.sheets.GoogleSheetsGateway;
 import com.ads.report.domain.reports.UpdateAllReports;
 
@@ -19,23 +18,24 @@ import java.util.concurrent.Executor;
  * */
 public class UpdateAllReportsUseCase {
 
-    private final GoogleAdsGateway googleAdsGateway;
-
     private final GoogleSheetsGateway googleSheetsGateway;
+
+    private final GoogleAdsUseCase googleAdsUseCase;
 
     private final Executor contextAwareExecutor;
 
     /**
      * The constructor uses the Google Ads and Google Sheets gateway interfaces to make the calls.
      *
-     * @param googleAdsGateway the Google Ads gateway
-     * @param googleSheetsGateway the Google Sheets gateway
+     * @param googleSheetsGateway the Google Sheets gateway.
+     * @param googleAdsUseCase here we have to use the ads use case to reuse the logic functionality.
+     * @param contextAwareExecutor the context {@link Executor} to propagate the properties and security contexts.
      */
-    public UpdateAllReportsUseCase(GoogleAdsGateway googleAdsGateway,
-                                   GoogleSheetsGateway googleSheetsGateway,
+    public UpdateAllReportsUseCase(GoogleSheetsGateway googleSheetsGateway,
+                                   GoogleAdsUseCase googleAdsUseCase,
                                    Executor contextAwareExecutor) {
-        this.googleAdsGateway = googleAdsGateway;
         this.googleSheetsGateway = googleSheetsGateway;
+        this.googleAdsUseCase = googleAdsUseCase;
         this.contextAwareExecutor = contextAwareExecutor;
     }
 
@@ -59,7 +59,7 @@ public class UpdateAllReportsUseCase {
                     googleSheetsGateway.campaignMetricsToSheets(
                         r.getSpreadsheetId(),
                         r.getClient() + "-campanhas",
-                        googleAdsGateway.getCampaignMetrics(
+                        googleAdsUseCase.getCampaignMetrics(
                             r.getCustomerId(), r.getStartDate(), r.getEndDate(), r.getActive())
                     ), contextAwareExecutor
                 ));
@@ -67,7 +67,7 @@ public class UpdateAllReportsUseCase {
                     googleSheetsGateway.sendAdTitleAndDescription(
                         r.getSpreadsheetId(),
                         r.getClient() + "-anuncios",
-                        googleAdsGateway.getAdTitleAndDescriptions(
+                        googleAdsUseCase.getAdTitleAndDescriptions(
                             r.getCustomerId(), r.getStartDate(), r.getEndDate())
                     ), contextAwareExecutor
                 ));
@@ -75,7 +75,7 @@ public class UpdateAllReportsUseCase {
                     googleSheetsGateway.sendKeywordMetrics(
                         r.getSpreadsheetId(),
                         r.getClient() + "-keywords",
-                        googleAdsGateway.getKeywordMetrics(
+                        googleAdsUseCase.getKeywordMetrics(
                             r.getCustomerId(), r.getStartDate(), r.getEndDate(), r.getActive())
                     ), contextAwareExecutor
                 ));
@@ -83,7 +83,7 @@ public class UpdateAllReportsUseCase {
                     googleSheetsGateway.totalPerDayToSheets(
                         r.getSpreadsheetId(),
                         r.getClient() + "-grafico",
-                        googleAdsGateway.getTotalPerDay(
+                        googleAdsUseCase.getTotalPerDay(
                             r.getCustomerId(), r.getStartDate(), r.getEndDate())
                     ), contextAwareExecutor
                 ));

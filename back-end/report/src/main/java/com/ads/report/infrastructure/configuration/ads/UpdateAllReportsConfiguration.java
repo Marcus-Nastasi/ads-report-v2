@@ -22,9 +22,9 @@ import java.util.concurrent.Executor;
 public class UpdateAllReportsConfiguration {
 
     @Bean
-    public UpdateAllReportsUseCase updateAllReportsUseCase(GoogleAdsGateway googleAdsGateway,
-                                                           GoogleSheetsGateway googleSheetsGateway,
+    public UpdateAllReportsUseCase updateAllReportsUseCase(GoogleSheetsGateway googleSheetsGateway,
+                                                           GoogleAdsUseCase googleAdsUseCase,
                                                            Executor contextAwareExecutor) {
-        return new UpdateAllReportsUseCase(googleAdsGateway, googleSheetsGateway, contextAwareExecutor);
+        return new UpdateAllReportsUseCase(googleSheetsGateway, googleAdsUseCase, contextAwareExecutor);
     }
 }
