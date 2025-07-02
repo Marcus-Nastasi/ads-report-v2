@@ -9,8 +9,8 @@ import com.ads.report.domain.campaign.CampaignTitleAndDescription;
 import com.ads.report.domain.campaign.CampaignPerDay;
 import com.ads.report.domain.manager.ManagerAccountInfo;
 import com.google.ads.googleads.lib.GoogleAdsClient;
-import com.google.ads.googleads.v17.common.AdTextAsset;
-import com.google.ads.googleads.v17.services.*;
+import com.google.ads.googleads.v20.common.AdTextAsset;
+import com.google.ads.googleads.v20.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

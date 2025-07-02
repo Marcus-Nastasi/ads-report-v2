@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     /**
      * Handler to forbidden exception, with 403 code.
      *
-     * @param exception An instance of type ForbiddenException.
+     * @param exception An instance of type {@link ForbiddenException}.
      * @param request The request param.
      *
      * @return Return a response entity of object type.
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
     /**
      * Handler to ads exception, with 400 code.
      *
-     * @param exception An instance of type GoogleAdsException.
+     * @param exception An instance of type {@link GoogleAdsException}.
      * @param request The request param.
      *
      * @return Return a response entity of object type.
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
     /**
      * Handler to sheets exception, with 400 code.
      *
-     * @param exception An instance of type GoogleSheetsException.
+     * @param exception An instance of type {@link GoogleSheetsException}.
      * @param request The request param.
      *
      * @return Return a response entity of object type.
@@ -64,7 +64,7 @@ public class GlobalExceptionHandler {
     /**
      * Handler to CSV exception, with 400 code.
      *
-     * @param exception An instance of type CsvException.
+     * @param exception An instance of type {@link CsvException}.
      * @param request The request param.
      *
      * @return Return a response entity of object type.
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler {
     /**
      * Handler to unknown runtime exceptions, with 500 code.
      *
-     * @param exception An instance of type RuntimeException.
+     * @param exception An instance of type {@link RuntimeException}.
      * @param request The request param.
      *
      * @return Return a response entity of object type.
@@ -90,7 +90,7 @@ public class GlobalExceptionHandler {
     /**
      * Handler to unknown exceptions, with 500 code.
      *
-     * @param exception An instance of type Exception.
+     * @param exception An instance of type {@link Exception}.
      * @param request The request param.
      *
      * @return Return a response entity of object type.

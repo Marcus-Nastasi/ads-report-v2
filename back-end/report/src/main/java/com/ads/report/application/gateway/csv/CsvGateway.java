@@ -16,6 +16,7 @@ import java.util.Map;
  * @version 1.0.1
  * @since 2025
  * */
+@FunctionalInterface
 public interface CsvGateway {
 
     /**

@@ -89,7 +89,7 @@ public class UpdateAllReportsUseCase {
                 ));
             }
             // Here all of 4×N tasks are simultaneous
-            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+            CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
         } catch (Exception e) {
             throw new GoogleSheetsException(e.getMessage());
         }

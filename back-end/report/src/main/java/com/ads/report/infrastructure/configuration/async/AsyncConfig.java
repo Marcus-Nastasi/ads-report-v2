@@ -23,8 +23,9 @@ public class AsyncConfig {
     public Executor contextAwareExecutor() {
         // 1. Creates a configured threads pool.
         ThreadPoolTaskExecutor delegate = new ThreadPoolTaskExecutor();
-        delegate.setCorePoolSize(16);
-        delegate.setMaxPoolSize(32);
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
+        delegate.setCorePoolSize(availableProcessors);
+        delegate.setMaxPoolSize(availableProcessors * 2);
         delegate.setQueueCapacity(200);
         delegate.setThreadNamePrefix("ctx-async-");
         // 2. Associates a decorator that propagate Request + Security Context

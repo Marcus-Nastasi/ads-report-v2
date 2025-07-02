@@ -14,11 +14,11 @@ import java.util.List;
 public class GoogleAdsDtoMapper {
 
     /**
-     * Map from Google Ads Rows to TestResponseDto.
+     * Map from Google Ads Rows to {@link TestResponseDto}.
      *
-     * @param googleAdsRows A list of strings that contains the rows returned by adwords.
+     * @param googleAdsRows A list of {@link String} that contains the rows returned by adwords.
      *
-     * @return Return the dto 'TestResponseDto'
+     * @return Return the dto {@link TestResponseDto}
      */
     public TestResponseDto mapToResponse(List<String> googleAdsRows) {
         return new TestResponseDto(googleAdsRows.getFirst(), googleAdsRows.subList(1, googleAdsRows.size()));

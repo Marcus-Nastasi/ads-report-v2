@@ -1,6 +1,7 @@
 package com.ads.report.infrastructure.configuration.async;
 
 import org.springframework.core.task.TaskDecorator;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
@@ -16,7 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 public class ContextCopyingDecorator implements TaskDecorator {
 
     @Override
-    public Runnable decorate(Runnable runnable) {
+    public Runnable decorate(@NonNull Runnable runnable) {
         // 1. Capture the current request context (attributes)
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         // 2. Capture the current security context (OAuth2 token)
