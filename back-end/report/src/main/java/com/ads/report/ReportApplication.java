@@ -13,8 +13,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @version 1.0.2
  * @since 2025
  * */
-@SpringBootApplication
 @EnableAsync
+@SpringBootApplication
 public class ReportApplication {
 
 	public static void main(String[] args) {

@@ -40,7 +40,7 @@ public class UpdateAllReportsUseCase {
     }
 
     /**
-     * This method allows the user to send data to sheets, from various accounts.
+     * <h3>This method allows the user to send data to sheets, from various accounts.<h3/>
      *
      * <p>By passing a {@link List} of the customer id, start date, end date, spreadsheet id, client and active flag,
      * you can update the sheets tables with ease.<p/>

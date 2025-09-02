@@ -22,9 +22,7 @@ public class ContextCopyingDecorator implements TaskDecorator {
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         // 2. Capture the current security context (OAuth2 token)
         SecurityContext secCtx = SecurityContextHolder.getContext();
-        /**
-         * Returns new {@link Runnable} that, before executing the logic, restore the context on threads.
-         * */
+        // Returns new {@link Runnable} that, before executing the logic, restore the context on threads.
         return () -> {
             try {
                 // Define the RequestContext and SecurityContext on current thread.
@@ -32,6 +30,8 @@ public class ContextCopyingDecorator implements TaskDecorator {
                 SecurityContextHolder.setContext(secCtx);
                 // Executes original logic.
                 runnable.run();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage(), e);
             } finally {
                 // Clear the context to avoid context scape through threads.
                 RequestContextHolder.resetRequestAttributes();

@@ -15,15 +15,17 @@ import java.util.concurrent.Executor;
  * @version 1.0.1
  * @since 2025
  * */
-@Configuration
 @EnableAsync
+@Configuration
 public class AsyncConfig {
+
+    private final ThreadPoolTaskExecutor delegate = new ThreadPoolTaskExecutor();
+
+    private final int availableProcessors = Runtime.getRuntime().availableProcessors();
 
     @Bean
     public Executor contextAwareExecutor() {
         // 1. Creates a configured threads pool.
-        ThreadPoolTaskExecutor delegate = new ThreadPoolTaskExecutor();
-        int availableProcessors = Runtime.getRuntime().availableProcessors();
         delegate.setCorePoolSize(availableProcessors);
         delegate.setMaxPoolSize(availableProcessors * 2);
         delegate.setQueueCapacity(200);
